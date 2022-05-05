@@ -12,15 +12,15 @@ namespace Damka.Classes
 
         public Male(Position pos, Color color, int range)
         {
-            this._pos =   pos;
+            this._pos = pos;
             this._color = color;
             this._range = range;
         }
 
         // Update to new postion
-        public void updatePosition()
+        public void updatePosition(int index)
         {
-
+            this._pos.updatePosition(index);
         }
 
         public int getRow()
@@ -33,9 +33,9 @@ namespace Damka.Classes
             return _pos.getCol();
         }
 
-        public int getListPos()
+        public int getIndex()
         {
-            return _pos.getListPos();
+            return _pos.getIndex();
         }
     }
 

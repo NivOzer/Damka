@@ -14,7 +14,7 @@ namespace Damka.Classes
             this._row = 0;
             this._col = 0;
         }
-        public Position(int row,int col)
+        public Position(int row, int col)
         {
             this._row = row;
             this._col = col;
@@ -30,9 +30,15 @@ namespace Damka.Classes
             return _col;
         }
 
-        public int getListPos()
+        public int getIndex()
         {
             return this._row * NUM_OF_COLS + this._col;
+        }
+
+        public void updatePosition(int index)
+        {
+            this._row = index / NUM_OF_COLS;
+            this._col = index % NUM_OF_COLS;
         }
 
     }

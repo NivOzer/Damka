@@ -78,7 +78,7 @@ namespace Damka.Classes
             {
                 foreach (Male piece in _blacks)
                 {
-                    int index = piece.getListPos();
+                    int index = piece.getIndex();
                     _board[index].Enabled = true;
                 }
             }
@@ -86,7 +86,7 @@ namespace Damka.Classes
             {
                 foreach (Male piece in _whites)
                 {
-                    int index = piece.getListPos();
+                    int index = piece.getIndex();
                     _board[index].Enabled = true;
                 }
             }
