@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 namespace Damka.Classes
 {
-    class Man
+    class Male
     {
         private Position _pos;
         public enum Color { White = 0, Black = 1 };
         private Color _color;
         private int _range;
 
-        public Man(Position pos, Color color, int range)
+        public Male(Position pos, Color color, int range)
         {
             this._pos =   pos;
             this._color = color;

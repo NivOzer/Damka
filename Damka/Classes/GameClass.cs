@@ -8,35 +8,75 @@ namespace Damka.Classes
     class GameClass
     {
         private int turnCounter;
-        public enum gamePhase { CharcterSelection, PostionSelecetion };
+        public enum GamePhase { CharacterSelection, PostionSelection };
+        private GamePhase _gamePhase;
         private List<Button> _board;
-        private List<Man> _blacks, _whites;
-        private Position _current_player_position;
-        private List<Man> _deadBlacks, _deadWhites;
+        private List<Male> _blacks, _whites;
+        private int _current_player_index;
+        private List<Male> _deadBlacks, _deadWhites;
 
         public GameClass()
         {
             this._board = new List<Button>();
-            this._current_player_position= new Position();
-            this._deadBlacks = new List<Man>();
-            this._deadWhites = new List<Man>();
+            this._current_player_index = 0;
+            this._blacks = new List<Male>();
+            this._whites = new List<Male>();
+            this._deadBlacks = new List<Male>();
+            this._deadWhites = new List<Male>();
+        }
+
+        public void addButtonToBoard(Button btn)
+        {
+            this._board.Add(btn);
+        }
+
+        public GamePhase getCurrentGamePhase()
+        {
+            return this._gamePhase;
+        }
+
+        // Updates the GamePhase and Invokes necessary function to progress the game
+        private void nextGamePhase()
+        {
+            if (_gamePhase == GamePhase.CharacterSelection)
+            {
+                // Logic here
+                _gamePhase = GamePhase.PostionSelection;
+            }
+            else
+            {
+                // Logic here
+                _gamePhase = GamePhase.CharacterSelection;
+            }
+        }
+
+        public void playerMoved(Button pressed)
+        {
+            //Logic here
+            nextGamePhase();
+        }
+
+        public void playerSelectedPiece(Button pressed)
+        {
+            //Logic here
+            nextGamePhase();
         }
 
         //Disables all the buttons
-        public void disableAllButtons()
+        private void disableAllButtons()
         {
             foreach (Button btn in _board)
             {
                 btn.Enabled = false;
             }
         }
-        
+
         //shows the legal moves for a piece to make
-        public void ShowAvailablePieces()
+        private void ShowAvailablePieces()
         {
-            if (turnCounter % 2 == (int)Man.Color.Black)
+            if (turnCounter % 2 == (int)Male.Color.Black)
             {
-                foreach (Man piece in _blacks)
+                foreach (Male piece in _blacks)
                 {
                     int index = piece.getListPos();
                     _board[index].Enabled = true;
@@ -44,17 +84,17 @@ namespace Damka.Classes
             }
             else
             {
-                foreach (Man piece in _whites)
+                foreach (Male piece in _whites)
                 {
                     int index = piece.getListPos();
                     _board[index].Enabled = true;
                 }
             }
-            
+
         }
-        
+
         // Enables all the buttons the piece can move to
-        public void ShowAvailableMoves()
+        private void ShowAvailableMoves()
         {
             foreach (Button btn in _board)
             {
@@ -63,18 +103,18 @@ namespace Damka.Classes
         }
 
         // Remove from list, move to graveyard, update button
-        public void gotEaten()
+        private void gotEaten()
         {
-            
+
         }
 
         // Checks if the game has ended
-        public bool gameEnded()
+        private bool gameEnded()
         {
             return false;
         }
-        
-        // Initializes GUI's propeties
+
+        // Initializes GUI's properties
         public void gameInit()
         {
         }

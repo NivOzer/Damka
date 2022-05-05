@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 namespace Damka.Classes
 {
-    class Freezer:Man
+    class Freezer:Male
     {
         private int freezeDuration;
         public Freezer(Position pos, Color color, int range) :base(pos,color,range)

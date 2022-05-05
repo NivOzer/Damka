@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Damka.Classes
 {
-    class Dasher : Man
+    class Dasher : Male
     {
         private int numberOfDashes;
         public Dasher(Position pos, Color color, int range) : base(pos, color, range)
