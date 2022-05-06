@@ -53,7 +53,7 @@ namespace Damka.Classes
         public void playerMoved(Button pressed)
         {
             //Logic here
-             pressed.BackColor = System.Drawing.Color.FromArgb(0, 0, 0);
+             pressed.BackColor = System.Drawing.Color.FromArgb(45 , 45, 45);
             nextGamePhase();
         }
 
