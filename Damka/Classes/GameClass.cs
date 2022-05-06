@@ -53,12 +53,14 @@ namespace Damka.Classes
         public void playerMoved(Button pressed)
         {
             //Logic here
+             pressed.BackColor = System.Drawing.Color.FromArgb(0, 0, 0);
             nextGamePhase();
         }
 
         public void playerSelectedPiece(Button pressed)
         {
             //Logic here
+            pressed.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
             nextGamePhase();
         }
 
