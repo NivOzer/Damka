@@ -16,6 +16,8 @@ namespace Damka
         const int NUM_OF_COLS = 8;
         const int NUM_OF_ROWS = 8;
         const int BUTTON_SIZE = 90;
+        public Color LIGHT_BROWN = System.Drawing.Color.FromArgb(66, 43, 34);
+        public Color DARK_BROWN = System.Drawing.Color.FromArgb(113, 82, 60);
         GameClass game = new GameClass();
 
         public Damka()
@@ -52,12 +54,11 @@ namespace Damka
                     btn.Location = new Point(col * BUTTON_SIZE, row * BUTTON_SIZE);
                     btn.FlatStyle = FlatStyle.Flat;
                     btn.FlatAppearance.BorderSize = 0;
-                    btn.Click += new EventHandler(boardClick);
-
                     if ((row + col) % 2 == 0)
-                        btn.BackColor = System.Drawing.Color.FromArgb(66, 43, 34);
+                        btn.BackColor = LIGHT_BROWN;
                     else
-                        btn.BackColor = System.Drawing.Color.FromArgb(113, 82, 60);
+                        btn.BackColor = DARK_BROWN;
+                    btn.Click += new EventHandler(boardClick);
                     gamePanel.Controls.Add(btn);
                     game.addButtonToBoard(btn);
                     game.initializePlayers(btn,col,row);
@@ -70,7 +71,6 @@ namespace Damka
         private void boardClick(object sender, EventArgs e)
         {
             Button pressed = ((Button)sender);
-
             if (game.getCurrentGamePhase() == GameClass.GamePhase.CharacterSelection) //CharacterSelection
             {
                 // pressed.BackColor = System.Drawing.Color.FromArgb(0, 0, 0);

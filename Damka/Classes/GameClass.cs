@@ -4,6 +4,8 @@ using System.Collections;
 using System.Text;
 
 using System.Windows.Forms;
+using System.Drawing;
+
 namespace Damka.Classes
 {
     class GameClass
@@ -18,7 +20,6 @@ namespace Damka.Classes
         private List<Male> _blacks, _whites;
         private int _current_player_index;
         private List<Male> _deadBlacks, _deadWhites;
-        private Panel _gamePanel;
         public GameClass()
         {
             // Generates a button grid for the board
@@ -33,7 +34,6 @@ namespace Damka.Classes
         }
         public void addButtonToPanel(Button btn)
         {
-            this._gamePanel.Controls.Add(btn);
         }
         public void addButtonToBoard(Button btn)
         {
@@ -86,8 +86,19 @@ namespace Damka.Classes
         //A Specific player has been pressed event
         public void playerSelectedPiece(Button pressed)
         {
+
             //Logic here
-            pressed.BackColor = System.Drawing.Color.FromArgb(238, 245, 198);
+            Color selectedColor = System.Drawing.Color.FromArgb(230, 220, 254);
+            Color LIGHT_BROWN = System.Drawing.Color.FromArgb(66, 43, 34);
+            Color DARK_BROWN = System.Drawing.Color.FromArgb(113, 82, 60);
+
+            if (((pressed.Left / 90) + (pressed.Bottom / 90)) % 2 == 0 && pressed.BackColor == selectedColor)
+                pressed.BackColor = DARK_BROWN;
+            else if (((pressed.Left / 90) + (pressed.Bottom / 90)) % 2 != 0 && pressed.BackColor == selectedColor)
+                pressed.BackColor = LIGHT_BROWN;
+            else
+                pressed.BackColor = selectedColor;
+
             nextGamePhase();
         }
 
