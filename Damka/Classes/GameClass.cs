@@ -2,29 +2,39 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.Text;
+
 using System.Windows.Forms;
 namespace Damka.Classes
 {
     class GameClass
     {
+        const int PANEL_SIZE = 720;
+        const int MALE_RANGE = 1;
         private int turnCounter;
+        //decides what gamephase the user has chosen : 0 is character selection , 1 is for position selection
         public enum GamePhase { CharacterSelection, PostionSelection };
         private GamePhase _gamePhase;
         private List<Button> _board;
         private List<Male> _blacks, _whites;
         private int _current_player_index;
         private List<Male> _deadBlacks, _deadWhites;
-
+        private Panel _gamePanel;
         public GameClass()
         {
+            // Generates a button grid for the board
             this._board = new List<Button>();
             this._current_player_index = 0;
+            //Initialize memory for 12 black and white pieces
             this._blacks = new List<Male>();
             this._whites = new List<Male>();
+            //Stacks the dead players in there own array
             this._deadBlacks = new List<Male>();
             this._deadWhites = new List<Male>();
         }
-
+        public void addButtonToPanel(Button btn)
+        {
+            this._gamePanel.Controls.Add(btn);
+        }
         public void addButtonToBoard(Button btn)
         {
             this._board.Add(btn);
@@ -35,6 +45,23 @@ namespace Damka.Classes
             return this._gamePhase;
         }
 
+        public void initializePlayers(Button btn,int col,int row)
+        {
+            int whiteindex = 0, blackindex = 0 ;
+            if (((row + col) % 2 == 0) && btn.Image == null && row <= 2)
+            {
+                Position p = new Position(row, col);
+                Male m = new Male(p, Male.Color.White, MALE_RANGE,btn);
+                this._whites.Add(m);
+            }
+            else if (((row + col) % 2 == 0) && btn.Image == null && row >= 5) // till 5 cause <8 is 7 so 3 lines is 5,6,7
+            {
+                Position p = new Position(row, col);
+                Male m = new Male(p, Male.Color.Black, MALE_RANGE,btn);
+                this._blacks.Add(m);
+            }
+
+        }
         // Updates the GamePhase and Invokes necessary function to progress the game
         private void nextGamePhase()
         {
@@ -53,14 +80,14 @@ namespace Damka.Classes
         public void playerMoved(Button pressed)
         {
             //Logic here
-             pressed.BackColor = System.Drawing.Color.FromArgb(51 , 5, 5);
+            //pressed.BackColor = System.Drawing.Color.FromArgb(51 , 5, 5);
             nextGamePhase();
         }
-
+        //A Specific player has been pressed event
         public void playerSelectedPiece(Button pressed)
         {
             //Logic here
-            pressed.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            pressed.BackColor = System.Drawing.Color.FromArgb(238, 245, 198);
             nextGamePhase();
         }
 

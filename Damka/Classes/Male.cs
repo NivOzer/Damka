@@ -1,22 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
+
 namespace Damka.Classes
 {
+    //added an image attribute
     class Male
     {
         private Position _pos;
         public enum Color { White = 0, Black = 1 };
         private Color _color;
-        private int _range;
-
-        public Male(Position pos, Color color, int range)
+        private int _range; 
+        private Button _buttonPos;
+        //Constructor
+        public Male(Position pos, Color color, int range,Button buttonPos)
         {
+            this._buttonPos = buttonPos;
+            if(color == Color.White)
+                this._buttonPos.Image = global::Damka.Properties.Resources.White_male;
+            else
+                this._buttonPos.Image = global::Damka.Properties.Resources.Black_male;
             this._pos = pos;
             this._color = color;
             this._range = range;
+            this._buttonPos = buttonPos;
         }
-
+        //Copy constructor
+        public Male(Male old)
+        {
+            this._pos = old._pos;
+            this._color = old._color;
+            this._range = old._range;
+            this._buttonPos = old._buttonPos;
+        }
         // Update to new postion
         public void updatePosition(int index)
         {
