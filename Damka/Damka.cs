@@ -45,12 +45,12 @@ namespace Damka
                 for (int col = 0; col < NUM_OF_COLS; col++)
                 {
                     Button btn = new Button();
-                    btn.Width = 90;
-                    btn.Height = 90;
+                    // btn.Width = 90; // Setting size with new Size at **
+                    // btn.Height = 90;
                     btn.ForeColor = Color.White;
                     btn.Text = (row * NUM_OF_COLS + col).ToString();
                     btn.Name = (row * NUM_OF_COLS + col).ToString();
-                    btn.Size = new Size(BUTTON_SIZE, BUTTON_SIZE);
+                    btn.Size = new Size(BUTTON_SIZE, BUTTON_SIZE); // ** 
                     btn.Location = new Point(col * BUTTON_SIZE, row * BUTTON_SIZE);
                     btn.FlatStyle = FlatStyle.Flat;
                     btn.FlatAppearance.BorderSize = 0;
@@ -61,7 +61,7 @@ namespace Damka
                     btn.Click += new EventHandler(boardClick);
                     gamePanel.Controls.Add(btn);
                     game.addButtonToBoard(btn);
-                    game.initializePlayers(btn,col,row);
+                    game.initializePlayers(btn, col, row);
 
                 }
             }
@@ -74,12 +74,12 @@ namespace Damka
             if (game.getCurrentGamePhase() == GameClass.GamePhase.CharacterSelection) //CharacterSelection
             {
                 // pressed.BackColor = System.Drawing.Color.FromArgb(0, 0, 0);
-                game.playerMoved(pressed);
+                game.playerMoved(pressed); // we should send the index instead
             }
             else //PostionSelection
             {
                 // pressed.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
-                game.playerSelectedPiece(pressed);
+                game.playerSelectedPiece(pressed); // we should send the index instead
             }
         }
 

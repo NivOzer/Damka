@@ -10,23 +10,24 @@ namespace Damka.Classes
     //added an image attribute
     class Male
     {
-        private Position _pos;
+        protected Position _pos;
         public enum Color { White = 0, Black = 1 };
-        private Color _color;
-        private int _range; 
-        private Button _buttonPos;
+        protected Color _color;
+        protected int _range;
+        // private Button _buttonPos;
         //Constructor
-        public Male(Position pos, Color color, int range,Button buttonPos)
+        public Male(Position pos, Color color, int range, Button buttonPos)
         {
-            this._buttonPos = buttonPos;
-            if(color == Color.White)
-                this._buttonPos.Image = global::Damka.Properties.Resources.White_male;
-            else
-                this._buttonPos.Image = global::Damka.Properties.Resources.Black_male;
+            // this._buttonPos = buttonPos;
+            // if (color == Color.White)
+            //     this._buttonPos.Image = global::Damka.Properties.Resources.White_male;
+            // else
+            //     this._buttonPos.Image = global::Damka.Properties.Resources.Black_male;
+
             this._pos = pos;
             this._color = color;
             this._range = range;
-            this._buttonPos = buttonPos;
+            // this._buttonPos = buttonPos;
         }
         //Copy constructor
         public Male(Male old)
@@ -34,8 +35,17 @@ namespace Damka.Classes
             this._pos = old._pos;
             this._color = old._color;
             this._range = old._range;
-            this._buttonPos = old._buttonPos;
+            // this._buttonPos = old._buttonPos;
         }
+
+        public Bitmap getImage()
+        {
+            if (_color == (int)Color.White)
+                return global::Damka.Properties.Resources.White_male;
+            else
+                return global::Damka.Properties.Resources.Black_male;
+        }
+
         // Update to new postion
         public void updatePosition(int index)
         {

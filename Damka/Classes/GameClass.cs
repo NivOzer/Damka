@@ -11,7 +11,7 @@ namespace Damka.Classes
     class GameClass
     {
         const int PANEL_SIZE = 720;
-        const int MALE_RANGE = 1;
+        const int MALE_RANGE = 1; // I don't think its necessary, we wouldn't really change it
         private int turnCounter;
         //decides what gamephase the user has chosen : 0 is character selection , 1 is for position selection
         public enum GamePhase { CharacterSelection, PostionSelection };
@@ -25,7 +25,7 @@ namespace Damka.Classes
             // Generates a button grid for the board
             this._board = new List<Button>();
             this._current_player_index = 0;
-            //Initialize memory for 12 black and white pieces
+            //a list for 12 black and white pieces
             this._blacks = new List<Male>();
             this._whites = new List<Male>();
             //Stacks the dead players in there own array
@@ -45,19 +45,21 @@ namespace Damka.Classes
             return this._gamePhase;
         }
 
-        public void initializePlayers(Button btn,int col,int row)
+        public void initializePlayers(Button btn, int col, int row)
         {
-            int whiteindex = 0, blackindex = 0 ;
+            int whiteindex = 0, blackindex = 0; // Unused
             if (((row + col) % 2 == 0) && btn.Image == null && row <= 2)
             {
                 Position p = new Position(row, col);
-                Male m = new Male(p, Male.Color.White, MALE_RANGE,btn);
+                Male m = new Male(p, Male.Color.White, MALE_RANGE, btn);
+                _board[p.getIndex()].Image = m.getImage(); // This is how we access the buttons in the current position, it will be a method in all the classes - A poly function
                 this._whites.Add(m);
             }
             else if (((row + col) % 2 == 0) && btn.Image == null && row >= 5) // till 5 cause <8 is 7 so 3 lines is 5,6,7
             {
                 Position p = new Position(row, col);
-                Male m = new Male(p, Male.Color.Black, MALE_RANGE,btn);
+                Male m = new Male(p, Male.Color.Black, MALE_RANGE, btn);
+                _board[p.getIndex()].Image = m.getImage(); // the same
                 this._blacks.Add(m);
             }
 
@@ -89,8 +91,8 @@ namespace Damka.Classes
 
             //Logic here
             Color selectedColor = System.Drawing.Color.FromArgb(230, 220, 254);
-            Color LIGHT_BROWN = System.Drawing.Color.FromArgb(66, 43, 34);
-            Color DARK_BROWN = System.Drawing.Color.FromArgb(113, 82, 60);
+            Color LIGHT_BROWN = System.Drawing.Color.FromArgb(66, 43, 34); // being set at Damka.cs - it's a duplicate
+            Color DARK_BROWN = System.Drawing.Color.FromArgb(113, 82, 60); // the same
 
             if (((pressed.Left / 90) + (pressed.Bottom / 90)) % 2 == 0 && pressed.BackColor == selectedColor)
                 pressed.BackColor = DARK_BROWN;
