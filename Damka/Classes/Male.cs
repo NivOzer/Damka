@@ -15,11 +15,11 @@ namespace Damka.Classes
         protected Color _color;
         protected int _range;
         //Constructor
-        public Male(Position pos, Color color, int range)
+        public Male(Position pos, Color color)
         {
             this._pos = pos;
             this._color = color;
-            this._range = range;
+            this._range = Constants.MALE_RANGE;
         }
         //Copy constructor
         public Male(Male old)
@@ -27,7 +27,6 @@ namespace Damka.Classes
             this._pos = old._pos;
             this._color = old._color;
             this._range = old._range;
-            // this._buttonPos = old._buttonPos;
         }
 
         public Bitmap getImage()
