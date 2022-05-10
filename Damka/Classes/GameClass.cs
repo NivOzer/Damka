@@ -48,14 +48,14 @@ namespace Damka.Classes
             if (((row + col) % 2 == 0) && btn.Image == null && row <= 2)
             {
                 Position p = new Position(row, col);
-                Male m = new Male(p, Male.Color.White);
+                Male m = new Male(p, Constants.PlayerColor.White);
                 _board[p.getIndex()].Image = m.getImage(); // This is how we access the buttons in the current position, it will be a method in all the classes - A poly function
                 this._whites.Add(m);
             }
             else if (((row + col) % 2 == 0) && btn.Image == null && row >= 5) // till 5 cause <8 is 7 so 3 lines is 5,6,7
             {
                 Position p = new Position(row, col);
-                Male m = new Male(p, Male.Color.Black);
+                Male m = new Male(p, Constants.PlayerColor.Black);
                 _board[p.getIndex()].Image = m.getImage(); // the same
                 this._blacks.Add(m);
             }
@@ -111,7 +111,7 @@ namespace Damka.Classes
         //shows the legal moves for a piece to make
         private void ShowAvailablePieces()
         {
-            if (turnCounter % 2 == (int)Male.Color.Black)
+            if (turnCounter % 2 == (int)Constants.PlayerColor.Black)
             {
                 foreach (Male piece in _blacks)
                 {
@@ -133,11 +133,25 @@ namespace Damka.Classes
         // Enables all the buttons the piece can move to
         private void ShowAvailableMoves()
         {
-            if (turnCounter % 2 == (int)Male.Color.Black)
+            int optionalIndex, i;
+            if (turnCounter % 2 == (int)Constants.PlayerColor.Black)
             {
                 foreach (Male piece in _blacks)
                 {
-                    // if (_blacks[_current_player_index].getCol() == 0 || _blacks[_current_player_index].getCol() ==
+                    if (_blacks[_current_player_index].getCol() == 0)
+                    {
+                        optionalIndex = _current_player_index - Constants.NUM_OF_COLS - 1;
+                        for (i = 1; i >= piece.getRange(); i++)
+                        {
+                            if (_board[optionalIndex].Image != null)
+                                break;
+                            _board[optionalIndex].Enabled = true;
+                        }
+                    }
+                    if (_blacks[_current_player_index].getCol() == Constants.NUM_OF_COLS)
+                    {
+                        //
+                    }
                 }
             }
             else

@@ -18,6 +18,7 @@ namespace Damka.Classes
         public static Color LIGHT_BROWN = System.Drawing.Color.FromArgb(66, 43, 34); // being set at Damka.cs - it's a duplicate
         public static Color DARK_BROWN = System.Drawing.Color.FromArgb(113, 82, 60); // the same
         public static Color selectedColor = System.Drawing.Color.FromArgb(230, 220, 254);
+        public enum PlayerColor { White = 0, Black = 1 };
         public const int BUTTON_SIZE = 90;
     }
 }

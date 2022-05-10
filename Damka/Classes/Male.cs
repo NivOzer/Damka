@@ -11,15 +11,18 @@ namespace Damka.Classes
     class Male
     {
         protected Position _pos;
-        public enum Color { White = 0, Black = 1 };
-        protected Color _color;
+        protected Constants.PlayerColor _color;
         protected int _range;
+        protected bool canGoUp;
+        protected bool canGoDown;
         //Constructor
-        public Male(Position pos, Color color)
+        public Male(Position pos, Constants.PlayerColor color)
         {
             this._pos = pos;
             this._color = color;
             this._range = Constants.MALE_RANGE;
+
+            // if (_color == Constants.)
         }
         //Copy constructor
         public Male(Male old)
@@ -31,7 +34,7 @@ namespace Damka.Classes
 
         public Bitmap getImage()
         {
-            if (_color == (int)Color.White)
+            if (_color == (int)Constants.PlayerColor.White)
                 return global::Damka.Properties.Resources.White_male;
             else
                 return global::Damka.Properties.Resources.Black_male;
