@@ -13,8 +13,8 @@ namespace Damka.Classes
         protected Position _pos;
         protected Constants.PlayerColor _color;
         protected int _range;
-        protected bool canGoUp;
-        protected bool canGoDown;
+        protected bool _canGoUp;
+        protected bool _canGoDown;
         //Constructor
         public Male(Position pos, Constants.PlayerColor color)
         {
@@ -22,7 +22,17 @@ namespace Damka.Classes
             this._color = color;
             this._range = Constants.MALE_RANGE;
 
-            // if (_color == Constants.)
+            if (_color == Constants.PlayerColor.Black)
+            {
+                _canGoDown = false;
+                _canGoUp = true;
+            }
+            else
+            {
+
+                _canGoDown = true;
+                _canGoUp = false;
+            }
         }
         //Copy constructor
         public Male(Male old)
@@ -64,6 +74,16 @@ namespace Damka.Classes
         public int getRange()
         {
             return this._range;
+        }
+
+        public bool canGoUp()
+        {
+            return this._canGoUp;
+        }
+
+        public bool canGoDown()
+        {
+            return this._canGoDown;
         }
     }
 
