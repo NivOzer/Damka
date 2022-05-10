@@ -8,7 +8,7 @@ namespace Damka.Classes
     class Dasher : Male
     { // just an example of the changes - regardless if we use the dasher or not
         private int numberOfDashes;
-        public Dasher(Position pos, Color color, int range, Button b) : base(pos, color, range, b)
+        public Dasher(Position pos, Color color, int range) : base(pos, color, range)
         { // again I think the button is unnecessary
             this.numberOfDashes = 2;
         }

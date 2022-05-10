@@ -51,14 +51,14 @@ namespace Damka.Classes
             if (((row + col) % 2 == 0) && btn.Image == null && row <= 2)
             {
                 Position p = new Position(row, col);
-                Male m = new Male(p, Male.Color.White, MALE_RANGE, btn);
+                Male m = new Male(p, Male.Color.White, MALE_RANGE);
                 _board[p.getIndex()].Image = m.getImage(); // This is how we access the buttons in the current position, it will be a method in all the classes - A poly function
                 this._whites.Add(m);
             }
             else if (((row + col) % 2 == 0) && btn.Image == null && row >= 5) // till 5 cause <8 is 7 so 3 lines is 5,6,7
             {
                 Position p = new Position(row, col);
-                Male m = new Male(p, Male.Color.Black, MALE_RANGE, btn);
+                Male m = new Male(p, Male.Color.Black, MALE_RANGE);
                 _board[p.getIndex()].Image = m.getImage(); // the same
                 this._blacks.Add(m);
             }

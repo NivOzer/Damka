@@ -14,20 +14,12 @@ namespace Damka.Classes
         public enum Color { White = 0, Black = 1 };
         protected Color _color;
         protected int _range;
-        // private Button _buttonPos;
         //Constructor
-        public Male(Position pos, Color color, int range, Button buttonPos)
+        public Male(Position pos, Color color, int range)
         {
-            // this._buttonPos = buttonPos;
-            // if (color == Color.White)
-            //     this._buttonPos.Image = global::Damka.Properties.Resources.White_male;
-            // else
-            //     this._buttonPos.Image = global::Damka.Properties.Resources.Black_male;
-
             this._pos = pos;
             this._color = color;
             this._range = range;
-            // this._buttonPos = buttonPos;
         }
         //Copy constructor
         public Male(Male old)

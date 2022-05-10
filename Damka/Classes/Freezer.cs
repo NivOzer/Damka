@@ -5,10 +5,10 @@ using System.Windows.Forms;
 
 namespace Damka.Classes
 {
-    class Freezer:Male
+    class Freezer : Male
     {
         private int freezeDuration;
-        public Freezer(Position pos, Color color, int range,Button b) :base(pos,color,range,b)
+        public Freezer(Position pos, Color color, int range) : base(pos, color, range)
         {
             this.freezeDuration = 2;
         }
