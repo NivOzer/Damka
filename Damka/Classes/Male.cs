@@ -57,6 +57,11 @@ namespace Damka.Classes
         {
             return _pos.getIndex();
         }
+
+        public int getRange()
+        {
+            return this._range;
+        }
     }
 
 }
