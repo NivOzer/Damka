@@ -79,14 +79,15 @@ namespace Damka.Classes
             }
         }
 
-        public void playerMoved(Button pressed)
+        public void playerMoved(int pressedIndex)
         {
             //Logic here
             //pressed.BackColor = System.Drawing.Color.FromArgb(51 , 5, 5);
+
             nextGamePhase();
         }
         //A Specific player has been pressed event
-        public void playerSelectedPiece(Button pressed)
+        public void playerSelectedPiece(int pressedIndex)
         {
 
             //Logic here
@@ -94,12 +95,12 @@ namespace Damka.Classes
             Color LIGHT_BROWN = System.Drawing.Color.FromArgb(66, 43, 34); // being set at Damka.cs - it's a duplicate
             Color DARK_BROWN = System.Drawing.Color.FromArgb(113, 82, 60); // the same
 
-            if (((pressed.Left / 90) + (pressed.Bottom / 90)) % 2 == 0 && pressed.BackColor == selectedColor)
-                pressed.BackColor = DARK_BROWN;
-            else if (((pressed.Left / 90) + (pressed.Bottom / 90)) % 2 != 0 && pressed.BackColor == selectedColor)
-                pressed.BackColor = LIGHT_BROWN;
-            else
-                pressed.BackColor = selectedColor;
+            // if (((pressed.Left / 90) + (pressed.Bottom / 90)) % 2 == 0 && pressed.BackColor == selectedColor)
+            //     pressed.BackColor = DARK_BROWN;
+            // else if (((pressed.Left / 90) + (pressed.Bottom / 90)) % 2 != 0 && pressed.BackColor == selectedColor)
+            //     pressed.BackColor = LIGHT_BROWN;
+            // else
+            //     pressed.BackColor = selectedColor;
 
             nextGamePhase();
         }
