@@ -13,25 +13,12 @@ namespace Damka.Classes
         protected Position _pos;
         protected Constants.PlayerColor _color;
         protected int _range;
-        protected bool _canGoUp;
-        protected bool _canGoDown;
         //Constructor
         public Male(Position pos, Constants.PlayerColor color)
         {
             this._pos = pos;
             this._color = color;
             this._range = Constants.MALE_RANGE;
-
-            // if (_color == Constants.PlayerColor.Black)
-            // {
-            //     _canGoDown = false;
-            //     _canGoUp = true;
-            // }
-            // else
-            // {
-            //     _canGoDown = true;
-            //     _canGoUp = false;
-            // }
         }
         //Copy constructor
         public Male(Male old)
@@ -43,7 +30,7 @@ namespace Damka.Classes
 
         public Bitmap getImage()
         {
-            if (_color == (int)Constants.PlayerColor.White)
+            if (_color == Constants.PlayerColor.White)
                 return global::Damka.Properties.Resources.White_male;
             else
                 return global::Damka.Properties.Resources.Black_male;
@@ -75,7 +62,7 @@ namespace Damka.Classes
             return this._range;
         }
 
-        public List<int> ShowAvailableMoves(List<Button> board, int startIndex)
+        public List<int> getAvailableMoves(List<Button> board, int startIndex)
         {
             List<int> result = new List<int>();
 
@@ -104,16 +91,5 @@ namespace Damka.Classes
             }
             return result;
         }
-
-        // public bool canGoUp()
-        // {
-        //     return this._canGoUp;
-        // }
-
-        // public bool canGoDown()
-        // {
-        //     return this._canGoDown;
-        // }
     }
-
 }

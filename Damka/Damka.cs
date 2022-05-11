@@ -54,7 +54,8 @@ namespace Damka
                     gamePanel.Controls.Add(btn);
                     game.addButtonToBoard(btn);
                     game.initializePlayers(btn, col, row);
-
+                    game.setGamePhase();
+                    game.ShowAvailablePieces();
                 }
             }
         }
@@ -63,15 +64,17 @@ namespace Damka
         private void boardClick(object sender, EventArgs e)
         {
             int pressedIndex = int.Parse(((Button)sender).Name);
-            if (game.getCurrentGamePhase() == Constants.GamePhase.CharacterSelection) //CharacterSelection
-            {
-                // pressed.BackColor = System.Drawing.Color.FromArgb(0, 0, 0);
-                game.playerMoved(pressedIndex); // we should send the index instead
+            if (game.getCurrentGamePhase() == Constants.GamePhase.CharacterSelection)
+            { // CharacterSelection
+
+                MessageBox.Show("Moves");
+                game.playerMoved(pressedIndex);
             }
-            else //PostionSelection
-            {
-                // pressed.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
-                game.playerSelectedPiece(pressedIndex); // we should send the index instead
+            else
+            { // PostionSelection
+
+                MessageBox.Show("Pieces");
+                game.playerSelectedPiece(pressedIndex);
             }
         }
 

@@ -44,7 +44,6 @@ namespace Damka.Classes
 
         public void initializePlayers(Button btn, int col, int row)
         {
-            int whiteindex = 0, blackindex = 0; // Unused
             if (((row + col) % 2 == 0) && btn.Image == null && row <= 2)
             {
                 Position p = new Position(row, col);
@@ -59,7 +58,7 @@ namespace Damka.Classes
                 _board[p.getIndex()].Image = m.getImage(); // the same
                 this._blacks.Add(m);
             }
-
+            disableAllButtons();
         }
         // Updates the GamePhase and Invokes necessary function to progress the game
         private void nextGamePhase()
@@ -68,18 +67,50 @@ namespace Damka.Classes
             {
                 // Logic here
                 _gamePhase = Constants.GamePhase.PostionSelection;
+                ShowAvailableMoves();
             }
             else
             {
                 // Logic here
+                //gameEnded(); // ******* TODO
                 _gamePhase = Constants.GamePhase.CharacterSelection;
+                ShowAvailablePieces();
             }
+            disableAllButtons();
+            turnCounter++;
         }
 
         public void playerMoved(int pressedIndex)
         {
             //Logic here
-            //pressed.BackColor = System.Drawing.Color.FromArgb(51 , 5, 5);
+
+            _board[pressedIndex].Image = _board[_current_player_index].Image;
+            _board[_current_player_index].Image = null;
+
+            if (turnCounter % 2 == (int)Constants.PlayerColor.Black)
+            {
+                foreach (Male piece in _blacks)
+                {
+                    if (piece.getIndex() == _current_player_index)
+                    {
+                        piece.setByIndex(pressedIndex);
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                foreach (Male piece in _whites)
+                {
+                    if (piece.getIndex() == _current_player_index)
+                    {
+                        piece.setByIndex(pressedIndex);
+                        break;
+                    }
+                }
+            }
+            _current_player_index = pressedIndex;
+            _board[pressedIndex].Text = "I have been here";
 
             nextGamePhase();
         }
@@ -89,13 +120,15 @@ namespace Damka.Classes
 
             //Logic here
 
-            // if (((pressed.Left / 90) + (pressed.Bottom / 90)) % 2 == 0 && pressed.BackColor == selectedColor)
-            //     pressed.BackColor = DARK_BROWN;
-            // else if (((pressed.Left / 90) + (pressed.Bottom / 90)) % 2 != 0 && pressed.BackColor == selectedColor)
-            //     pressed.BackColor = LIGHT_BROWN;
-            // else
-            //     pressed.BackColor = selectedColor;
+            if (((_board[pressedIndex].Left / Constants.BUTTON_SIZE) + (_board[pressedIndex].Bottom / Constants.BUTTON_SIZE)) % 2 == 0 && _board[pressedIndex].BackColor == Constants.selectedColor)
+                _board[pressedIndex].BackColor = Constants.DARK_BROWN;
+            else if (((_board[pressedIndex].Left / Constants.BUTTON_SIZE) + (_board[pressedIndex].Bottom / Constants.BUTTON_SIZE)) % 2 != 0 && _board[pressedIndex].BackColor == Constants.selectedColor)
+                _board[pressedIndex].BackColor = Constants.LIGHT_BROWN;
+            else
+                _board[pressedIndex].BackColor = Constants.selectedColor;
 
+            _current_player_index = pressedIndex;
+            ShowAvailableMoves();
             nextGamePhase();
         }
 
@@ -108,8 +141,18 @@ namespace Damka.Classes
             }
         }
 
+        // Enables all the buttons in the List (by index)
+        private void enableButtons(List<int> moves)
+        {
+            foreach (int move in moves)
+            {
+                _board[move].Enabled = true;
+                // _board[move].Text = "click me";
+
+            }
+        }
         //shows the legal moves for a piece to make
-        private void ShowAvailablePieces()
+        public void ShowAvailablePieces()
         {
             if (turnCounter % 2 == (int)Constants.PlayerColor.Black)
             {
@@ -127,30 +170,24 @@ namespace Damka.Classes
                     _board[index].Enabled = true;
                 }
             }
-
         }
 
         // Enables all the buttons the piece can move to
         private void ShowAvailableMoves()
         {
-            int optionalIndex, i;
+            int playerInList = 0;
+            List<int> moves;
+
             if (turnCounter % 2 == (int)Constants.PlayerColor.Black)
             {
                 foreach (Male piece in _blacks)
                 {
-                    if (_blacks[_current_player_index].getCol() == 0)
+                    playerInList++;
+                    if (piece.getIndex() == _current_player_index)
                     {
-                        optionalIndex = _current_player_index - Constants.NUM_OF_COLS - 1;
-                        for (i = 1; i >= piece.getRange(); i++)
-                        {
-                            if (_board[optionalIndex].Image != null)
-                                break;
-                            _board[optionalIndex].Enabled = true;
-                        }
-                    }
-                    if (_blacks[_current_player_index].getCol() == Constants.NUM_OF_COLS)
-                    {
-                        //
+                        moves = piece.getAvailableMoves(_board, _current_player_index);
+                        enableButtons(moves);
+                        break;
                     }
                 }
             }
@@ -158,9 +195,20 @@ namespace Damka.Classes
             {
                 foreach (Male piece in _whites)
                 {
-                    //
+                    playerInList++;
+                    if (piece.getIndex() == _current_player_index)
+                    {
+                        moves = piece.getAvailableMoves(_board, _current_player_index);
+                        enableButtons(moves);
+                        break;
+                    }
                 }
             }
+        }
+
+        public List<Button> getBoard()
+        {
+            return _board;
         }
 
         // Remove from list, move to graveyard, update button
@@ -175,10 +223,15 @@ namespace Damka.Classes
             return false;
         }
 
+        // set current game phase is empty set as 'PostionSelection' 
+        public void setGamePhase(Constants.GamePhase gamePhase = Constants.GamePhase.PostionSelection)
+        {
+            _gamePhase = gamePhase;
+        }
+
         // Initializes GUI's properties
         public void gameInit()
         {
         }
-
     }
 }
