@@ -50,9 +50,9 @@ namespace Damka.Classes
         }
 
         // Update to new postion
-        public void updatePosition(int index)
+        public void setByIndex(int index)
         {
-            this._pos.updatePosition(index);
+            this._pos.setByIndex(index);
         }
 
         public int getRow()
@@ -82,22 +82,22 @@ namespace Damka.Classes
 
             if (_color == Constants.PlayerColor.Black)
             {
-                if (board[startIndex - 9].Image != null)
+                if (board[startIndex - 9].Image == null)
                 { // Black can go left
                     result.Add(startIndex - 9);
                 }
-                if (board[startIndex - 7].Image != null)
+                if (board[startIndex - 7].Image == null)
                 { // Black can go right
                     result.Add(startIndex - 7);
                 }
             }
             else
             {
-                if (board[startIndex + 7].Image != null)
+                if (board[startIndex + 7].Image == null)
                 { // White can go left
                     result.Add(startIndex + 7);
                 }
-                if (board[startIndex + 9].Image != null)
+                if (board[startIndex + 9].Image == null)
                 { // White can go right
                     result.Add(startIndex + 9);
                 }

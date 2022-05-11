@@ -35,7 +35,7 @@ namespace Damka.Classes
             return this._row * NUM_OF_COLS + this._col;
         }
 
-        public void updatePosition(int index)
+        public void setByIndex(int index)
         {
             this._row = index / NUM_OF_COLS;
             this._col = index % NUM_OF_COLS;
