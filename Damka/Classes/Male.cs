@@ -22,17 +22,16 @@ namespace Damka.Classes
             this._color = color;
             this._range = Constants.MALE_RANGE;
 
-            if (_color == Constants.PlayerColor.Black)
-            {
-                _canGoDown = false;
-                _canGoUp = true;
-            }
-            else
-            {
-
-                _canGoDown = true;
-                _canGoUp = false;
-            }
+            // if (_color == Constants.PlayerColor.Black)
+            // {
+            //     _canGoDown = false;
+            //     _canGoUp = true;
+            // }
+            // else
+            // {
+            //     _canGoDown = true;
+            //     _canGoUp = false;
+            // }
         }
         //Copy constructor
         public Male(Male old)
@@ -76,15 +75,45 @@ namespace Damka.Classes
             return this._range;
         }
 
-        public bool canGoUp()
+        public List<int> ShowAvailableMoves(List<Button> board, int startIndex)
         {
-            return this._canGoUp;
+            List<int> result = new List<int>();
+
+
+            if (_color == Constants.PlayerColor.Black)
+            {
+                if (board[startIndex - 9].Image != null)
+                { // Black can go left
+                    result.Add(startIndex - 9);
+                }
+                if (board[startIndex - 7].Image != null)
+                { // Black can go right
+                    result.Add(startIndex - 7);
+                }
+            }
+            else
+            {
+                if (board[startIndex + 7].Image != null)
+                { // White can go left
+                    result.Add(startIndex + 7);
+                }
+                if (board[startIndex + 9].Image != null)
+                { // White can go right
+                    result.Add(startIndex + 9);
+                }
+            }
+            return result;
         }
 
-        public bool canGoDown()
-        {
-            return this._canGoDown;
-        }
+        // public bool canGoUp()
+        // {
+        //     return this._canGoUp;
+        // }
+
+        // public bool canGoDown()
+        // {
+        //     return this._canGoDown;
+        // }
     }
 
 }
