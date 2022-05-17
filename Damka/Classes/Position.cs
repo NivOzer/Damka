@@ -14,6 +14,10 @@ namespace Damka.Classes
             this._row = 0;
             this._col = 0;
         }
+        public Position(int index)
+        {
+            setByIndex(index);
+        }
         public Position(int row, int col)
         {
             this._row = row;
