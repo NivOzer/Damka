@@ -64,18 +64,8 @@ namespace Damka
         private void boardClick(object sender, EventArgs e)
         {
             int pressedIndex = int.Parse(((Button)sender).Name);
-            if (game.getCurrentGamePhase() == Constants.GamePhase.CharacterSelection)
-            { // CharacterSelection
-
-                MessageBox.Show("Moves");
-                game.playerMoved(pressedIndex);
-            }
-            else
-            { // PostionSelection
-
-                MessageBox.Show("Pieces");
-                game.playerSelectedPiece(pressedIndex);
-            }
+            game.getBoard()[30].Text = game.getCurrentGamePhase() + "";
+            game.nextGamePhase(pressedIndex);
         }
 
     }

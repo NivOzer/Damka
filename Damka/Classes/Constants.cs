@@ -9,7 +9,7 @@ namespace Damka.Classes
     {
         public const int PANEL_SIZE = 720;
         public const int MALE_RANGE = 1;
-        public enum GamePhase { CharacterSelection, PostionSelection };
+        public enum GamePhase { SelectedAPiece, ChoseWhereToGo };
 
         public const int NUM_OF_ROWS = 8;
         public const int NUM_OF_COLS = 8;
