@@ -20,5 +20,6 @@ namespace Damka.Classes
         public static Color selectedColor = System.Drawing.Color.FromArgb(230, 220, 254);
         public enum PlayerColor { White = 0, Black = 1 };
         public const int BUTTON_SIZE = 90;
+        public const int KING_EAT_COUNTER_NUMBER = 2;
     }
 }
