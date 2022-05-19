@@ -48,14 +48,14 @@ namespace Damka.Classes
             {
                 Position p = new Position(row, col);
                 Male m = new Male(p, Constants.PlayerColor.White);
-                _board[p.getIndex()].Image = m.getImage(); // This is how we access the buttons in the current position, it will be a method in all the classes - A poly function
+                _board[p.getIndex()].Image = m.getImage();
                 this._whites.Add(m);
             }
             else if (((row + col) % 2 == 0) && btn.Image == null && row >= 7) // till 5 cause <8 is 7 so 3 lines is 5,6,7
             {
                 Position p = new Position(row, col);
                 Male m = new Male(p, Constants.PlayerColor.Black);
-                _board[p.getIndex()].Image = m.getImage(); // the same
+                _board[p.getIndex()].Image = m.getImage();
                 this._blacks.Add(m);
             }
             disableAllButtons();
@@ -75,17 +75,9 @@ namespace Damka.Classes
             }
             else
             { // Player was in ChoseWhereToGo OR first turn of the game
-              // if (_turnCounter != 0)
-              // {
                 disableAllButtons();
                 playerSelectedPiece(pressedIndex);
                 _gamePhase = Constants.GamePhase.SelectedAPiece;
-                // }
-                // else
-                // { // first turn of the game
-                //     _current_player_index = pressedIndex;
-                //     ShowAvailableMoves();
-                // }
             }
         }
 
