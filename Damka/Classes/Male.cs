@@ -164,6 +164,6 @@ namespace Damka.Classes
 
 
         public virtual void ateAPlayer() { }
-        public virtual void gotEaten() { }
+        public virtual bool gotEaten() { return false; }
     }
 }
