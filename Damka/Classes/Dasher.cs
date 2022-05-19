@@ -8,7 +8,7 @@ namespace Damka.Classes
     class Dasher : Male
     { // just an example of the changes - regardless if we use the dasher or not
         private int numberOfDashes;
-        public Dasher(Position pos, Color color, int range) : base(pos, color, range)
+        public Dasher(Position pos, Constants.PlayerColor color) : base(pos, color)
         { // again I think the button is unnecessary
             this.numberOfDashes = 2;
         }
@@ -21,7 +21,7 @@ namespace Damka.Classes
 
         public new Bitmap getImage()
         {
-            if (base._color == (int)Color.White)
+            if (base._color == (int)Constants.PlayerColor.White)
                 return global::Damka.Properties.Resources.KING_Horizontal;
             else
                 return global::Damka.Properties.Resources.KING_Horizontal_Black;

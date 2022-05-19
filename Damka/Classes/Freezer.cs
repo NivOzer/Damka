@@ -8,7 +8,7 @@ namespace Damka.Classes
     class Freezer : Male
     {
         private int freezeDuration;
-        public Freezer(Position pos, Color color, int range) : base(pos, color, range)
+        public Freezer(Position pos, Constants.PlayerColor color) : base(pos, color)
         {
             this.freezeDuration = 2;
         }
