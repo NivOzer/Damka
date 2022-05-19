@@ -9,16 +9,23 @@ namespace Damka.Classes
     [Serializable]
     class King : Male
     {
-        private int _eatCounter;
-        // public King(Position pos, Constants.PlayerColor color) : base(pos, color)
-        // {
-        //     //
-        // }
-
+        internal int _eatCounter;
         public King(Male old) : base(old.pos, old.color)
+        { // Upgrade from Male
+            _range = 8;
+            _eatCounter = 0;
+        }
+
+        public King(Position pos, Constants.PlayerColor color) : base(pos, color)
         {
             _range = 8;
             _eatCounter = 0;
+        }
+
+        public King(King old) : base(old._pos, old._color)
+        { // getting Upgrade to special King
+            this._range = old._range;
+            this._eatCounter = old._eatCounter;
         }
 
         public override List<int> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
