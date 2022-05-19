@@ -36,7 +36,7 @@ namespace Damka
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Damka.Properties.Resources.wood;
-            this.ClientSize = new System.Drawing.Size(1400, 802);
+            this.ClientSize = new System.Drawing.Size(719, 721);
             this.Name = "Damka";
             this.Text = "Damka";
             this.ResumeLayout(false);
