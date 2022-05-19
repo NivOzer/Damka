@@ -28,7 +28,6 @@ namespace Damka.Classes
             {
                 if (board[toIndex].Image == null)
                 { // can go  up
-                    // result.Add(toIndex);
                     result.Add(new KeyValuePair<int, int>(toIndex, -1));
                     if (isEmpty == false)
                     {
@@ -57,7 +56,6 @@ namespace Damka.Classes
             {
                 if (board[toIndex].Image == null)
                 { // can go down
-                    // result.Add(toIndex);
                     result.Add(new KeyValuePair<int, int>(toIndex, -1));
                     if (isEmpty == false)
                     {

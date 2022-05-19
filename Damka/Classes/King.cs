@@ -42,7 +42,6 @@ namespace Damka.Classes
                 if (board[toIndex].Image == null)
                 { // can go right up
                     result.Add(new KeyValuePair<int, int>(toIndex, -1));
-                    // result.Add(toIndex);
                     if (isEmpty == false)
                     {
                         result.Add(new KeyValuePair<int, int>(toIndex, toIndex + 7));
@@ -71,7 +70,6 @@ namespace Damka.Classes
                 if (board[toIndex].Image == null)
                 { // can go left up
                     result.Add(new KeyValuePair<int, int>(toIndex, -1));
-                    // result.Add(toIndex);
                     if (isEmpty == false)
                     {
                         result.Add(new KeyValuePair<int, int>(toIndex, toIndex + 9));
@@ -100,7 +98,6 @@ namespace Damka.Classes
                 if (board[toIndex].Image == null)
                 { // can go left up
                     result.Add(new KeyValuePair<int, int>(toIndex, -1));
-                    // result.Add(toIndex);
                     if (isEmpty == false)
                     {
                         result.Add(new KeyValuePair<int, int>(toIndex, toIndex - 7));
@@ -129,7 +126,6 @@ namespace Damka.Classes
                 if (board[toIndex].Image == null)
                 { // can go left up
                     result.Add(new KeyValuePair<int, int>(toIndex, -1));
-                    // result.Add(toIndex);
                     if (isEmpty == false)
                     {
                         result.Add(new KeyValuePair<int, int>(toIndex, toIndex - 9));

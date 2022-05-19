@@ -178,14 +178,12 @@ namespace Damka.Classes
             {
                 if (move.Key == pressedIndex && move.Value != -1)
                 {
-
                     Male gotKilled = getPlayerMaleByIndex(move.Value);
                     if (gotKilled._color == Constants.PlayerColor.White)
                         _whites.Remove(gotKilled);
                     else
                         _blacks.Remove(gotKilled);
                     _board[move.Value].Image = null;
-                    MessageBox.Show("Killed " + move.Value);
                 }
             }
             //Logic here
@@ -202,14 +200,14 @@ namespace Damka.Classes
             _current_player_index = pressedIndex;
 
 
-            //checks for an upgarde
+            //checks for an upgrade
             if (current.isUpgradeable())
             {
                 if (current.GetType() == typeof(Classes.Male))
                 {
                     King temp2 = new King(current);
 
-                    VerticalKing temp = new VerticalKing(temp2);
+                    HorizontalKing temp = new HorizontalKing(temp2);
                     _board[pressedIndex].Image = temp.getImage();
 
                     if (Constants.PlayerColor.Black == current.color)
@@ -222,6 +220,10 @@ namespace Damka.Classes
                         _whites.Remove(current);
                         _whites.Add(temp);
                     }
+                }
+                if (current.GetType() == typeof(Classes.King))
+                {
+                    // King Random
                 }
             }
         }
@@ -237,8 +239,6 @@ namespace Damka.Classes
             {
                 _board[(move.Key)].Enabled = true;
             }
-            // foreach (int move in moves)
-            //     _board[move].Enabled = true;
         } // Enables all the buttons in the List (by index)
         public void loadFromFile()
         {

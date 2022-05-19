@@ -30,7 +30,6 @@ namespace Damka.Classes
                 if (board[to.getIndex()].Image == null)
                 { // can go left
                     result.Add(new KeyValuePair<int, int>(to.getIndex(), -1));
-                    // result.Add(to.getIndex());
                     if (isEmpty == false)
                     {
                         result.Add(new KeyValuePair<int, int>(to.getIndex(), to.getIndex() + 2));
@@ -57,7 +56,6 @@ namespace Damka.Classes
                 if (board[to.getIndex()].Image == null)
                 { // can go left
                     result.Add(new KeyValuePair<int, int>(to.getIndex(), -1));
-                    // result.Add(to.getIndex());
                     if (isEmpty == false)
                     {
                         result.Add(new KeyValuePair<int, int>(to.getIndex(), to.getIndex() - 2));
