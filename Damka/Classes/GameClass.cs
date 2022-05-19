@@ -44,14 +44,14 @@ namespace Damka.Classes
 
         public void initializePlayers(Button btn, int col, int row)
         {
-            if (((row + col) % 2 == 0) && btn.Image == null && row <= 0)
+            if (((row + col) % 2 == 0) && btn.Image == null && row <= 2)
             {
                 Position p = new Position(row, col);
                 Male m = new Male(p, Constants.PlayerColor.White);
                 _board[p.getIndex()].Image = m.getImage();
                 this._whites.Add(m);
             }
-            else if (((row + col) % 2 == 0) && btn.Image == null && row >= 7) // till 5 cause <8 is 7 so 3 lines is 5,6,7
+            else if (((row + col) % 2 == 0) && btn.Image == null && row >= 5) // till 5 cause <8 is 7 so 3 lines is 5,6,7
             {
                 Position p = new Position(row, col);
                 Male m = new Male(p, Constants.PlayerColor.Black);
@@ -118,9 +118,6 @@ namespace Damka.Classes
             //         }
             //     }
             // }
-
-            _board[pressedIndex].Text = "I have been here";
-
         }
         //A Specific player has been pressed event
         public void playerSelectedPiece(int pressedIndex)
@@ -154,8 +151,6 @@ namespace Damka.Classes
             foreach (int move in moves)
             {
                 _board[move].Enabled = true;
-                // _board[move].Text = "click me";
-
             }
         }
         //shows the legal moves for a piece to make
@@ -183,8 +178,6 @@ namespace Damka.Classes
         private void ShowAvailableMoves()
         {
             List<int> moves;
-
-            // MessageBox.Show("Show moves");
             Male current = getPlayerMaleByIndex(_current_player_index);
             moves = current.getAvailableMoves(_board, _current_player_index, this);
             enableButtons(moves);
