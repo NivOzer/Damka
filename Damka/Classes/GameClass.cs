@@ -69,14 +69,14 @@ namespace Damka.Classes
 
         public void initializePlayers(Button btn, int col, int row)
         {
-            if (((row + col) % 2 == 0) && btn.Image == null && row <= 0)
+            if (((row + col) % 2 == 0) && btn.Image == null && row <= 2)
             {
                 Position p = new Position(row, col);
                 Male m = new Male(p, Constants.PlayerColor.White);
                 _board[p.getIndex()].Image = m.getImage();
                 this._whites.Add(m);
             }
-            else if (((row + col) % 2 == 0) && btn.Image == null && row >= 7) // till 5 cause <8 is 7 so 3 lines is 5,6,7
+            else if (((row + col) % 2 == 0) && btn.Image == null && row >= 5) // till 5 cause <8 is 7 so 3 lines is 5,6,7
             {
                 Position p = new Position(row, col);
                 Male m = new Male(p, Constants.PlayerColor.Black);
@@ -175,6 +175,7 @@ namespace Damka.Classes
                 if (move.Key == pressedIndex && move.Value != -1)
                 {
                     Male gotKilled = getPlayerMaleByIndex(move.Value);
+                    gotEaten = gotKilled.gotEaten();
                     if (gotKilled._color == Constants.PlayerColor.White)
                         _whites.Remove(gotKilled);
                     else
@@ -183,9 +184,8 @@ namespace Damka.Classes
 
                     current.ateAPlayer();
 
-                    if (gotKilled.gotEaten())
-                    { // Mine killed attacker
-                        gotEaten = true;
+                    if (gotEaten)
+                    { // Attacker killed a mine 
                         if (Constants.PlayerColor.Black == current.color)
                             _blacks.Remove(current);
                         else
@@ -203,14 +203,11 @@ namespace Damka.Classes
             else
                 _board[_current_player_index].BackColor = Constants.LIGHT_BROWN;
 
-            current.setByIndex(pressedIndex);
-            _current_player_index = pressedIndex;
-
-
-
             //checks for an upgrade
             if (gotEaten == false)
             {
+                current.setByIndex(pressedIndex);
+                _current_player_index = pressedIndex;
                 if (current.isUpgradeable())
                 {
                     if (current.GetType() == typeof(Classes.Male))
