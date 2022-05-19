@@ -10,13 +10,20 @@ using Damka.Classes;
 using System.IO;
 using System.Runtime.Serialization;//!!!!!!
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Linq;
 
 namespace Damka
 {
+
+    //BUGS TO FIX
+    //1 stepping over and not really eating
+    //2 if loaded a picked game the turn of the person that just played still remains
+    //3 disabled buttons colors
+
     public partial class Damka : Form
     {
         GameClass game = new GameClass();
-
+        Panel gamePanel = new Panel();
         public Damka()
         {
             InitializeComponent();
@@ -26,13 +33,14 @@ namespace Damka
         private void gameLoad()
         {
             drawBoard();
+            game.setGamePhase();
+            game.ShowAvailablePieces();
             //placePlayers();
         }
 
         // Draws all the buttons and adds them to game List<Button> _board
         private void drawBoard()
         {
-            Panel gamePanel = new Panel();
             gamePanel.Width = Constants.PANEL_SIZE;
             gamePanel.Height = Constants.PANEL_SIZE;
             gamePanel.BackColor = Color.Yellow;
@@ -49,31 +57,59 @@ namespace Damka
                     btn.Location = new Point(col * Constants.BUTTON_SIZE, row * Constants.BUTTON_SIZE);
                     btn.FlatStyle = FlatStyle.Flat;
                     btn.FlatAppearance.BorderSize = 0;
+                    btn.BackColor = game.getButtonColor(row, col);
+                    btn.Click += new EventHandler(boardClick);
+                    gamePanel.Controls.Add(btn);
+                    game.addButtonToBoard(btn);
+                    game.initializePlayers(btn, col, row);
+                }
+            }
+        }
+
+        public void createBoardToLoad()
+        {
+            for (int row = 0; row < Constants.NUM_OF_ROWS; row++)
+            {
+                for (int col = 0; col < Constants.NUM_OF_COLS; col++)
+                {
+                    Button btn = new Button();
+                    btn.ForeColor = Color.White;
+                    btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();
+                    btn.Name = (row * Constants.NUM_OF_COLS + col).ToString();
+                    btn.Size = new Size(Constants.BUTTON_SIZE, Constants.BUTTON_SIZE);
+                    btn.Location = new Point(col * Constants.BUTTON_SIZE, row * Constants.BUTTON_SIZE);
+                    btn.FlatStyle = FlatStyle.Flat;
+                    btn.FlatAppearance.BorderSize = 0;
                     if ((row + col) % 2 == 0)
                     {
-                        btn.AccessibleDescription = "LIGHT_BROWN";
+
                         btn.BackColor = Constants.LIGHT_BROWN;
                     }
                     else
                     {
-                        btn.AccessibleDescription = "DARK_BROWN";
+
                         btn.BackColor = Constants.DARK_BROWN;
                     }
                     btn.Click += new EventHandler(boardClick);
                     gamePanel.Controls.Add(btn);
                     game.addButtonToBoard(btn);
-                    game.initializePlayers(btn, col, row);
-                    game.setGamePhase();
-                    game.ShowAvailablePieces();
                 }
             }
         }
+
+        public void removeButtons()
+        {
+            foreach (Control item in gamePanel.Controls.OfType<Button>().ToList())
+            {
+                gamePanel.Controls.Remove(item);
+            }
+        }
+
 
         // Checks the current GamePhase and initiate a proper response
         private void boardClick(object sender, EventArgs e)
         {
             int pressedIndex = int.Parse(((Button)sender).Name);
-            // game.getBoard()[30].Text = game.getCurrentGamePhase() + "";
             game.nextGamePhase(pressedIndex);
         }
 
@@ -111,8 +147,19 @@ namespace Damka
                 //!!!!
                 /*                pts = (FigureList)binaryFormatter.Deserialize(stream);
                                 pictureBox1.Invalidate();*/
+
+                //deletes all buttons
+                removeButtons();
                 game = (GameClass)binaryFormatter.Deserialize(stream);
+                game.setBoard(null);
+                /*game.getBoard() = new List<Button>();*/
+                //creates buttons - initiate players
+                createBoardToLoad();
+                game.loadFromFile();
+                game.disableAllButtons();
+                game.ShowAvailableMoves();
             }
         }
+
     }
 }

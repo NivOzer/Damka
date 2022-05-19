@@ -12,9 +12,9 @@ namespace Damka.Classes
     class GameClass
     {
         private int _turnCounter;
-        //decides what gamePhase the user has chosen : 0 is character selection , 1 is for position selection
+        //decides what gamePhase the user has chosen : 0 is Character selection , 1 is for Position selection
         private Constants.GamePhase _gamePhase;
-        private List<Button> _board;
+        [NonSerialized()] private List<Button> _board;
         private List<Male> _blacks, _whites;
         private int _current_player_index;
         private List<Male> _deadBlacks, _deadWhites;
@@ -30,18 +30,42 @@ namespace Damka.Classes
             this._deadBlacks = new List<Male>();
             this._deadWhites = new List<Male>();
         }
-        public void addButtonToPanel(Button btn)
+
+        // --- GETTERS --
+        public Constants.GamePhase getCurrentGamePhase() { return this._gamePhase; }
+        public List<Button> getBoard() { return _board; }
+        public Color getButtonColor(int index)
         {
+            Position point = new Position(index);
+            if ((point.getRow() + point.getCol()) % 2 == 0)
+                return Constants.LIGHT_BROWN;
+            return Constants.DARK_BROWN;
+        } 
+        public Color getButtonColor(int row, int col)
+        {
+            if ((row + col) % 2 == 0)
+                return Constants.LIGHT_BROWN;
+            return Constants.DARK_BROWN;
         }
-        public void addButtonToBoard(Button btn)
+        public Male getPlayerMaleByIndex(int index)
         {
-            this._board.Add(btn);
+            foreach (Male piece in _blacks)
+                if (piece.getIndex() == index) return piece;
+            foreach (Male piece in _whites)
+                if (piece.getIndex() == index) return piece;
+            return null; // for maintanace
         }
 
-        public Constants.GamePhase getCurrentGamePhase()
+        // --- SETTERS --
+
+        public void setGamePhase(Constants.GamePhase gamePhase = Constants.GamePhase.ChoseWhereToGo) { _gamePhase = gamePhase; } // sets current gamephase
+        public void setBoard(List<Button> btns = null) //given a board - if empty creates a new one , else adds the buttons to the board
         {
-            return this._gamePhase;
+            if (btns == null) _board = new List<Button>();
+            else _board = btns;
         }
+
+        // Game Functionality
 
         public void initializePlayers(Button btn, int col, int row)
         {
@@ -61,13 +85,22 @@ namespace Damka.Classes
             }
             disableAllButtons();
         }
-        // Updates the GamePhase and Invokes necessary function to progress the game
+        public void addButtonToBoard(Button btn) { this._board.Add(btn); }
         public void nextGamePhase(int pressedIndex)
         {
             if (_gamePhase == Constants.GamePhase.SelectedAPiece)
             { // Player was in character selection
                 // Logic here
                 disableAllButtons();
+                if (pressedIndex == _current_player_index || getPlayerMaleByIndex(pressedIndex) != null)
+                {
+                    //restores original color
+                    if (_board[_current_player_index].BackColor == Constants.selectedColor)
+                        _board[_current_player_index].BackColor = getButtonColor(_current_player_index);
+                    ShowAvailablePieces();
+                    _gamePhase = Constants.GamePhase.ChoseWhereToGo;
+                    return;
+                }
                 playerMoved(pressedIndex);
                 //gameEnded(); // ******* TODO
                 _turnCounter++;
@@ -78,14 +111,65 @@ namespace Damka.Classes
             { // Player was in ChoseWhereToGo OR first turn of the game
                 disableAllButtons();
                 playerSelectedPiece(pressedIndex);
+                ShowAvailablePieces();
                 _gamePhase = Constants.GamePhase.SelectedAPiece;
             }
-        }
-
-        public void playerMoved(int pressedIndex)
+        }// Updates the GamePhase and Invokes necessary function to progress the game
+        public void ShowAvailablePieces()
         {
-            //Logic here
+            if (_turnCounter % 2 == (int)Constants.PlayerColor.Black)
+            {
+                foreach (Male piece in _blacks)
+                {
+                    int index = piece.getIndex();
+                    if (piece.getAvailableMoves(_board, index, this).Count > 0)
+                        _board[index].Enabled = true;
+                }
+            }
+            else
+            {
+                foreach (Male piece in _whites)
+                {
+                    int index = piece.getIndex();
+                    if (piece.getAvailableMoves(_board, index, this).Count > 0)
+                        _board[index].Enabled = true;
+                }
+            }
+        } //shows the legal moves for a piece to make
+        public void playerSelectedPiece(int pressedIndex)
+        {
 
+            //Logic here
+            if (((_board[pressedIndex].Left / Constants.BUTTON_SIZE) + (_board[pressedIndex].Bottom / Constants.BUTTON_SIZE)) % 2 == 0 && _board[pressedIndex].BackColor == Constants.selectedColor)
+                _board[pressedIndex].BackColor = Constants.DARK_BROWN;
+            else if (((_board[pressedIndex].Left / Constants.BUTTON_SIZE) + (_board[pressedIndex].Bottom / Constants.BUTTON_SIZE)) % 2 != 0 && _board[pressedIndex].BackColor == Constants.selectedColor)
+                _board[pressedIndex].BackColor = Constants.LIGHT_BROWN;
+            else
+                _board[pressedIndex].BackColor = Constants.selectedColor;
+            _current_player_index = pressedIndex;
+            ShowAvailableMoves();
+        }//A Specific player has been pressed event
+        public void ShowAvailableMoves()
+        {
+            List<int> moves;
+            Male current = getPlayerMaleByIndex(_current_player_index);
+            moves = current.getAvailableMoves(_board, _current_player_index, this);
+            enableButtons(moves);
+            _board[_current_player_index].Enabled = true;
+        }// Enables all the buttons the piece can move to
+        public void playerMoved(int pressedIndex)//actions to do After a player has moved
+        {
+/*            int delta = _current_player_index - pressedIndex;
+            int eatenIndex = _current_player_index + delta;
+            Male eaten = getPlayerMaleByIndex(eatenIndex);
+            if (eaten._color != getPlayerMaleByIndex(_current_player_index)._color)
+            {
+                if (Constants.PlayerColor.White == eaten.color)
+                    _whites.Remove(eaten);
+                _blacks.Remove(eaten);
+            }*/
+
+            //Logic here
             _board[pressedIndex].Image = _board[_current_player_index].Image;
             _board[_current_player_index].Image = null;
 
@@ -99,6 +183,8 @@ namespace Damka.Classes
             current.setByIndex(pressedIndex);
             _current_player_index = pressedIndex;
 
+
+            //checks for an upgarde
             if (current.isUpgradeable())
             {
                 if (current.GetType() == typeof(Classes.Male))
@@ -119,98 +205,28 @@ namespace Damka.Classes
                 }
             }
         }
-
-        //A Specific player has been pressed event
-        public void playerSelectedPiece(int pressedIndex)
-        {
-
-            //Logic here
-
-            if (((_board[pressedIndex].Left / Constants.BUTTON_SIZE) + (_board[pressedIndex].Bottom / Constants.BUTTON_SIZE)) % 2 == 0 && _board[pressedIndex].BackColor == Constants.selectedColor)
-                _board[pressedIndex].BackColor = Constants.DARK_BROWN;
-            else if (((_board[pressedIndex].Left / Constants.BUTTON_SIZE) + (_board[pressedIndex].Bottom / Constants.BUTTON_SIZE)) % 2 != 0 && _board[pressedIndex].BackColor == Constants.selectedColor)
-                _board[pressedIndex].BackColor = Constants.LIGHT_BROWN;
-            else
-                _board[pressedIndex].BackColor = Constants.selectedColor;
-
-            _current_player_index = pressedIndex;
-            ShowAvailableMoves();
-        }
-
-        //Disables all the buttons
-        private void disableAllButtons()
+        public void disableAllButtons()
         {
             foreach (Button btn in _board)
-            {
                 btn.Enabled = false;
-            }
-        }
 
-        // Enables all the buttons in the List (by index)
+        }//Disables all the buttons
         private void enableButtons(List<int> moves)
         {
             foreach (int move in moves)
-            {
                 _board[move].Enabled = true;
-            }
-        }
-        //shows the legal moves for a piece to make
-        public void ShowAvailablePieces()
+        } // Enables all the buttons in the List (by index)
+        public void loadFromFile()
         {
-            if (_turnCounter % 2 == (int)Constants.PlayerColor.Black)
-            {
-                foreach (Male piece in _blacks)
-                {
-                    int index = piece.getIndex();
-                    // if (piece.getAvailableMoves(_board, index, this).Count > 0)
-                    _board[index].Enabled = true;
-                }
-            }
-            else
-            {
-                foreach (Male piece in _whites)
-                {
-                    int index = piece.getIndex();
-                    // if (piece.getAvailableMoves(_board, index, this).Count > 0)
-                    _board[index].Enabled = true;
-                }
-            }
-        }
+            foreach (Button btn in _board) btn.Image = null;
+            foreach (Male w in _whites) _board[w.getIndex()].Image = w.getImage();
+            foreach (Male b in _blacks) _board[b.getIndex()].Image = b.getImage();
+        }// Initializes GUI's properties
 
-        // Enables all the buttons the piece can move to
-        private void ShowAvailableMoves()
-        {
-            List<int> moves;
-            Male current = getPlayerMaleByIndex(_current_player_index);
-            moves = current.getAvailableMoves(_board, _current_player_index, this);
-            enableButtons(moves);
-        }
 
-        public List<Button> getBoard()
-        {
-            return _board;
-        }
-
-        public Male getPlayerMaleByIndex(int index)
-        {
-            foreach (Male piece in _blacks)
-            {
-                if (piece.getIndex() == index)
-                {
-                    return piece;
-                }
-            }
-            foreach (Male piece in _whites)
-            {
-                if (piece.getIndex() == index)
-                {
-                    return piece;
-                }
-
-            }
-            MessageBox.Show("No Player found at " + index);
-            return null; // will never here - just to solve 
-        }
+        // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv TO  DO vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+        // ********************************************************** TO  DO *****************************************************************
+        // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv TO  DO vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
         // Remove from list, move to graveyard, update button
         private void gotEaten()
@@ -222,17 +238,6 @@ namespace Damka.Classes
         private bool gameEnded()
         {
             return false;
-        }
-
-        // set current game phase is empty set as 'PositionSelection' 
-        public void setGamePhase(Constants.GamePhase gamePhase = Constants.GamePhase.ChoseWhereToGo)
-        {
-            _gamePhase = gamePhase;
-        }
-
-        // Initializes GUI's properties
-        public void gameInit()
-        {
         }
     }
 }

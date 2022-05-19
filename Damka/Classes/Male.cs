@@ -37,40 +37,20 @@ namespace Damka.Classes
                 return global::Damka.Properties.Resources.Black_male;
         }
 
-        // Update to new postion
-        public void setByIndex(int index)
-        {
-            this._pos.setByIndex(index);
-        }
 
-        public int getRow()
-        {
-            return _pos.getRow();
-        }
+        // --- GETTERS --
 
-        public int getCol()
-        {
-            return _pos.getCol();
-        }
-
-        public int getIndex()
-        {
-            return _pos.getIndex();
-        }
-
-        public int getRange()
-        {
-            return this._range;
-        }
-
+        public int getRow() { return _pos.getRow(); }
+        public int getCol() { return _pos.getCol(); }       
+        public int getIndex() { return _pos.getIndex(); }
+        public int getRange() { return this._range; }
         public Position pos
         {
             get
             {
                 return _pos;
             }
-        }
-
+        } 
         public Constants.PlayerColor color
         {
             get
@@ -78,6 +58,17 @@ namespace Damka.Classes
                 return _color;
             }
         }
+
+
+        // SETTERS and Male Functionality
+        public void setByIndex(int index) { this._pos.setByIndex(index); }// Update to new postion
+        public bool isValidMove(int startIndex, int desiredLocationIndex)
+        {
+            if (startIndex % Constants.NUM_OF_COLS == 0 && desiredLocationIndex % 8 == 7) return false;
+            if (startIndex % Constants.NUM_OF_COLS == 7 && desiredLocationIndex % 8 == 0) return false;
+            if (desiredLocationIndex >= Constants.NUM_OF_COLS * Constants.NUM_OF_ROWS || desiredLocationIndex < 0) return false;
+            return true;
+        } // checks the board bounds
         public virtual List<int> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
         {
             List<int> result = new List<int>();
@@ -151,22 +142,14 @@ namespace Damka.Classes
             }
             return result;
         }
-        public bool isValidMove(int startIndex, int desiredLocationIndex)
-        {
-            if (startIndex % Constants.NUM_OF_COLS == 0 && desiredLocationIndex % 8 == 7) return false;
-            if (startIndex % Constants.NUM_OF_COLS == 7 && desiredLocationIndex % 8 == 0) return false;
-            if (desiredLocationIndex >= Constants.NUM_OF_COLS * Constants.NUM_OF_ROWS || desiredLocationIndex < 0) return false;
-            return true;
-        }
-
         public virtual bool isUpgradeable()
         {
-            // return true;
-            bool result = false;
-            if (_color == Constants.PlayerColor.Black && _pos.getRow() == 0) result = true;
-            if (_color == Constants.PlayerColor.White && _pos.getRow() == Constants.NUM_OF_ROWS - 1) result = true;
-            return result;
+            //should always return true
+            if (_color == Constants.PlayerColor.Black && _pos.getRow() == 0) return true;
+            if (_color == Constants.PlayerColor.White && _pos.getRow() == Constants.NUM_OF_ROWS - 1) return true;
+            return false;
         }
+
 
         public virtual void ateAPlayer() { }
         public virtual void gotEaten() { }
