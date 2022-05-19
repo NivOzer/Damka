@@ -101,6 +101,23 @@ namespace Damka.Classes
                         }
                     }
                 }
+                if (isValidMove(startIndex, startIndex - 9))
+                {
+                    if (board[startIndex - 9].Image == null)
+                    { // White can go right
+                        result.Add(startIndex - 9);
+                    }
+                    else
+                    {
+                        if (isValidMove(startIndex - 9, startIndex - 18))
+                        {
+                            if (board[startIndex - 18].Image == null)
+                            { // White can eat right
+                                result.Add(startIndex - 18);
+                            }
+                        }
+                    }
+                }
             }
             else
             {

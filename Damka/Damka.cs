@@ -64,7 +64,7 @@ namespace Damka
         private void boardClick(object sender, EventArgs e)
         {
             int pressedIndex = int.Parse(((Button)sender).Name);
-            game.getBoard()[30].Text = game.getCurrentGamePhase() + "";
+            // game.getBoard()[30].Text = game.getCurrentGamePhase() + "";
             game.nextGamePhase(pressedIndex);
         }
 

@@ -11,7 +11,7 @@ namespace Damka.Classes
     class GameClass
     {
         private int _turnCounter;
-        //decides what gamephase the user has chosen : 0 is character selection , 1 is for position selection
+        //decides what gamePhase the user has chosen : 0 is character selection , 1 is for position selection
         private Constants.GamePhase _gamePhase;
         private List<Button> _board;
         private List<Male> _blacks, _whites;
@@ -64,28 +64,28 @@ namespace Damka.Classes
         public void nextGamePhase(int pressedIndex)
         {
             if (_gamePhase == Constants.GamePhase.SelectedAPiece)
-            { // player selected what piece to play
+            { // Player was in character selection
                 // Logic here
                 disableAllButtons();
-                ShowAvailableMoves();
+                playerMoved(pressedIndex);
+                //gameEnded(); // ******* TODO
                 _turnCounter++;
                 _gamePhase = Constants.GamePhase.ChoseWhereToGo;
-                //gameEnded(); // ******* TODO
+                ShowAvailablePieces();
             }
             else
-            { // Player selected where to go
-                if (_turnCounter != 0)
-                {
-                    disableAllButtons();
-                    playerSelectedPiece(pressedIndex);
-                    ShowAvailablePieces();
-                    _gamePhase = Constants.GamePhase.SelectedAPiece;
-                }
-                else
-                { // first turn of the game
-                    _current_player_index = pressedIndex;
-                    ShowAvailableMoves();
-                }
+            { // Player was in ChoseWhereToGo OR first turn of the game
+              // if (_turnCounter != 0)
+              // {
+                disableAllButtons();
+                playerSelectedPiece(pressedIndex);
+                _gamePhase = Constants.GamePhase.SelectedAPiece;
+                // }
+                // else
+                // { // first turn of the game
+                //     _current_player_index = pressedIndex;
+                //     ShowAvailableMoves();
+                // }
             }
         }
 
