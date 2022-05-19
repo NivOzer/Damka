@@ -154,15 +154,16 @@ namespace Damka.Classes
         {
             if (startIndex % Constants.NUM_OF_COLS == 0 && desiredLocationIndex % 8 == 7) return false;
             if (startIndex % Constants.NUM_OF_COLS == 7 && desiredLocationIndex % 8 == 0) return false;
-            if (desiredLocationIndex >= Constants.NUM_OF_COLS * Constants.NUM_OF_ROWS || desiredLocationIndex <= 0) return false;
+            if (desiredLocationIndex >= Constants.NUM_OF_COLS * Constants.NUM_OF_ROWS || desiredLocationIndex < 0) return false;
             return true;
         }
 
         public virtual bool isUpgradeable()
         {
+            return true;
             bool result = false;
-            if (_color == Constants.PlayerColor.Black && _pos.getRow() == 4) result = true;
-            if (_color == Constants.PlayerColor.White && _pos.getRow() == Constants.NUM_OF_ROWS - 5) result = true;
+            if (_color == Constants.PlayerColor.Black && _pos.getRow() == 0) result = true;
+            if (_color == Constants.PlayerColor.White && _pos.getRow() == Constants.NUM_OF_ROWS - 1) result = true;
 
             return result;
         }
