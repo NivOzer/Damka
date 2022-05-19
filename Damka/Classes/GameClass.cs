@@ -98,26 +98,27 @@ namespace Damka.Classes
             current.setByIndex(pressedIndex);
             _current_player_index = pressedIndex;
 
-            // if (current.isUpgradeable())
-            // {
-            //     if (current.GetType() == typeof(Classes.Male))
-            //     {
-            //         King temp = new King(current);
-            //         _board[pressedIndex].Image = temp.getImage();
+            if (current.isUpgradeable())
+            {
+                if (current.GetType() == typeof(Classes.Male))
+                {
+                    King temp = new King(current);
+                    _board[pressedIndex].Image = temp.getImage();
 
-            //         if (Constants.PlayerColor.Black == current.color)
-            //         {
-            //             _blacks.Remove(current);
-            //             _blacks.Add(temp);
-            //         }
-            //         else
-            //         {
-            //             _whites.Remove(current);
-            //             _whites.Add(temp);
-            //         }
-            //     }
-            // }
+                    if (Constants.PlayerColor.Black == current.color)
+                    {
+                        _blacks.Remove(current);
+                        _blacks.Add(temp);
+                    }
+                    else
+                    {
+                        _whites.Remove(current);
+                        _whites.Add(temp);
+                    }
+                }
+            }
         }
+
         //A Specific player has been pressed event
         public void playerSelectedPiece(int pressedIndex)
         {
