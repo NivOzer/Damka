@@ -35,6 +35,7 @@ namespace Damka
             drawBoard();
             game.setGamePhase();
             game.ShowAvailablePieces();
+            game.initializeMine();
             //placePlayers();
         }
 
