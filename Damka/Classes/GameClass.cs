@@ -83,6 +83,9 @@ namespace Damka.Classes
                 _board[p.getIndex()].Image = m.getImage();
                 this._blacks.Add(m);
             }
+            Random rnd = new Random();
+
+
             disableAllButtons();
         }
         public void addButtonToBoard(Button btn) { this._board.Add(btn); }
@@ -103,6 +106,7 @@ namespace Damka.Classes
                 }
                 playerMoved(pressedIndex);
                 //gameEnded(); // ******* TODO
+                // if no moves are available end game
                 _turnCounter++;
                 _gamePhase = Constants.GamePhase.ChoseWhereToGo;
                 ShowAvailablePieces();
@@ -160,15 +164,7 @@ namespace Damka.Classes
         }// Enables all the buttons the piece can move to
         public void playerMoved(int pressedIndex)//actions to do After a player has moved
         {
-            /*            int delta = _current_player_index - pressedIndex;
-                        int eatenIndex = _current_player_index + delta;
-                        Male eaten = getPlayerMaleByIndex(eatenIndex);
-                        if (eaten._color != getPlayerMaleByIndex(_current_player_index)._color)
-                        {
-                            if (Constants.PlayerColor.White == eaten.color)
-                                _whites.Remove(eaten);
-                            _blacks.Remove(eaten);
-                        }*/
+            bool gotEaten = false;
 
             Male current = getPlayerMaleByIndex(_current_player_index);
             List<KeyValuePair<int, int>> moves = new List<KeyValuePair<int, int>>();
@@ -184,6 +180,17 @@ namespace Damka.Classes
                     else
                         _blacks.Remove(gotKilled);
                     _board[move.Value].Image = null;
+
+                    current.ateAPlayer();
+
+                    if (gotKilled.gotEaten())
+                    { // Mine killed attacker
+                        gotEaten = true;
+                        if (Constants.PlayerColor.Black == current.color)
+                            _blacks.Remove(current);
+                        else
+                            _whites.Remove(current);
+                    }
                 }
             }
             //Logic here
@@ -200,31 +207,50 @@ namespace Damka.Classes
             _current_player_index = pressedIndex;
 
 
+
             //checks for an upgrade
-            if (current.isUpgradeable())
+            if (gotEaten == false)
             {
-                if (current.GetType() == typeof(Classes.Male))
+                if (current.isUpgradeable())
                 {
-                    King temp2 = new King(current);
-
-                    HorizontalKing temp = new HorizontalKing(temp2);
-                    _board[pressedIndex].Image = temp.getImage();
-
-                    if (Constants.PlayerColor.Black == current.color)
+                    if (current.GetType() == typeof(Classes.Male))
                     {
-                        _blacks.Remove(current);
-                        _blacks.Add(temp);
+                        King temp = new King(current);
+                        _board[pressedIndex].Image = temp.getImage();
+
+                        upgradePiece(current, temp);
                     }
-                    else
+
+                    if (current.GetType() == typeof(Classes.King))
                     {
-                        _whites.Remove(current);
-                        _whites.Add(temp);
+                        Random rnd = new Random();
+
+                        int result = rnd.Next(2);
+                        if (result == 1)
+                        {
+                            HorizontalKing temp = new HorizontalKing((King)current);
+                            upgradePiece(current, temp);
+                        }
+                        else
+                        {
+                            VerticalKing temp = new VerticalKing((King)current);
+                            upgradePiece(current, temp);
+                        }
                     }
                 }
-                if (current.GetType() == typeof(Classes.King))
-                {
-                    // King Random
-                }
+            }
+        }
+        public void upgradePiece(Male old, Male upgraded)
+        {
+            if (Constants.PlayerColor.Black == old.color)
+            {
+                _blacks.Remove(old);
+                _blacks.Add(upgraded);
+            }
+            else
+            {
+                _whites.Remove(old);
+                _whites.Add(upgraded);
             }
         }
         public void disableAllButtons()
@@ -253,14 +279,23 @@ namespace Damka.Classes
         // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv TO  DO vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
         // Remove from list, move to graveyard, update button
-        private void gotEaten()
+        public void initializeMine()
         {
+            Random rnd = new Random();
+            int index = rnd.Next(12);
+            Mine temp = new Mine(_whites[index]);
+            upgradePiece(_whites[index], temp);
 
+            index = rnd.Next(12);
+            temp = new Mine(_blacks[index]);
+            upgradePiece(_blacks[index], temp);
         }
 
         // Checks if the game has ended
-        private bool gameEnded()
+        public bool gameEnded()
         {
+            if (_blacks.Count == 0 || _whites.Count == 0)
+                return true;
             return false;
         }
     }
