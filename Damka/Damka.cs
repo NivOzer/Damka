@@ -47,9 +47,15 @@ namespace Damka
                     btn.FlatStyle = FlatStyle.Flat;
                     btn.FlatAppearance.BorderSize = 0;
                     if ((row + col) % 2 == 0)
+                    {
+                        btn.AccessibleDescription = "LIGHT_BROWN";
                         btn.BackColor = Constants.LIGHT_BROWN;
+                    }
                     else
+                    {
+                        btn.AccessibleDescription = "DARK_BROWN";
                         btn.BackColor = Constants.DARK_BROWN;
+                    }
                     btn.Click += new EventHandler(boardClick);
                     gamePanel.Controls.Add(btn);
                     game.addButtonToBoard(btn);
