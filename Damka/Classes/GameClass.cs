@@ -69,14 +69,14 @@ namespace Damka.Classes
 
         public void initializePlayers(Button btn, int col, int row)
         {
-            if (((row + col) % 2 == 0) && btn.Image == null && row <= 2)
+            if (((row + col) % 2 == 0) && btn.Image == null && row <= 0)
             {
                 Position p = new Position(row, col);
                 Male m = new Male(p, Constants.PlayerColor.White);
                 _board[p.getIndex()].Image = m.getImage();
                 this._whites.Add(m);
             }
-            else if (((row + col) % 2 == 0) && btn.Image == null && row >= 5) // till 5 cause <8 is 7 so 3 lines is 5,6,7
+            else if (((row + col) % 2 == 0) && btn.Image == null && row >= 7) // till 5 cause <8 is 7 so 3 lines is 5,6,7
             {
                 Position p = new Position(row, col);
                 Male m = new Male(p, Constants.PlayerColor.Black);
@@ -230,11 +230,13 @@ namespace Damka.Classes
                         {
                             HorizontalKing temp = new HorizontalKing((King)current);
                             upgradePiece(current, temp);
+                            _board[pressedIndex].Image = temp.getImage();
                         }
                         else
                         {
                             VerticalKing temp = new VerticalKing((King)current);
                             upgradePiece(current, temp);
+                            _board[pressedIndex].Image = temp.getImage();
                         }
                     }
                 }
@@ -285,10 +287,12 @@ namespace Damka.Classes
             int index = rnd.Next(12);
             Mine temp = new Mine(_whites[index]);
             upgradePiece(_whites[index], temp);
+            _board[_whites[index].getIndex()].Image = temp.getImage();
 
             index = rnd.Next(12);
             temp = new Mine(_blacks[index]);
             upgradePiece(_blacks[index], temp);
+            _board[_blacks[index].getIndex()].Image = temp.getImage();
         }
 
         // Checks if the game has ended
