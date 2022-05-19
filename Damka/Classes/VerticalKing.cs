@@ -17,7 +17,7 @@ namespace Damka.Classes
         public override List<KeyValuePair<int, int>> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
         {
 
-            List<KeyValuePair<int, int>> result = new List<KeyValuePair<int, int>>();
+            List<KeyValuePair<int, int>> result = base.getAvailableMoves(board, startIndex, game);
             Male temp;
             int fromIndex = startIndex, toIndex, counter = 1;
             bool isEmpty = true;

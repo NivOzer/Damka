@@ -155,7 +155,7 @@ namespace Damka.Classes
         }
         public virtual bool isUpgradeable()
         {
-            return false;
+            return true;
             //should always return true
             if (_color == Constants.PlayerColor.Black && _pos.getRow() == 0) return true;
             if (_color == Constants.PlayerColor.White && _pos.getRow() == Constants.NUM_OF_ROWS - 1) return true;

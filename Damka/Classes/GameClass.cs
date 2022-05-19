@@ -170,8 +170,8 @@ namespace Damka.Classes
                             _blacks.Remove(eaten);
                         }*/
 
-            List<KeyValuePair<int, int>> moves = new List<KeyValuePair<int, int>>();
             Male current = getPlayerMaleByIndex(_current_player_index);
+            List<KeyValuePair<int, int>> moves = new List<KeyValuePair<int, int>>();
             moves = current.getAvailableMoves(_board, _current_player_index, this);
 
             foreach (KeyValuePair<int, int> move in moves)
@@ -207,7 +207,9 @@ namespace Damka.Classes
             {
                 if (current.GetType() == typeof(Classes.Male))
                 {
-                    King temp = new King(current);
+                    King temp2 = new King(current);
+
+                    VerticalKing temp = new VerticalKing(temp2);
                     _board[pressedIndex].Image = temp.getImage();
 
                     if (Constants.PlayerColor.Black == current.color)
