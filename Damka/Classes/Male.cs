@@ -10,9 +10,9 @@ namespace Damka.Classes
     //added an image attribute
     class Male
     {
-        protected Position _pos;
-        protected Constants.PlayerColor _color;
-        protected int _range;
+        internal Position _pos;
+        internal Constants.PlayerColor _color;
+        internal int _range;
         //Constructor
         public Male(Position pos, Constants.PlayerColor color)
         {
