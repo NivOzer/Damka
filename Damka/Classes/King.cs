@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace Damka.Classes
 {
+    [Serializable]
     class King : Male
     {
         private int _eatCounter;
