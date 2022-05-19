@@ -28,7 +28,7 @@ namespace Damka.Classes
             this._range = old._range;
         }
 
-        public Bitmap getImage()
+        public virtual Bitmap getImage()
         {
             if (_color == Constants.PlayerColor.White)
                 return global::Damka.Properties.Resources.White_male;
@@ -77,7 +77,7 @@ namespace Damka.Classes
                 return _color;
             }
         }
-        public List<int> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
+        public virtual List<int> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
         {
             List<int> result = new List<int>();
             Male otherPlayer;
@@ -158,16 +158,16 @@ namespace Damka.Classes
             return true;
         }
 
-        public bool isUpgradeable()
+        public virtual bool isUpgradeable()
         {
             bool result = false;
-            if (_color == Constants.PlayerColor.Black && _pos.getRow() == 0) result = true;
-            if (_color == Constants.PlayerColor.White && _pos.getRow() == Constants.NUM_OF_ROWS - 1) result = true;
+            if (_color == Constants.PlayerColor.Black && _pos.getRow() == 4) result = true;
+            if (_color == Constants.PlayerColor.White && _pos.getRow() == Constants.NUM_OF_ROWS - 5) result = true;
 
             return result;
         }
 
-        public void ateAPlayer() { }
-        public void gotEaten() { }
+        public virtual void ateAPlayer() { }
+        public virtual void gotEaten() { }
     }
 }
