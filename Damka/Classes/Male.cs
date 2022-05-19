@@ -41,7 +41,7 @@ namespace Damka.Classes
         // --- GETTERS --
 
         public int getRow() { return _pos.getRow(); }
-        public int getCol() { return _pos.getCol(); }       
+        public int getCol() { return _pos.getCol(); }
         public int getIndex() { return _pos.getIndex(); }
         public int getRange() { return this._range; }
         public Position pos
@@ -50,7 +50,7 @@ namespace Damka.Classes
             {
                 return _pos;
             }
-        } 
+        }
         public Constants.PlayerColor color
         {
             get
@@ -69,9 +69,10 @@ namespace Damka.Classes
             if (desiredLocationIndex >= Constants.NUM_OF_COLS * Constants.NUM_OF_ROWS || desiredLocationIndex < 0) return false;
             return true;
         } // checks the board bounds
-        public virtual List<int> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
+        public virtual List<KeyValuePair<int, int>> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
         {
-            List<int> result = new List<int>();
+            List<KeyValuePair<int, int>> result = new List<KeyValuePair<int, int>>();
+            // List<int> result = new List<int>();
             Male otherPlayer;
 
             if (_color == Constants.PlayerColor.Black)
@@ -80,14 +81,16 @@ namespace Damka.Classes
                 {
                     if (board[startIndex - 7].Image == null)
                     { // black can go right
-                        result.Add(startIndex - 7);
+                        result.Add(new KeyValuePair<int, int>(startIndex - 7, -1));
+                        // result.Add(startIndex - 7);
                     }
                     else
                     {
                         if (isValidMove(startIndex - 7, startIndex - 14) && board[startIndex - 14].Image == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex - 7);
-                            if (otherPlayer._color != this._color) result.Add(startIndex - 14); // black can eat left
+                            if (otherPlayer._color != this._color) result.Add(new KeyValuePair<int, int>(startIndex - 14, startIndex - 7));
+                            // result.Add(startIndex - 14); // black can eat left
                         }
                     }
                 }
@@ -95,14 +98,17 @@ namespace Damka.Classes
                 {
                     if (board[startIndex - 9].Image == null)
                     { // black can go left
-                        result.Add(startIndex - 9);
+
+                        result.Add(new KeyValuePair<int, int>(startIndex - 9, -1));
+                        // result.Add(startIndex - 9);
                     }
                     else
                     {
                         if (isValidMove(startIndex - 9, startIndex - 18) && board[startIndex - 18].Image == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex - 9);
-                            if (otherPlayer._color != this._color) result.Add(startIndex - 18); // White can eat right
+                            if (otherPlayer._color != this._color) result.Add(new KeyValuePair<int, int>(startIndex - 18, startIndex - 9));
+                            // if (otherPlayer._color != this._color) result.Add(startIndex - 18); // White can eat right
                         }
                     }
                 }
@@ -113,14 +119,17 @@ namespace Damka.Classes
                 {
                     if (board[startIndex + 7].Image == null)
                     { // White can go left
-                        result.Add(startIndex + 7);
+
+                        result.Add(new KeyValuePair<int, int>(startIndex + 7, -1));
+                        // result.Add(startIndex + 7);
                     }
                     else
                     {
                         if (isValidMove(startIndex + 7, startIndex + 14) && board[startIndex + 14].Image == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex + 7);
-                            if (otherPlayer._color != this._color) result.Add(startIndex + 14); // White can eat left
+                            if (otherPlayer._color != this._color) result.Add(new KeyValuePair<int, int>(startIndex + 14, startIndex + 7));
+                            // if (otherPlayer._color != this._color) result.Add(startIndex + 14); // White can eat left
                         }
                     }
                 }
@@ -128,14 +137,16 @@ namespace Damka.Classes
                 {
                     if (board[startIndex + 9].Image == null)
                     { // White can go right
-                        result.Add(startIndex + 9);
+                        result.Add(new KeyValuePair<int, int>(startIndex + 9, -1));
+                        // result.Add(startIndex + 9);
                     }
                     else
                     {
                         if (isValidMove(startIndex + 9, startIndex + 18) && board[startIndex + 18].Image == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex + 9);
-                            if (otherPlayer._color != this._color) result.Add(startIndex + 18); // White can eat right
+                            if (otherPlayer._color != this._color) result.Add(new KeyValuePair<int, int>(startIndex + 18, startIndex + 9));
+                            // if (otherPlayer._color != this._color) result.Add(startIndex + 18); // White can eat right
                         }
                     }
                 }
@@ -144,6 +155,7 @@ namespace Damka.Classes
         }
         public virtual bool isUpgradeable()
         {
+            return false;
             //should always return true
             if (_color == Constants.PlayerColor.Black && _pos.getRow() == 0) return true;
             if (_color == Constants.PlayerColor.White && _pos.getRow() == Constants.NUM_OF_ROWS - 1) return true;

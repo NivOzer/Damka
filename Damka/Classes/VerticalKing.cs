@@ -14,10 +14,10 @@ namespace Damka.Classes
             _eatCounter = old._eatCounter;
         }
 
-        public override List<int> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
+        public override List<KeyValuePair<int, int>> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
         {
 
-            List<int> result = base.getAvailableMoves(board, startIndex, game);
+            List<KeyValuePair<int, int>> result = new List<KeyValuePair<int, int>>();
             Male temp;
             int fromIndex = startIndex, toIndex, counter = 1;
             bool isEmpty = true;
@@ -28,8 +28,13 @@ namespace Damka.Classes
             {
                 if (board[toIndex].Image == null)
                 { // can go  up
-                    result.Add(toIndex);
-                    if (isEmpty == false) break;
+                    // result.Add(toIndex);
+                    result.Add(new KeyValuePair<int, int>(toIndex, -1));
+                    if (isEmpty == false)
+                    {
+                        result.Add(new KeyValuePair<int, int>(toIndex, fromIndex));
+                        break;
+                    }
                 }
                 else
                 {
@@ -52,8 +57,13 @@ namespace Damka.Classes
             {
                 if (board[toIndex].Image == null)
                 { // can go down
-                    result.Add(toIndex);
-                    if (isEmpty == false) break;
+                    // result.Add(toIndex);
+                    result.Add(new KeyValuePair<int, int>(toIndex, -1));
+                    if (isEmpty == false)
+                    {
+                        result.Add(new KeyValuePair<int, int>(toIndex, fromIndex));
+                        break;
+                    }
                 }
                 else
                 {

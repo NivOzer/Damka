@@ -40,7 +40,7 @@ namespace Damka.Classes
             if ((point.getRow() + point.getCol()) % 2 == 0)
                 return Constants.LIGHT_BROWN;
             return Constants.DARK_BROWN;
-        } 
+        }
         public Color getButtonColor(int row, int col)
         {
             if ((row + col) % 2 == 0)
@@ -151,7 +151,8 @@ namespace Damka.Classes
         }//A Specific player has been pressed event
         public void ShowAvailableMoves()
         {
-            List<int> moves;
+            // List<int> moves;
+            List<KeyValuePair<int, int>> moves = new List<KeyValuePair<int, int>>();
             Male current = getPlayerMaleByIndex(_current_player_index);
             moves = current.getAvailableMoves(_board, _current_player_index, this);
             enableButtons(moves);
@@ -159,16 +160,34 @@ namespace Damka.Classes
         }// Enables all the buttons the piece can move to
         public void playerMoved(int pressedIndex)//actions to do After a player has moved
         {
-/*            int delta = _current_player_index - pressedIndex;
-            int eatenIndex = _current_player_index + delta;
-            Male eaten = getPlayerMaleByIndex(eatenIndex);
-            if (eaten._color != getPlayerMaleByIndex(_current_player_index)._color)
-            {
-                if (Constants.PlayerColor.White == eaten.color)
-                    _whites.Remove(eaten);
-                _blacks.Remove(eaten);
-            }*/
+            /*            int delta = _current_player_index - pressedIndex;
+                        int eatenIndex = _current_player_index + delta;
+                        Male eaten = getPlayerMaleByIndex(eatenIndex);
+                        if (eaten._color != getPlayerMaleByIndex(_current_player_index)._color)
+                        {
+                            if (Constants.PlayerColor.White == eaten.color)
+                                _whites.Remove(eaten);
+                            _blacks.Remove(eaten);
+                        }*/
 
+            List<KeyValuePair<int, int>> moves = new List<KeyValuePair<int, int>>();
+            Male current = getPlayerMaleByIndex(_current_player_index);
+            moves = current.getAvailableMoves(_board, _current_player_index, this);
+
+            foreach (KeyValuePair<int, int> move in moves)
+            {
+                if (move.Key == pressedIndex && move.Value != -1)
+                {
+
+                    Male gotKilled = getPlayerMaleByIndex(move.Value);
+                    if (gotKilled._color == Constants.PlayerColor.White)
+                        _whites.Remove(gotKilled);
+                    else
+                        _blacks.Remove(gotKilled);
+                    _board[move.Value].Image = null;
+                    MessageBox.Show("Killed " + move.Value);
+                }
+            }
             //Logic here
             _board[pressedIndex].Image = _board[_current_player_index].Image;
             _board[_current_player_index].Image = null;
@@ -179,7 +198,6 @@ namespace Damka.Classes
             else
                 _board[_current_player_index].BackColor = Constants.LIGHT_BROWN;
 
-            Male current = getPlayerMaleByIndex(_current_player_index);
             current.setByIndex(pressedIndex);
             _current_player_index = pressedIndex;
 
@@ -211,10 +229,14 @@ namespace Damka.Classes
                 btn.Enabled = false;
 
         }//Disables all the buttons
-        private void enableButtons(List<int> moves)
+        private void enableButtons(List<KeyValuePair<int, int>> moves)
         {
-            foreach (int move in moves)
-                _board[move].Enabled = true;
+            foreach (KeyValuePair<int, int> move in moves)
+            {
+                _board[(move.Key)].Enabled = true;
+            }
+            // foreach (int move in moves)
+            //     _board[move].Enabled = true;
         } // Enables all the buttons in the List (by index)
         public void loadFromFile()
         {

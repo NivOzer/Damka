@@ -28,9 +28,9 @@ namespace Damka.Classes
             this._eatCounter = old._eatCounter;
         }
 
-        public override List<int> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
+        public override List<KeyValuePair<int, int>> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
         {
-            List<int> result = new List<int>();
+            List<KeyValuePair<int, int>> result = new List<KeyValuePair<int, int>>();
             Male temp;
             int fromIndex = startIndex, toIndex, counter = 1;
             bool isEmpty = true;
@@ -41,8 +41,13 @@ namespace Damka.Classes
             {
                 if (board[toIndex].Image == null)
                 { // can go right up
-                    result.Add(toIndex);
-                    if (isEmpty == false) break;
+                    result.Add(new KeyValuePair<int, int>(toIndex, -1));
+                    // result.Add(toIndex);
+                    if (isEmpty == false)
+                    {
+                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex - 7));
+                        break;
+                    }
                 }
                 else
                 {
@@ -65,8 +70,13 @@ namespace Damka.Classes
             {
                 if (board[toIndex].Image == null)
                 { // can go left up
-                    result.Add(toIndex);
-                    if (isEmpty == false) break;
+                    result.Add(new KeyValuePair<int, int>(toIndex, -1));
+                    // result.Add(toIndex);
+                    if (isEmpty == false)
+                    {
+                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex - 9));
+                        break;
+                    }
                 }
                 else
                 {
@@ -89,8 +99,13 @@ namespace Damka.Classes
             {
                 if (board[toIndex].Image == null)
                 { // can go left up
-                    result.Add(toIndex);
-                    if (isEmpty == false) break;
+                    result.Add(new KeyValuePair<int, int>(toIndex, -1));
+                    // result.Add(toIndex);
+                    if (isEmpty == false)
+                    {
+                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex + 7));
+                        break;
+                    }
                 }
                 else
                 {
@@ -113,8 +128,13 @@ namespace Damka.Classes
             {
                 if (board[toIndex].Image == null)
                 { // can go left up
-                    result.Add(toIndex);
-                    if (isEmpty == false) break;
+                    result.Add(new KeyValuePair<int, int>(toIndex, -1));
+                    // result.Add(toIndex);
+                    if (isEmpty == false)
+                    {
+                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex + 9));
+                        break;
+                    }
                 }
                 else
                 {
