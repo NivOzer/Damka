@@ -80,7 +80,7 @@ namespace Damka.Classes
         public List<int> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
         {
             List<int> result = new List<int>();
-            //Position pos = new Position(startIndex);
+            Male otherPlayer;
 
             if (_color == Constants.PlayerColor.Black)
             {
@@ -92,12 +92,10 @@ namespace Damka.Classes
                     }
                     else
                     {
-                        if (isValidMove(startIndex - 14, startIndex - 14))
+                        if (isValidMove(startIndex - 7, startIndex - 14) && board[startIndex - 14].Image == null)
                         {
-                            if (board[startIndex - 14].Image == null)
-                            { // black can eat left
-                                result.Add(startIndex - 14);
-                            }
+                            otherPlayer = game.getPlayerMaleByIndex(startIndex - 7);
+                            if (otherPlayer._color != this._color) result.Add(startIndex - 14); // black can eat left
                         }
                     }
                 }
@@ -109,18 +107,16 @@ namespace Damka.Classes
                     }
                     else
                     {
-                        if (isValidMove(startIndex - 9, startIndex - 18))
+                        if (isValidMove(startIndex - 9, startIndex - 18) && board[startIndex - 18].Image == null)
                         {
-                            if (board[startIndex - 18].Image == null)
-                            { // White can eat right
-                                result.Add(startIndex - 18);
-                            }
+                            otherPlayer = game.getPlayerMaleByIndex(startIndex - 9);
+                            if (otherPlayer._color != this._color) result.Add(startIndex - 18); // White can eat right
                         }
                     }
                 }
             }
             else
-            {
+            { // White turn
                 if (isValidMove(startIndex, startIndex + 7))
                 {
                     if (board[startIndex + 7].Image == null)
@@ -129,12 +125,10 @@ namespace Damka.Classes
                     }
                     else
                     {
-                        if (isValidMove(startIndex + 7, startIndex + 14))
+                        if (isValidMove(startIndex + 7, startIndex + 14) && board[startIndex + 14].Image == null)
                         {
-                            if (board[startIndex + 14].Image == null)
-                            { // White can eat left
-                                result.Add(startIndex + 14);
-                            }
+                            otherPlayer = game.getPlayerMaleByIndex(startIndex + 7);
+                            if (otherPlayer._color != this._color) result.Add(startIndex + 14); // White can eat left
                         }
                     }
                 }
@@ -146,12 +140,10 @@ namespace Damka.Classes
                     }
                     else
                     {
-                        if (isValidMove(startIndex + 9, startIndex + 18))
+                        if (isValidMove(startIndex + 9, startIndex + 18) && board[startIndex + 18].Image == null)
                         {
-                            if (board[startIndex + 18].Image == null)
-                            { // White can eat right
-                                result.Add(startIndex + 18);
-                            }
+                            otherPlayer = game.getPlayerMaleByIndex(startIndex + 9);
+                            if (otherPlayer._color != this._color) result.Add(startIndex + 18); // White can eat right
                         }
                     }
                 }
@@ -173,7 +165,9 @@ namespace Damka.Classes
             if (_color == Constants.PlayerColor.White && _pos.getRow() == Constants.NUM_OF_ROWS - 1) result = true;
 
             return result;
-
         }
+
+        public void ateAPlayer() { }
+        public void gotEaten() { }
     }
 }
