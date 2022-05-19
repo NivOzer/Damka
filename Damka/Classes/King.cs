@@ -45,7 +45,7 @@ namespace Damka.Classes
                     // result.Add(toIndex);
                     if (isEmpty == false)
                     {
-                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex - 7));
+                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex + 7));
                         break;
                     }
                 }
@@ -74,7 +74,7 @@ namespace Damka.Classes
                     // result.Add(toIndex);
                     if (isEmpty == false)
                     {
-                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex - 9));
+                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex + 9));
                         break;
                     }
                 }
@@ -103,7 +103,7 @@ namespace Damka.Classes
                     // result.Add(toIndex);
                     if (isEmpty == false)
                     {
-                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex + 7));
+                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex - 7));
                         break;
                     }
                 }
@@ -132,7 +132,7 @@ namespace Damka.Classes
                     // result.Add(toIndex);
                     if (isEmpty == false)
                     {
-                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex + 9));
+                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex - 9));
                         break;
                     }
                 }
