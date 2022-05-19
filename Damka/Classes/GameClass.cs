@@ -8,6 +8,7 @@ using System.Drawing;
 
 namespace Damka.Classes
 {
+    [Serializable]
     class GameClass
     {
         private int _turnCounter;
@@ -44,18 +45,18 @@ namespace Damka.Classes
 
         public void initializePlayers(Button btn, int col, int row)
         {
-            if (((row + col) % 2 == 0) && btn.Image == null && row <= 0)
+            if (((row + col) % 2 == 0) && btn.Image == null && row <= 2)
             {
                 Position p = new Position(row, col);
                 Male m = new Male(p, Constants.PlayerColor.White);
-                _board[p.getIndex()].Image = m.getImage(); // This is how we access the buttons in the current position, it will be a method in all the classes - A poly function
+                _board[p.getIndex()].Image = m.getImage();
                 this._whites.Add(m);
             }
-            else if (((row + col) % 2 == 0) && btn.Image == null && row >= 7) // till 5 cause <8 is 7 so 3 lines is 5,6,7
+            else if (((row + col) % 2 == 0) && btn.Image == null && row >= 5) // till 5 cause <8 is 7 so 3 lines is 5,6,7
             {
                 Position p = new Position(row, col);
                 Male m = new Male(p, Constants.PlayerColor.Black);
-                _board[p.getIndex()].Image = m.getImage(); // the same
+                _board[p.getIndex()].Image = m.getImage();
                 this._blacks.Add(m);
             }
             disableAllButtons();
@@ -75,17 +76,9 @@ namespace Damka.Classes
             }
             else
             { // Player was in ChoseWhereToGo OR first turn of the game
-              // if (_turnCounter != 0)
-              // {
                 disableAllButtons();
                 playerSelectedPiece(pressedIndex);
                 _gamePhase = Constants.GamePhase.SelectedAPiece;
-                // }
-                // else
-                // { // first turn of the game
-                //     _current_player_index = pressedIndex;
-                //     ShowAvailableMoves();
-                // }
             }
         }
 
@@ -96,16 +89,15 @@ namespace Damka.Classes
             _board[pressedIndex].Image = _board[_current_player_index].Image;
             _board[_current_player_index].Image = null;
 
+            // restore original color
+            if (_board[_current_player_index].AccessibleDescription == "DARK_BROWN")
+                _board[_current_player_index].BackColor = Constants.DARK_BROWN;
+            else
+                _board[_current_player_index].BackColor = Constants.LIGHT_BROWN;
+
             Male current = getPlayerMaleByIndex(_current_player_index);
             current.setByIndex(pressedIndex);
             _current_player_index = pressedIndex;
-
-            // if (current.GetType() == typeof(Classes.King))
-            // {
-            //     // (King)current.ateAPlayer();
-            //     King temp = (King)getPlayerMaleByIndex(_current_player_index);
-            //     temp.ateAPlayer();
-            // }
 
             // if (current.isUpgradeable())
             // {
@@ -126,9 +118,6 @@ namespace Damka.Classes
             //         }
             //     }
             // }
-
-            _board[pressedIndex].Text = "I have been here";
-
         }
         //A Specific player has been pressed event
         public void playerSelectedPiece(int pressedIndex)
@@ -162,8 +151,6 @@ namespace Damka.Classes
             foreach (int move in moves)
             {
                 _board[move].Enabled = true;
-                // _board[move].Text = "click me";
-
             }
         }
         //shows the legal moves for a piece to make
@@ -174,6 +161,7 @@ namespace Damka.Classes
                 foreach (Male piece in _blacks)
                 {
                     int index = piece.getIndex();
+                    // if (piece.getAvailableMoves(_board, index, this).Count > 0)
                     _board[index].Enabled = true;
                 }
             }
@@ -182,6 +170,7 @@ namespace Damka.Classes
                 foreach (Male piece in _whites)
                 {
                     int index = piece.getIndex();
+                    // if (piece.getAvailableMoves(_board, index, this).Count > 0)
                     _board[index].Enabled = true;
                 }
             }
@@ -191,8 +180,6 @@ namespace Damka.Classes
         private void ShowAvailableMoves()
         {
             List<int> moves;
-
-            // MessageBox.Show("Show moves");
             Male current = getPlayerMaleByIndex(_current_player_index);
             moves = current.getAvailableMoves(_board, _current_player_index, this);
             enableButtons(moves);
@@ -205,27 +192,22 @@ namespace Damka.Classes
 
         public Male getPlayerMaleByIndex(int index)
         {
-            if (_turnCounter % 2 == (int)Constants.PlayerColor.Black)
+            foreach (Male piece in _blacks)
             {
-                foreach (Male piece in _blacks)
+                if (piece.getIndex() == index)
                 {
-                    if (piece.getIndex() == _current_player_index)
-                    {
-                        return piece;
-                    }
+                    return piece;
                 }
             }
-            else
+            foreach (Male piece in _whites)
             {
-                foreach (Male piece in _whites)
+                if (piece.getIndex() == index)
                 {
-                    if (piece.getIndex() == _current_player_index)
-                    {
-                        return piece;
-                    }
+                    return piece;
                 }
+
             }
-            MessageBox.Show("No Player found");
+            MessageBox.Show("No Player found at " + index);
             return null; // will never here - just to solve 
         }
 
@@ -241,7 +223,7 @@ namespace Damka.Classes
             return false;
         }
 
-        // set current game phase is empty set as 'PostionSelection' 
+        // set current game phase is empty set as 'PositionSelection' 
         public void setGamePhase(Constants.GamePhase gamePhase = Constants.GamePhase.ChoseWhereToGo)
         {
             _gamePhase = gamePhase;

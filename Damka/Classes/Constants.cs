@@ -5,6 +5,7 @@ using System.Drawing;
 
 namespace Damka.Classes
 {
+    [Serializable]
     class Constants
     {
         public const int PANEL_SIZE = 720;
