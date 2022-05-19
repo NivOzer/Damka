@@ -89,16 +89,15 @@ namespace Damka.Classes
             _board[pressedIndex].Image = _board[_current_player_index].Image;
             _board[_current_player_index].Image = null;
 
+            // restore original color
+            if (_board[_current_player_index].AccessibleDescription == "DARK_BROWN")
+                _board[_current_player_index].BackColor = Constants.DARK_BROWN;
+            else
+                _board[_current_player_index].BackColor = Constants.LIGHT_BROWN;
+
             Male current = getPlayerMaleByIndex(_current_player_index);
             current.setByIndex(pressedIndex);
             _current_player_index = pressedIndex;
-
-            // if (current.GetType() == typeof(Classes.King))
-            // {
-            //     // (King)current.ateAPlayer();
-            //     King temp = (King)getPlayerMaleByIndex(_current_player_index);
-            //     temp.ateAPlayer();
-            // }
 
             // if (current.isUpgradeable())
             // {
@@ -162,6 +161,7 @@ namespace Damka.Classes
                 foreach (Male piece in _blacks)
                 {
                     int index = piece.getIndex();
+                    // if (piece.getAvailableMoves(_board, index, this).Count > 0)
                     _board[index].Enabled = true;
                 }
             }
@@ -170,6 +170,7 @@ namespace Damka.Classes
                 foreach (Male piece in _whites)
                 {
                     int index = piece.getIndex();
+                    // if (piece.getAvailableMoves(_board, index, this).Count > 0)
                     _board[index].Enabled = true;
                 }
             }
@@ -191,27 +192,22 @@ namespace Damka.Classes
 
         public Male getPlayerMaleByIndex(int index)
         {
-            if (_turnCounter % 2 == (int)Constants.PlayerColor.Black)
+            foreach (Male piece in _blacks)
             {
-                foreach (Male piece in _blacks)
+                if (piece.getIndex() == index)
                 {
-                    if (piece.getIndex() == _current_player_index)
-                    {
-                        return piece;
-                    }
+                    return piece;
                 }
             }
-            else
+            foreach (Male piece in _whites)
             {
-                foreach (Male piece in _whites)
+                if (piece.getIndex() == index)
                 {
-                    if (piece.getIndex() == _current_player_index)
-                    {
-                        return piece;
-                    }
+                    return piece;
                 }
+
             }
-            MessageBox.Show("No Player found");
+            MessageBox.Show("No Player found at " + index);
             return null; // will never here - just to solve 
         }
 
@@ -227,7 +223,7 @@ namespace Damka.Classes
             return false;
         }
 
-        // set current game phase is empty set as 'PostionSelection' 
+        // set current game phase is empty set as 'PositionSelection' 
         public void setGamePhase(Constants.GamePhase gamePhase = Constants.GamePhase.ChoseWhereToGo)
         {
             _gamePhase = gamePhase;

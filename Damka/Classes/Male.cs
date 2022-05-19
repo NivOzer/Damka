@@ -11,9 +11,9 @@ namespace Damka.Classes
     [Serializable]
     class Male
     {
-        protected Position _pos;
-        protected Constants.PlayerColor _color;
-        protected int _range;
+        internal Position _pos;
+        internal Constants.PlayerColor _color;
+        internal int _range;
         //Constructor
         public Male(Position pos, Constants.PlayerColor color)
         {
@@ -29,7 +29,7 @@ namespace Damka.Classes
             this._range = old._range;
         }
 
-        public Bitmap getImage()
+        public virtual Bitmap getImage()
         {
             if (_color == Constants.PlayerColor.White)
                 return global::Damka.Properties.Resources.White_male;
@@ -78,10 +78,10 @@ namespace Damka.Classes
                 return _color;
             }
         }
-        public List<int> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
+        public virtual List<int> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
         {
             List<int> result = new List<int>();
-            //Position pos = new Position(startIndex);
+            Male otherPlayer;
 
             if (_color == Constants.PlayerColor.Black)
             {
@@ -93,12 +93,10 @@ namespace Damka.Classes
                     }
                     else
                     {
-                        if (isValidMove(startIndex - 14, startIndex - 14))
+                        if (isValidMove(startIndex - 7, startIndex - 14) && board[startIndex - 14].Image == null)
                         {
-                            if (board[startIndex - 14].Image == null)
-                            { // black can eat left
-                                result.Add(startIndex - 14);
-                            }
+                            otherPlayer = game.getPlayerMaleByIndex(startIndex - 7);
+                            if (otherPlayer._color != this._color) result.Add(startIndex - 14); // black can eat left
                         }
                     }
                 }
@@ -110,18 +108,16 @@ namespace Damka.Classes
                     }
                     else
                     {
-                        if (isValidMove(startIndex - 9, startIndex - 18))
+                        if (isValidMove(startIndex - 9, startIndex - 18) && board[startIndex - 18].Image == null)
                         {
-                            if (board[startIndex - 18].Image == null)
-                            { // White can eat right
-                                result.Add(startIndex - 18);
-                            }
+                            otherPlayer = game.getPlayerMaleByIndex(startIndex - 9);
+                            if (otherPlayer._color != this._color) result.Add(startIndex - 18); // White can eat right
                         }
                     }
                 }
             }
             else
-            {
+            { // White turn
                 if (isValidMove(startIndex, startIndex + 7))
                 {
                     if (board[startIndex + 7].Image == null)
@@ -130,12 +126,10 @@ namespace Damka.Classes
                     }
                     else
                     {
-                        if (isValidMove(startIndex + 7, startIndex + 14))
+                        if (isValidMove(startIndex + 7, startIndex + 14) && board[startIndex + 14].Image == null)
                         {
-                            if (board[startIndex + 14].Image == null)
-                            { // White can eat left
-                                result.Add(startIndex + 14);
-                            }
+                            otherPlayer = game.getPlayerMaleByIndex(startIndex + 7);
+                            if (otherPlayer._color != this._color) result.Add(startIndex + 14); // White can eat left
                         }
                     }
                 }
@@ -147,12 +141,10 @@ namespace Damka.Classes
                     }
                     else
                     {
-                        if (isValidMove(startIndex + 9, startIndex + 18))
+                        if (isValidMove(startIndex + 9, startIndex + 18) && board[startIndex + 18].Image == null)
                         {
-                            if (board[startIndex + 18].Image == null)
-                            { // White can eat right
-                                result.Add(startIndex + 18);
-                            }
+                            otherPlayer = game.getPlayerMaleByIndex(startIndex + 9);
+                            if (otherPlayer._color != this._color) result.Add(startIndex + 18); // White can eat right
                         }
                     }
                 }
@@ -163,16 +155,20 @@ namespace Damka.Classes
         {
             if (startIndex % Constants.NUM_OF_COLS == 0 && desiredLocationIndex % 8 == 7) return false;
             if (startIndex % Constants.NUM_OF_COLS == 7 && desiredLocationIndex % 8 == 0) return false;
-            if (desiredLocationIndex >= Constants.NUM_OF_COLS * Constants.NUM_OF_ROWS || desiredLocationIndex <= 0) return false;
+            if (desiredLocationIndex >= Constants.NUM_OF_COLS * Constants.NUM_OF_ROWS || desiredLocationIndex < 0) return false;
             return true;
         }
 
-        public bool isUpgradeable()
+        public virtual bool isUpgradeable()
         {
+            // return true;
             bool result = false;
             if (_color == Constants.PlayerColor.Black && _pos.getRow() == 0) result = true;
             if (_color == Constants.PlayerColor.White && _pos.getRow() == Constants.NUM_OF_ROWS - 1) result = true;
             return result;
         }
+
+        public virtual void ateAPlayer() { }
+        public virtual void gotEaten() { }
     }
 }
