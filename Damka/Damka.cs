@@ -7,6 +7,9 @@ using System.Text;
 using System.Windows.Forms;
 using Damka.Classes;
 
+using System.IO;
+using System.Runtime.Serialization;//!!!!!!
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Damka
 {
@@ -68,5 +71,42 @@ namespace Damka
             game.nextGamePhase(pressedIndex);
         }
 
+        //--- SAVE --
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();// + "..\\myModels";
+            saveFileDialog1.Filter = "model files (*.mdl)|*.mdl|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                IFormatter formatter = new BinaryFormatter();
+                using (Stream stream = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    //!!!!
+                    formatter.Serialize(stream, game);
+                }
+            }
+        }
+
+        //--- LOAD --
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();// + "..\\myModels";
+            openFileDialog1.Filter = "model files (*.mdl)|*.mdl|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Stream stream = File.Open(openFileDialog1.FileName, FileMode.Open);
+                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                //!!!!
+                /*                pts = (FigureList)binaryFormatter.Deserialize(stream);
+                                pictureBox1.Invalidate();*/
+                game = (GameClass)binaryFormatter.Deserialize(stream);
+            }
+        }
     }
 }

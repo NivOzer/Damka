@@ -8,6 +8,7 @@ using System.Windows.Forms;
 namespace Damka.Classes
 {
     //added an image attribute
+    [Serializable]
     class Male
     {
         protected Position _pos;
@@ -171,9 +172,7 @@ namespace Damka.Classes
             bool result = false;
             if (_color == Constants.PlayerColor.Black && _pos.getRow() == 0) result = true;
             if (_color == Constants.PlayerColor.White && _pos.getRow() == Constants.NUM_OF_ROWS - 1) result = true;
-
             return result;
-
         }
     }
 }

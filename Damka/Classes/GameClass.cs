@@ -8,6 +8,7 @@ using System.Drawing;
 
 namespace Damka.Classes
 {
+    [Serializable]
     class GameClass
     {
         private int _turnCounter;
