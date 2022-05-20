@@ -27,7 +27,7 @@ namespace Damka.Classes
             to.setByIndex(startIndex + moveBy);
             while (isValidMove(to.getIndex()) && from.getRow() == to.getRow())
             {
-                if (board[to.getIndex()].Image == null)
+                if (board[to.getIndex()].BackgroundImage == null)
                 { // can go left
                     result.Add(new KeyValuePair<int, int>(to.getIndex(), -1));
                     if (isEmpty == false)
@@ -53,7 +53,7 @@ namespace Damka.Classes
             to.setByIndex(startIndex + moveBy);
             while (isValidMove(to.getIndex()) && from.getRow() == to.getRow())
             {
-                if (board[to.getIndex()].Image == null)
+                if (board[to.getIndex()].BackgroundImage == null)
                 { // can go left
                     result.Add(new KeyValuePair<int, int>(to.getIndex(), -1));
                     if (isEmpty == false)

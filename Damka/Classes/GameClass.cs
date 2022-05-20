@@ -69,21 +69,20 @@ namespace Damka.Classes
         // Game Functionality
         public void initializePlayers(Button btn, int col, int row)
         {
-            if (((row + col) % 2 == 0) && btn.Image == null && row <= 2)
+            if (((row + col) % 2 == 0) && btn.BackgroundImage == null && row <= 2)
             {
                 Position p = new Position(row, col);
                 Male m = new Male(p, Constants.PlayerColor.White);
-                _board[p.getIndex()].Image = m.getImage();
+                _board[p.getIndex()].BackgroundImage = m.getImage();
                 this._whites.Add(m);
             }
-            else if (((row + col) % 2 == 0) && btn.Image == null && row >= 5) // till 5 cause <8 is 7 so 3 lines is 5,6,7
+            else if (((row + col) % 2 == 0) && btn.BackgroundImage == null && row >= 5) // till 5 cause <8 is 7 so 3 lines is 5,6,7
             {
                 Position p = new Position(row, col);
                 Male m = new Male(p, Constants.PlayerColor.Black);
-                _board[p.getIndex()].Image = m.getImage();
+                _board[p.getIndex()].BackgroundImage = m.getImage();
                 this._blacks.Add(m);
             }
-            disableAllButtons();
         }
         public void addButtonToBoard(Button btn) { this._board.Add(btn); }
         public void nextGamePhase(int pressedIndex)
@@ -126,6 +125,7 @@ namespace Damka.Classes
                     if (piece.getAvailableMoves(_board, index, this).Count > 0)
                     {
                         _board[index].Enabled = true;
+                        // _board[index].BackColor = Constants.selectedColorSecondary;
                         counter++;
                     }
                 }
@@ -182,7 +182,7 @@ namespace Damka.Classes
                         _whites.Remove(gotKilled);
                     else
                         _blacks.Remove(gotKilled);
-                    _board[move.Value].Image = null;
+                    _board[move.Value].BackgroundImage = null;
 
                     current.ateAPlayer();
 
@@ -192,22 +192,17 @@ namespace Damka.Classes
                             _blacks.Remove(current);
                         else
                             _whites.Remove(current);
-                        _board[_current_player_index].Image = null;
+                        _board[_current_player_index].BackgroundImage = null;
                     }
                 }
             }
 
-            // restore original color
-            // if (_board[_current_player_index].AccessibleDescription == "DARK_BROWN")
-            //     _board[_current_player_index].BackColor = Constants.DARK_BROWN;
-            // else
-            //     _board[_current_player_index].BackColor = Constants.LIGHT_BROWN;
             _board[_current_player_index].BackColor = getButtonColor(_current_player_index);
 
             if (exploded == false)
             {
-                _board[pressedIndex].Image = _board[_current_player_index].Image;
-                _board[_current_player_index].Image = null;
+                _board[pressedIndex].BackgroundImage = _board[_current_player_index].BackgroundImage;
+                _board[_current_player_index].BackgroundImage = null;
 
                 current.setByIndex(pressedIndex);
                 _current_player_index = pressedIndex;
@@ -217,7 +212,7 @@ namespace Damka.Classes
                     if (current.GetType() == typeof(Classes.Male))
                     {
                         King temp = new King(current);
-                        _board[pressedIndex].Image = temp.getImage();
+                        _board[pressedIndex].BackgroundImage = temp.getImage();
                         upgradePiece(current, temp);
                     }
 
@@ -230,13 +225,13 @@ namespace Damka.Classes
                         {
                             HorizontalKing temp = new HorizontalKing((King)current);
                             upgradePiece(current, temp);
-                            _board[pressedIndex].Image = temp.getImage();
+                            _board[pressedIndex].BackgroundImage = temp.getImage();
                         }
                         else
                         {
                             VerticalKing temp = new VerticalKing((King)current);
                             upgradePiece(current, temp);
-                            _board[pressedIndex].Image = temp.getImage();
+                            _board[pressedIndex].BackgroundImage = temp.getImage();
                         }
                     }
                 }
@@ -258,7 +253,10 @@ namespace Damka.Classes
         public void disableAllButtons()
         {
             foreach (Button btn in _board)
+            {
                 btn.Enabled = false;
+                btn.BackColor = getButtonColor(int.Parse(btn.Name));
+            }
 
         }//Disables all the buttons
         private void enableButtons(List<KeyValuePair<int, int>> moves)
@@ -266,13 +264,14 @@ namespace Damka.Classes
             foreach (KeyValuePair<int, int> move in moves)
             {
                 _board[(move.Key)].Enabled = true;
+                _board[move.Key].BackColor = Constants.selectedColorSecondary;
             }
         } // Enables all the buttons in the List (by index)
         public void loadFromFile()
         {
-            foreach (Button btn in _board) btn.Image = null;
-            foreach (Male w in _whites) _board[w.getIndex()].Image = w.getImage();
-            foreach (Male b in _blacks) _board[b.getIndex()].Image = b.getImage();
+            foreach (Button btn in _board) btn.BackgroundImage = null;
+            foreach (Male w in _whites) _board[w.getIndex()].BackgroundImage = w.getImage();
+            foreach (Male b in _blacks) _board[b.getIndex()].BackgroundImage = b.getImage();
         }// Initializes GUI's properties
 
 
@@ -287,12 +286,12 @@ namespace Damka.Classes
             int index = rnd.Next(12);
             Mine temp = new Mine(_whites[index]);
             upgradePiece(_whites[index], temp);
-            _board[_whites[_whites.Count - 1].getIndex()].Image = temp.getImage();
+            _board[_whites[_whites.Count - 1].getIndex()].BackgroundImage = temp.getImage();
 
             index = rnd.Next(12);
             temp = new Mine(_blacks[index]);
             upgradePiece(_blacks[index], temp);
-            _board[_blacks[_blacks.Count - 1].getIndex()].Image = temp.getImage();
+            _board[_blacks[_blacks.Count - 1].getIndex()].BackgroundImage = temp.getImage();
         }
 
         public void endGame()

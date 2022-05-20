@@ -79,14 +79,14 @@ namespace Damka.Classes
             {
                 if (isValidMove(startIndex, startIndex - 7))
                 {
-                    if (board[startIndex - 7].Image == null)
+                    if (board[startIndex - 7].BackgroundImage == null)
                     { // black can go right
                         result.Add(new KeyValuePair<int, int>(startIndex - 7, -1));
                         // result.Add(startIndex - 7);
                     }
                     else
                     {
-                        if (isValidMove(startIndex - 7, startIndex - 14) && board[startIndex - 14].Image == null)
+                        if (isValidMove(startIndex - 7, startIndex - 14) && board[startIndex - 14].BackgroundImage == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex - 7);
                             if (otherPlayer._color != this._color)
@@ -97,14 +97,14 @@ namespace Damka.Classes
                 }
                 if (isValidMove(startIndex, startIndex - 9))
                 {
-                    if (board[startIndex - 9].Image == null)
+                    if (board[startIndex - 9].BackgroundImage == null)
                     { // black can go left
                         result.Add(new KeyValuePair<int, int>(startIndex - 9, -1));
                         // result.Add(startIndex - 9);
                     }
                     else
                     {
-                        if (isValidMove(startIndex - 9, startIndex - 18) && board[startIndex - 18].Image == null)
+                        if (isValidMove(startIndex - 9, startIndex - 18) && board[startIndex - 18].BackgroundImage == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex - 9);
                             if (otherPlayer._color != this._color)
@@ -118,14 +118,14 @@ namespace Damka.Classes
             { // White turn
                 if (isValidMove(startIndex, startIndex + 7))
                 {
-                    if (board[startIndex + 7].Image == null)
+                    if (board[startIndex + 7].BackgroundImage == null)
                     { // White can go left
                         result.Add(new KeyValuePair<int, int>(startIndex + 7, -1));
                         // result.Add(startIndex + 7);
                     }
                     else
                     {
-                        if (isValidMove(startIndex + 7, startIndex + 14) && board[startIndex + 14].Image == null)
+                        if (isValidMove(startIndex + 7, startIndex + 14) && board[startIndex + 14].BackgroundImage == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex + 7);
                             if (otherPlayer._color != this._color)
@@ -136,14 +136,14 @@ namespace Damka.Classes
                 }
                 if (isValidMove(startIndex, startIndex + 9))
                 {
-                    if (board[startIndex + 9].Image == null)
+                    if (board[startIndex + 9].BackgroundImage == null)
                     { // White can go right
                         result.Add(new KeyValuePair<int, int>(startIndex + 9, -1));
                         // result.Add(startIndex + 9);
                     }
                     else
                     {
-                        if (isValidMove(startIndex + 9, startIndex + 18) && board[startIndex + 18].Image == null)
+                        if (isValidMove(startIndex + 9, startIndex + 18) && board[startIndex + 18].BackgroundImage == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex + 9);
                             if (otherPlayer._color != this._color)
