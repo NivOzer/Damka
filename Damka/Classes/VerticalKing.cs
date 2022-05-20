@@ -26,7 +26,7 @@ namespace Damka.Classes
             toIndex = startIndex - (Constants.NUM_OF_COLS * 2 * counter);
             while (isValidMove(fromIndex, toIndex))
             {
-                if (board[toIndex].Image == null)
+                if (board[toIndex].BackgroundImage == null)
                 { // can go  up
                     result.Add(new KeyValuePair<int, int>(toIndex, -1));
                     if (isEmpty == false)
@@ -54,7 +54,7 @@ namespace Damka.Classes
             toIndex = startIndex + (Constants.NUM_OF_COLS * 2 * counter);
             while (isValidMove(fromIndex, toIndex))
             {
-                if (board[toIndex].Image == null)
+                if (board[toIndex].BackgroundImage == null)
                 { // can go down
                     result.Add(new KeyValuePair<int, int>(toIndex, -1));
                     if (isEmpty == false)

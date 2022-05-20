@@ -39,7 +39,7 @@ namespace Damka.Classes
             toIndex = startIndex - (7 * counter);
             while (isValidMove(fromIndex, toIndex))
             {
-                if (board[toIndex].Image == null)
+                if (board[toIndex].BackgroundImage == null)
                 { // can go right up
                     result.Add(new KeyValuePair<int, int>(toIndex, -1));
                     if (isEmpty == false)
@@ -67,7 +67,7 @@ namespace Damka.Classes
             toIndex = startIndex - (9 * counter);
             while (isValidMove(fromIndex, toIndex))
             {
-                if (board[toIndex].Image == null)
+                if (board[toIndex].BackgroundImage == null)
                 { // can go left up
                     result.Add(new KeyValuePair<int, int>(toIndex, -1));
                     if (isEmpty == false)
@@ -95,7 +95,7 @@ namespace Damka.Classes
             toIndex = startIndex + (7 * counter);
             while (isValidMove(fromIndex, toIndex))
             {
-                if (board[toIndex].Image == null)
+                if (board[toIndex].BackgroundImage == null)
                 { // can go left up
                     result.Add(new KeyValuePair<int, int>(toIndex, -1));
                     if (isEmpty == false)
@@ -123,7 +123,7 @@ namespace Damka.Classes
             toIndex = startIndex + (9 * counter);
             while (isValidMove(fromIndex, toIndex))
             {
-                if (board[toIndex].Image == null)
+                if (board[toIndex].BackgroundImage == null)
                 { // can go left up
                     result.Add(new KeyValuePair<int, int>(toIndex, -1));
                     if (isEmpty == false)

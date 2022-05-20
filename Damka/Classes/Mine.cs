@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Damka.Classes
 {
+    [Serializable]
     class Mine : Male
     {
         public Mine(Male old) : base(old.pos, old.color)

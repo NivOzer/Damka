@@ -57,12 +57,13 @@ namespace Damka
                 {
                     Button btn = new Button();
                     btn.ForeColor = Color.White;
-                    btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();
+/*                    btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();*/
                     btn.Name = (row * Constants.NUM_OF_COLS + col).ToString();
                     btn.Size = new Size(Constants.BUTTON_SIZE, Constants.BUTTON_SIZE);
                     btn.Location = new Point(col * Constants.BUTTON_SIZE, row * Constants.BUTTON_SIZE);
                     btn.FlatStyle = FlatStyle.Flat;
                     btn.FlatAppearance.BorderSize = 0;
+                    btn.BackgroundImageLayout = ImageLayout.Center;
                     btn.BackColor = game.getButtonColor(row, col);
                     btn.Click += new EventHandler(boardClick);
                     gamePanel.Controls.Add(btn);
@@ -86,6 +87,7 @@ namespace Damka
                     btn.Location = new Point(col * Constants.BUTTON_SIZE, row * Constants.BUTTON_SIZE);
                     btn.FlatStyle = FlatStyle.Flat;
                     btn.FlatAppearance.BorderSize = 0;
+                    btn.BackgroundImageLayout = ImageLayout.Center;
                     if ((row + col) % 2 == 0)
                         btn.BackColor = Constants.LIGHT_BROWN;
                     else
@@ -150,7 +152,10 @@ namespace Damka
                 createBoardToLoad();// leaves a blank board
                 game.loadFromFile();
                 game.disableAllButtons();
-                game.ShowAvailableMoves();
+                if (game.getCurrentGamePhase() == Constants.GamePhase.SelectedAPiece)
+                    game.ShowAvailableMoves();
+                else
+                    game.ShowAvailablePieces();
             }
         }
 
@@ -160,5 +165,6 @@ namespace Damka
             GameMenu gameScreen = new GameMenu();
             gameScreen.Show();
         }
+
     }
 }
