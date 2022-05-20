@@ -25,7 +25,7 @@ namespace Damka.Classes
 
             moveBy -= 2;
             to.setByIndex(startIndex + moveBy);
-            while (from.getRow() == to.getRow())
+            while (isValidMove(to.getIndex()) && from.getRow() == to.getRow())
             {
                 if (board[to.getIndex()].Image == null)
                 { // can go left
@@ -51,7 +51,7 @@ namespace Damka.Classes
             moveBy = 2;
             isEmpty = true;
             to.setByIndex(startIndex + moveBy);
-            while (from.getRow() == to.getRow())
+            while (isValidMove(to.getIndex()) && from.getRow() == to.getRow())
             {
                 if (board[to.getIndex()].Image == null)
                 { // can go left
@@ -86,6 +86,13 @@ namespace Damka.Classes
         public override bool isUpgradeable()
         {
             return false;
+        }
+
+        public bool isValidMove(int toIndex)
+        {
+            if (toIndex < 0 || toIndex > Constants.NUM_OF_COLS * Constants.NUM_OF_ROWS)
+                return false;
+            return true;
         }
     }
 }
