@@ -150,7 +150,10 @@ namespace Damka
                 createBoardToLoad();// leaves a blank board
                 game.loadFromFile();
                 game.disableAllButtons();
-                game.ShowAvailableMoves();
+                if (game.getCurrentGamePhase() == Constants.GamePhase.SelectedAPiece)
+                    game.ShowAvailableMoves();
+                else
+                    game.ShowAvailablePieces();
             }
         }
 
