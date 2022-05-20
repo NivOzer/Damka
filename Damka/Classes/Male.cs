@@ -61,7 +61,7 @@ namespace Damka.Classes
 
 
         // SETTERS and Male Functionality
-        public void setByIndex(int index) { this._pos.setByIndex(index); }// Update to new postion
+        public void setByIndex(int index) { this._pos.setByIndex(index); }// Update to new position
         public bool isValidMove(int startIndex, int desiredLocationIndex)
         {
             if (startIndex % Constants.NUM_OF_COLS == 0 && desiredLocationIndex % 8 == 7) return false;
@@ -89,7 +89,8 @@ namespace Damka.Classes
                         if (isValidMove(startIndex - 7, startIndex - 14) && board[startIndex - 14].Image == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex - 7);
-                            if (otherPlayer._color != this._color) result.Add(new KeyValuePair<int, int>(startIndex - 14, startIndex - 7));
+                            if (otherPlayer._color != this._color)
+                                result.Add(new KeyValuePair<int, int>(startIndex - 14, startIndex - 7));
                             // result.Add(startIndex - 14); // black can eat left
                         }
                     }
@@ -98,7 +99,6 @@ namespace Damka.Classes
                 {
                     if (board[startIndex - 9].Image == null)
                     { // black can go left
-
                         result.Add(new KeyValuePair<int, int>(startIndex - 9, -1));
                         // result.Add(startIndex - 9);
                     }
@@ -107,7 +107,8 @@ namespace Damka.Classes
                         if (isValidMove(startIndex - 9, startIndex - 18) && board[startIndex - 18].Image == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex - 9);
-                            if (otherPlayer._color != this._color) result.Add(new KeyValuePair<int, int>(startIndex - 18, startIndex - 9));
+                            if (otherPlayer._color != this._color)
+                                result.Add(new KeyValuePair<int, int>(startIndex - 18, startIndex - 9));
                             // if (otherPlayer._color != this._color) result.Add(startIndex - 18); // White can eat right
                         }
                     }
@@ -119,7 +120,6 @@ namespace Damka.Classes
                 {
                     if (board[startIndex + 7].Image == null)
                     { // White can go left
-
                         result.Add(new KeyValuePair<int, int>(startIndex + 7, -1));
                         // result.Add(startIndex + 7);
                     }
@@ -128,7 +128,8 @@ namespace Damka.Classes
                         if (isValidMove(startIndex + 7, startIndex + 14) && board[startIndex + 14].Image == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex + 7);
-                            if (otherPlayer._color != this._color) result.Add(new KeyValuePair<int, int>(startIndex + 14, startIndex + 7));
+                            if (otherPlayer._color != this._color)
+                                result.Add(new KeyValuePair<int, int>(startIndex + 14, startIndex + 7));
                             // if (otherPlayer._color != this._color) result.Add(startIndex + 14); // White can eat left
                         }
                     }
@@ -145,7 +146,8 @@ namespace Damka.Classes
                         if (isValidMove(startIndex + 9, startIndex + 18) && board[startIndex + 18].Image == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex + 9);
-                            if (otherPlayer._color != this._color) result.Add(new KeyValuePair<int, int>(startIndex + 18, startIndex + 9));
+                            if (otherPlayer._color != this._color)
+                                result.Add(new KeyValuePair<int, int>(startIndex + 18, startIndex + 9));
                             // if (otherPlayer._color != this._color) result.Add(startIndex + 18); // White can eat right
                         }
                     }
@@ -155,12 +157,10 @@ namespace Damka.Classes
         }
         public virtual bool isUpgradeable()
         {
-            //should always return true
             if (_color == Constants.PlayerColor.Black && _pos.getRow() == 0) return true;
             if (_color == Constants.PlayerColor.White && _pos.getRow() == Constants.NUM_OF_ROWS - 1) return true;
             return false;
         }
-
 
         public virtual void ateAPlayer() { }
         public virtual bool gotEaten() { return false; }
