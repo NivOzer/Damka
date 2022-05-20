@@ -193,7 +193,6 @@ namespace Damka.Classes
                         else
                             _whites.Remove(current);
                         _board[_current_player_index].Image = null;
-                        MessageBox.Show(move.Key + " Killed a Mine at " + move.Value + " :(");
                     }
                 }
             }
