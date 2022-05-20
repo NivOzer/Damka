@@ -81,7 +81,7 @@ namespace Damka
                 {
                     Button btn = new Button();
                     btn.ForeColor = Color.White;
-                    btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();
+/*                    btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();*/
                     btn.Name = (row * Constants.NUM_OF_COLS + col).ToString();
                     btn.Size = new Size(Constants.BUTTON_SIZE, Constants.BUTTON_SIZE);
                     btn.Location = new Point(col * Constants.BUTTON_SIZE, row * Constants.BUTTON_SIZE);
