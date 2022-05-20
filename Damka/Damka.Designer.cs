@@ -77,7 +77,7 @@ namespace Damka
             this.gameLabel.Font = new System.Drawing.Font("Perpetua Titling MT", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.gameLabel.ForeColor = System.Drawing.Color.Snow;
             this.gameLabel.Location = new System.Drawing.Point(976, 133);
-            this.gameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.gameLabel.Margin = new System.Windows.Forms.Padding(0);
             this.gameLabel.Name = "gameLabel";
             this.gameLabel.Size = new System.Drawing.Size(306, 79);
             this.gameLabel.TabIndex = 1;
@@ -99,6 +99,7 @@ namespace Damka
             this.button1.TabIndex = 15;
             this.button1.Text = "Back To Menu";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Damka
             // 

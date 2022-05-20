@@ -47,8 +47,9 @@ namespace Damka
             gamePanel.Width = Constants.PANEL_SIZE;
             gamePanel.Height = Constants.PANEL_SIZE;
             gamePanel.BackColor = Color.Yellow;
-            gamePanel.Anchor = AnchorStyles.Left;
-            gamePanel.Location = new Point(Constants.SCREEN_SIZE_WIDTH/2 - Constants.PANEL_SIZE/2  , Constants.SCREEN_SIZE_HEIGHT/6);
+            gamePanel.Anchor = AnchorStyles.None;
+            gamePanel.Left = Constants.PANEL_SIZE + 60;
+            gamePanel.Top = Constants.SCREEN_SIZE_HEIGHT / 6;
             this.Controls.Add(gamePanel);
             for (int row = 0; row < Constants.NUM_OF_ROWS; row++)
             {
@@ -153,5 +154,11 @@ namespace Damka
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            GameMenu gameScreen = new GameMenu();
+            gameScreen.Show();
+        }
     }
 }
