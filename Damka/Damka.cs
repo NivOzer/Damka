@@ -48,8 +48,8 @@ namespace Damka
             gamePanel.Height = Constants.PANEL_SIZE;
             gamePanel.BackColor = Color.Yellow;
             gamePanel.Anchor = AnchorStyles.None;
-            gamePanel.Left = Constants.PANEL_SIZE + 60;
-            gamePanel.Top = Constants.SCREEN_SIZE_HEIGHT / 6;
+            gamePanel.Left = Constants.PANEL_SIZE-100;
+            gamePanel.Top = Constants.SCREEN_SIZE_HEIGHT / 10;
             this.Controls.Add(gamePanel);
             for (int row = 0; row < Constants.NUM_OF_ROWS; row++)
             {

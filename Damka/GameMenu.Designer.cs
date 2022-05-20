@@ -65,8 +65,8 @@ namespace Damka
             this.BlackVKingIMG.BackColor = System.Drawing.Color.Transparent;
             this.BlackVKingIMG.Image = global::Damka.Properties.Resources.KING_Verical_Black;
             this.BlackVKingIMG.InitialImage = global::Damka.Properties.Resources.Black_male;
-            this.BlackVKingIMG.Location = new System.Drawing.Point(573, 541);
-            this.BlackVKingIMG.Margin = new System.Windows.Forms.Padding(2);
+            this.BlackVKingIMG.Location = new System.Drawing.Point(523, 741);
+            this.BlackVKingIMG.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.BlackVKingIMG.Name = "BlackVKingIMG";
             this.BlackVKingIMG.Size = new System.Drawing.Size(90, 82);
             this.BlackVKingIMG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -79,8 +79,8 @@ namespace Damka
             this.BlackHKingIMG.BackColor = System.Drawing.Color.Transparent;
             this.BlackHKingIMG.Image = global::Damka.Properties.Resources.KING_Horizontal_Black;
             this.BlackHKingIMG.InitialImage = global::Damka.Properties.Resources.White_male;
-            this.BlackHKingIMG.Location = new System.Drawing.Point(573, 451);
-            this.BlackHKingIMG.Margin = new System.Windows.Forms.Padding(2);
+            this.BlackHKingIMG.Location = new System.Drawing.Point(523, 621);
+            this.BlackHKingIMG.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.BlackHKingIMG.Name = "BlackHKingIMG";
             this.BlackHKingIMG.Size = new System.Drawing.Size(90, 82);
             this.BlackHKingIMG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -93,8 +93,8 @@ namespace Damka
             this.BlackKingIMG.BackColor = System.Drawing.Color.Transparent;
             this.BlackKingIMG.Image = global::Damka.Properties.Resources.Black_King;
             this.BlackKingIMG.InitialImage = global::Damka.Properties.Resources.White_male;
-            this.BlackKingIMG.Location = new System.Drawing.Point(573, 360);
-            this.BlackKingIMG.Margin = new System.Windows.Forms.Padding(2);
+            this.BlackKingIMG.Location = new System.Drawing.Point(523, 500);
+            this.BlackKingIMG.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.BlackKingIMG.Name = "BlackKingIMG";
             this.BlackKingIMG.Size = new System.Drawing.Size(90, 82);
             this.BlackKingIMG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -107,8 +107,8 @@ namespace Damka
             this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox4.Image = global::Damka.Properties.Resources.BlackMine;
             this.pictureBox4.InitialImage = global::Damka.Properties.Resources.White_male;
-            this.pictureBox4.Location = new System.Drawing.Point(573, 270);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox4.Location = new System.Drawing.Point(523, 380);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(90, 82);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -121,8 +121,8 @@ namespace Damka
             this.BlackMaleIMG.BackColor = System.Drawing.Color.Transparent;
             this.BlackMaleIMG.Image = global::Damka.Properties.Resources.Black_male;
             this.BlackMaleIMG.InitialImage = global::Damka.Properties.Resources.White_male;
-            this.BlackMaleIMG.Location = new System.Drawing.Point(573, 174);
-            this.BlackMaleIMG.Margin = new System.Windows.Forms.Padding(2);
+            this.BlackMaleIMG.Location = new System.Drawing.Point(523, 252);
+            this.BlackMaleIMG.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.BlackMaleIMG.Name = "BlackMaleIMG";
             this.BlackMaleIMG.Size = new System.Drawing.Size(90, 82);
             this.BlackMaleIMG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -136,10 +136,10 @@ namespace Damka
             this.StartGameButton.BackColor = System.Drawing.Color.Transparent;
             this.StartGameButton.FlatAppearance.BorderSize = 10;
             this.StartGameButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.StartGameButton.Location = new System.Drawing.Point(808, 657);
-            this.StartGameButton.Margin = new System.Windows.Forms.Padding(2);
+            this.StartGameButton.Location = new System.Drawing.Point(827, 893);
+            this.StartGameButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.StartGameButton.Name = "StartGameButton";
-            this.StartGameButton.Size = new System.Drawing.Size(300, 52);
+            this.StartGameButton.Size = new System.Drawing.Size(343, 69);
             this.StartGameButton.TabIndex = 31;
             this.StartGameButton.Text = "Start Game";
             this.StartGameButton.UseVisualStyleBackColor = false;
@@ -149,72 +149,73 @@ namespace Damka
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("MonoLisa-Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label7.ForeColor = System.Drawing.Color.Snow;
-            this.label7.Location = new System.Drawing.Point(803, 548);
+            this.label7.Location = new System.Drawing.Point(786, 751);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(630, 77);
+            this.label7.Size = new System.Drawing.Size(720, 103);
             this.label7.TabIndex = 30;
-            this.label7.Text = "Vertical   - A vertical King behves like a                 King         regular K" +
-    "ing but can also go up and down";
+            this.label7.Text = "Vertical   - A vertical King behves like a                                       " +
+    "            King          regular King but can also go up and down";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label6
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("MonoLisa-Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.Snow;
-            this.label6.Location = new System.Drawing.Point(808, 458);
+            this.label6.Location = new System.Drawing.Point(791, 631);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(625, 77);
+            this.label6.Size = new System.Drawing.Size(714, 103);
             this.label6.TabIndex = 29;
-            this.label6.Text = "Horizontal - A Horizontal King behaves like a             King         regular Ki" +
-    "ng but can also go sideways";
+            this.label6.Text = "Horizontal - A Horizontal King behaves like a                                    " +
+    "   King            regular King but can also go sideways";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label5
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("MonoLisa-Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.Color.Snow;
-            this.label5.Location = new System.Drawing.Point(808, 366);
+            this.label5.Location = new System.Drawing.Point(791, 508);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(530, 84);
+            this.label5.Size = new System.Drawing.Size(606, 112);
             this.label5.TabIndex = 28;
-            this.label5.Text = "King - A king behaves like a Man but can go                 infiite amount of blo" +
-    "cks";
+            this.label5.Text = "King - A king behaves like a Man but can go                                      " +
+    " infiite amount of blocks";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("MonoLisa-Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.Snow;
-            this.label4.Location = new System.Drawing.Point(803, 276);
+            this.label4.Location = new System.Drawing.Point(786, 388);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(727, 77);
+            this.label4.Size = new System.Drawing.Size(831, 103);
             this.label4.TabIndex = 27;
-            this.label4.Text = "Mine - Acts like a normal Man but If you eat the mine both                     th" +
-    "e mine and the eating player lose their piece";
+            this.label4.Text = "Mine - Acts like a normal Man but If you eat the mine both                       " +
+    "                                 the mine and the eating player lose their piece" +
+    "";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("MonoLisa-Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.Snow;
-            this.label3.Location = new System.Drawing.Point(803, 181);
+            this.label3.Location = new System.Drawing.Point(786, 261);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(533, 77);
+            this.label3.Size = new System.Drawing.Size(609, 103);
             this.label3.TabIndex = 26;
             this.label3.Text = "Man  - The basic player";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -225,8 +226,8 @@ namespace Damka
             this.VKingStartIMG.BackColor = System.Drawing.Color.Transparent;
             this.VKingStartIMG.Image = global::Damka.Properties.Resources.KING_Verical_new;
             this.VKingStartIMG.InitialImage = global::Damka.Properties.Resources.Black_male;
-            this.VKingStartIMG.Location = new System.Drawing.Point(684, 541);
-            this.VKingStartIMG.Margin = new System.Windows.Forms.Padding(2);
+            this.VKingStartIMG.Location = new System.Drawing.Point(650, 741);
+            this.VKingStartIMG.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.VKingStartIMG.Name = "VKingStartIMG";
             this.VKingStartIMG.Size = new System.Drawing.Size(90, 82);
             this.VKingStartIMG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -239,8 +240,8 @@ namespace Damka
             this.HKingStartIMG.BackColor = System.Drawing.Color.Transparent;
             this.HKingStartIMG.Image = global::Damka.Properties.Resources.KING_Horizontal;
             this.HKingStartIMG.InitialImage = global::Damka.Properties.Resources.White_male;
-            this.HKingStartIMG.Location = new System.Drawing.Point(684, 451);
-            this.HKingStartIMG.Margin = new System.Windows.Forms.Padding(2);
+            this.HKingStartIMG.Location = new System.Drawing.Point(650, 621);
+            this.HKingStartIMG.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.HKingStartIMG.Name = "HKingStartIMG";
             this.HKingStartIMG.Size = new System.Drawing.Size(90, 82);
             this.HKingStartIMG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -253,8 +254,8 @@ namespace Damka
             this.KingStartIMG.BackColor = System.Drawing.Color.Transparent;
             this.KingStartIMG.Image = global::Damka.Properties.Resources.KING;
             this.KingStartIMG.InitialImage = global::Damka.Properties.Resources.White_male;
-            this.KingStartIMG.Location = new System.Drawing.Point(684, 360);
-            this.KingStartIMG.Margin = new System.Windows.Forms.Padding(2);
+            this.KingStartIMG.Location = new System.Drawing.Point(650, 500);
+            this.KingStartIMG.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.KingStartIMG.Name = "KingStartIMG";
             this.KingStartIMG.Size = new System.Drawing.Size(90, 90);
             this.KingStartIMG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -267,8 +268,8 @@ namespace Damka
             this.MineStartIMG.BackColor = System.Drawing.Color.Transparent;
             this.MineStartIMG.Image = global::Damka.Properties.Resources.Bomber_Fixed_size;
             this.MineStartIMG.InitialImage = global::Damka.Properties.Resources.White_male;
-            this.MineStartIMG.Location = new System.Drawing.Point(684, 270);
-            this.MineStartIMG.Margin = new System.Windows.Forms.Padding(2);
+            this.MineStartIMG.Location = new System.Drawing.Point(650, 380);
+            this.MineStartIMG.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MineStartIMG.Name = "MineStartIMG";
             this.MineStartIMG.Size = new System.Drawing.Size(90, 82);
             this.MineStartIMG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -281,8 +282,8 @@ namespace Damka
             this.PlayerLabelIMG.BackColor = System.Drawing.Color.Transparent;
             this.PlayerLabelIMG.Image = global::Damka.Properties.Resources.White_male;
             this.PlayerLabelIMG.InitialImage = global::Damka.Properties.Resources.White_male;
-            this.PlayerLabelIMG.Location = new System.Drawing.Point(684, 174);
-            this.PlayerLabelIMG.Margin = new System.Windows.Forms.Padding(2);
+            this.PlayerLabelIMG.Location = new System.Drawing.Point(650, 252);
+            this.PlayerLabelIMG.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.PlayerLabelIMG.Name = "PlayerLabelIMG";
             this.PlayerLabelIMG.Size = new System.Drawing.Size(90, 82);
             this.PlayerLabelIMG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -295,10 +296,10 @@ namespace Damka
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.Snow;
-            this.label2.Location = new System.Drawing.Point(894, 129);
+            this.label2.Location = new System.Drawing.Point(923, 206);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(442, 27);
+            this.label2.Size = new System.Drawing.Size(505, 36);
             this.label2.TabIndex = 20;
             this.label2.Text = "Rules of the game";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -312,22 +313,22 @@ namespace Damka
             this.label1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.label1.Font = new System.Drawing.Font("Perpetua Titling MT", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.Snow;
-            this.label1.Location = new System.Drawing.Point(573, 31);
+            this.label1.Location = new System.Drawing.Point(523, 95);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(791, 79);
+            this.label1.Size = new System.Drawing.Size(933, 98);
             this.label1.TabIndex = 19;
-            this.label1.Text = "Welcome to Damka";
+            this.label1.Text = "Welcome to Nivka";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.UseMnemonic = false;
             // 
             // GameMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackgroundImage = global::Damka.Properties.Resources.wood;
-            this.ClientSize = new System.Drawing.Size(1974, 830);
+            this.ClientSize = new System.Drawing.Size(1924, 1055);
             this.Controls.Add(this.BlackVKingIMG);
             this.Controls.Add(this.BlackHKingIMG);
             this.Controls.Add(this.BlackKingIMG);
@@ -346,6 +347,7 @@ namespace Damka
             this.Controls.Add(this.PlayerLabelIMG);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "GameMenu";
             this.Text = "GameMenu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
