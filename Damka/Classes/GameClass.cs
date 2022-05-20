@@ -175,6 +175,7 @@ namespace Damka.Classes
                 if (move.Key == pressedIndex && move.Value != -1)
                 {
                     Male gotKilled = getPlayerMaleByIndex(move.Value);
+                    gotEaten = gotKilled.gotEaten();
                     if (gotKilled._color == Constants.PlayerColor.White)
                         _whites.Remove(gotKilled);
                     else
@@ -203,14 +204,11 @@ namespace Damka.Classes
             else
                 _board[_current_player_index].BackColor = Constants.LIGHT_BROWN;
 
-            current.setByIndex(pressedIndex);
-            _current_player_index = pressedIndex;
-
-
-
             //checks for an upgrade
             if (gotEaten == false)
             {
+                current.setByIndex(pressedIndex);
+                _current_player_index = pressedIndex;
                 if (current.isUpgradeable())
                 {
                     if (current.GetType() == typeof(Classes.Male))
