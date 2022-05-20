@@ -47,10 +47,8 @@ otherPlayer was null. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
             gamePanel.Width = Constants.PANEL_SIZE;
             gamePanel.Height = Constants.PANEL_SIZE;
             gamePanel.BackColor = Color.Yellow;
-            int xScreen = Screen.PrimaryScreen.Bounds.Width;
-            int yScreen = Screen.PrimaryScreen.Bounds.Height;
-            gamePanel.Anchor = AnchorStyles.Top-Left;
-            gamePanel.Location = new Point(xScreen / 3 - Constants.PANEL_SIZE/8  , yScreen / 3 - Constants.PANEL_SIZE/6);
+            gamePanel.Anchor = AnchorStyles.Left;
+            gamePanel.Location = new Point(Constants.SCREEN_SIZE_WIDTH/2 - Constants.PANEL_SIZE/2  , Constants.SCREEN_SIZE_HEIGHT/6);
             this.Controls.Add(gamePanel);
             for (int row = 0; row < Constants.NUM_OF_ROWS; row++)
             {
