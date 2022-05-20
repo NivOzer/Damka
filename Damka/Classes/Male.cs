@@ -61,7 +61,7 @@ namespace Damka.Classes
 
 
         // SETTERS and Male Functionality
-        public void setByIndex(int index) { this._pos.setByIndex(index); }// Update to new postion
+        public void setByIndex(int index) { this._pos.setByIndex(index); }// Update to new position
         public bool isValidMove(int startIndex, int desiredLocationIndex)
         {
             if (startIndex % Constants.NUM_OF_COLS == 0 && desiredLocationIndex % 8 == 7) return false;
@@ -157,13 +157,10 @@ namespace Damka.Classes
         }
         public virtual bool isUpgradeable()
         {
-            // return false;
-            //should always return true
             if (_color == Constants.PlayerColor.Black && _pos.getRow() == 0) return true;
             if (_color == Constants.PlayerColor.White && _pos.getRow() == Constants.NUM_OF_ROWS - 1) return true;
             return false;
         }
-
 
         public virtual void ateAPlayer() { }
         public virtual bool gotEaten() { return false; }
