@@ -16,10 +16,12 @@ namespace Damka
 {
 
     //BUGS TO FIX
-    //1 stepping over and not really eating
     //2 if loaded a picked game the turn of the person that just played still remains
     //3 disabled buttons colors
 
+/*    System.NullReferenceException: 'Object reference not set to an instance of an object.'
+
+otherPlayer was null. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
     public partial class Damka : Form
     {
         GameClass game = new GameClass();
@@ -45,6 +47,10 @@ namespace Damka
             gamePanel.Width = Constants.PANEL_SIZE;
             gamePanel.Height = Constants.PANEL_SIZE;
             gamePanel.BackColor = Color.Yellow;
+            int xScreen = Screen.PrimaryScreen.Bounds.Width;
+            int yScreen = Screen.PrimaryScreen.Bounds.Height;
+            gamePanel.Anchor = AnchorStyles.Top-Left;
+            gamePanel.Location = new Point(xScreen / 3 - Constants.PANEL_SIZE/8  , yScreen / 3 - Constants.PANEL_SIZE/6);
             this.Controls.Add(gamePanel);
             for (int row = 0; row < Constants.NUM_OF_ROWS; row++)
             {
@@ -82,15 +88,9 @@ namespace Damka
                     btn.FlatStyle = FlatStyle.Flat;
                     btn.FlatAppearance.BorderSize = 0;
                     if ((row + col) % 2 == 0)
-                    {
-
                         btn.BackColor = Constants.LIGHT_BROWN;
-                    }
                     else
-                    {
-
                         btn.BackColor = Constants.DARK_BROWN;
-                    }
                     btn.Click += new EventHandler(boardClick);
                     gamePanel.Controls.Add(btn);
                     game.addButtonToBoard(btn);
@@ -101,11 +101,8 @@ namespace Damka
         public void removeButtons()
         {
             foreach (Control item in gamePanel.Controls.OfType<Button>().ToList())
-            {
                 gamePanel.Controls.Remove(item);
-            }
         }
-
 
         // Checks the current GamePhase and initiate a proper response
         private void boardClick(object sender, EventArgs e)
@@ -148,14 +145,10 @@ namespace Damka
                 //!!!!
                 /*                pts = (FigureList)binaryFormatter.Deserialize(stream);
                                 pictureBox1.Invalidate();*/
-
-                //deletes all buttons
-                removeButtons();
+                removeButtons(); 
                 game = (GameClass)binaryFormatter.Deserialize(stream);
                 game.setBoard(null);
-                /*game.getBoard() = new List<Button>();*/
-                //creates buttons - initiate players
-                createBoardToLoad();
+                createBoardToLoad();// leaves a blank board
                 game.loadFromFile();
                 game.disableAllButtons();
                 game.ShowAvailableMoves();
