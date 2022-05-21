@@ -75,7 +75,7 @@ namespace Damka.Classes
                 Male m = new Male(p, Constants.PlayerColor.White);
                 _board[p.getIndex()].BackgroundImage = m.getImage();
                 this._whites.Add(m);
-                
+
             }
             else if (((row + col) % 2 == 0) && btn.BackgroundImage == null && row >= 5) // till 5 cause <8 is 7 so 3 lines is 5,6,7
             {
@@ -198,11 +198,6 @@ namespace Damka.Classes
                 }
             }
 
-            // restore original color
-            // if (_board[_current_player_index].AccessibleDescription == "DARK_BROWN")
-            //     _board[_current_player_index].BackColor = Constants.DARK_BROWN;
-            // else
-            //     _board[_current_player_index].BackColor = Constants.LIGHT_BROWN;
             _board[_current_player_index].BackColor = getButtonColor(_current_player_index);
 
             if (exploded == false)
@@ -296,8 +291,8 @@ namespace Damka.Classes
 
         public void endGame()
         {
-            MessageBox.Show("Game Ended");
             disableAllButtons();
+            MessageBox.Show("Game Ended");
         }
     }
 }
