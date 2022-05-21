@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace Damka.Classes
 {
+    [Serializable]
     class VerticalKing : King
     {
         public VerticalKing(King old) : base(old._pos, old._color)
