@@ -42,10 +42,10 @@ namespace Damka
             this.saveButton.BackColor = System.Drawing.Color.Transparent;
             this.saveButton.FlatAppearance.BorderSize = 10;
             this.saveButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.saveButton.Location = new System.Drawing.Point(620, 871);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.saveButton.Location = new System.Drawing.Point(538, 766);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(2);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(358, 69);
+            this.saveButton.Size = new System.Drawing.Size(313, 52);
             this.saveButton.TabIndex = 14;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = false;
@@ -58,10 +58,10 @@ namespace Damka
             this.loadButton.BackColor = System.Drawing.Color.Transparent;
             this.loadButton.FlatAppearance.BorderSize = 10;
             this.loadButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.loadButton.Location = new System.Drawing.Point(982, 871);
-            this.loadButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.loadButton.Location = new System.Drawing.Point(855, 766);
+            this.loadButton.Margin = new System.Windows.Forms.Padding(2);
             this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(358, 69);
+            this.loadButton.Size = new System.Drawing.Size(313, 52);
             this.loadButton.TabIndex = 14;
             this.loadButton.Text = "Load";
             this.loadButton.UseVisualStyleBackColor = false;
@@ -76,10 +76,10 @@ namespace Damka
             this.gameLabel.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.gameLabel.Font = new System.Drawing.Font("Perpetua Titling MT", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.gameLabel.ForeColor = System.Drawing.Color.Snow;
-            this.gameLabel.Location = new System.Drawing.Point(796, 40);
+            this.gameLabel.Location = new System.Drawing.Point(696, -80);
             this.gameLabel.Margin = new System.Windows.Forms.Padding(0);
             this.gameLabel.Name = "gameLabel";
-            this.gameLabel.Size = new System.Drawing.Size(379, 98);
+            this.gameLabel.Size = new System.Drawing.Size(306, 79);
             this.gameLabel.TabIndex = 1;
             this.gameLabel.Text = "Damka";
             this.gameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -92,10 +92,10 @@ namespace Damka
             this.button1.BackColor = System.Drawing.Color.Transparent;
             this.button1.FlatAppearance.BorderSize = 10;
             this.button1.Font = new System.Drawing.Font("Microsoft YaHei UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(620, 944);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.button1.Location = new System.Drawing.Point(538, 821);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(720, 69);
+            this.button1.Size = new System.Drawing.Size(630, 52);
             this.button1.TabIndex = 15;
             this.button1.Text = "Back To Menu";
             this.button1.UseVisualStyleBackColor = false;
@@ -103,17 +103,17 @@ namespace Damka
             // 
             // Damka
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImage = global::Damka.Properties.Resources.wood;
-            this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.ClientSize = new System.Drawing.Size(1684, 791);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.gameLabel);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Damka";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "~ Damka ~";

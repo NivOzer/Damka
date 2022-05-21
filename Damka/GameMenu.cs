@@ -26,5 +26,10 @@ namespace Damka
             Damka gameScreen = new Damka();
             gameScreen.Show();
         }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
