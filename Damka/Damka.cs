@@ -15,13 +15,6 @@ using System.Linq;
 namespace Damka
 {
 
-    //BUGS TO FIX
-    //2 if loaded a picked game the turn of the person that just played still remains
-    //3 disabled buttons colors
-
-    /*    System.NullReferenceException: 'Object reference not set to an instance of an object.'
-
-    otherPlayer was null. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
     public partial class Damka : Form
     {
         GameClass game = new GameClass();
@@ -49,8 +42,8 @@ namespace Damka
             gamePanel.Height = Constants.PANEL_SIZE;
             gamePanel.BackColor = Color.Yellow;
             // gamePanel.Anchor = AnchorStyles.Left;
-            // int delta = (Size.Height - saveButton.Location.Y) / 2 + (gameLabel.Location.Y + gameLabel.Size.Height) / 2;
-            // gamePanel.Location = new Point(Size.Width / 2 - Constants.PANEL_SIZE / 2, Size.Height / 2 - Constants.PANEL_SIZE / 2 + delta / 2);
+            // int delta = (Size.Height - saveButton.Location.Y) / 2 + (gameLabel.Location.Y + gameLabel.Size.Height);
+            // gamePanel.Location = new Point((Size.Width / 2) - (gamePanel.Width / 2), Size.Height / 2 - gamePanel.Height / 2 - delta);
             this.Controls.Add(gamePanel);
             for (int row = 0; row < Constants.NUM_OF_ROWS; row++)
             {
@@ -58,7 +51,7 @@ namespace Damka
                 {
                     Button btn = new Button();
                     btn.ForeColor = Color.White;
-                    //btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();
+                    btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();
                     btn.Name = (row * Constants.NUM_OF_COLS + col).ToString();
                     btn.Size = new Size(Constants.BUTTON_SIZE, Constants.BUTTON_SIZE);
                     btn.Location = new Point(col * Constants.BUTTON_SIZE, row * Constants.BUTTON_SIZE);
@@ -84,7 +77,7 @@ namespace Damka
                 {
                     Button btn = new Button();
                     btn.ForeColor = Color.White;
-                    //btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();
+                    btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();
                     btn.Name = (row * Constants.NUM_OF_COLS + col).ToString();
                     btn.Size = new Size(Constants.BUTTON_SIZE, Constants.BUTTON_SIZE);
                     btn.Location = new Point(col * Constants.BUTTON_SIZE, row * Constants.BUTTON_SIZE);
@@ -97,6 +90,7 @@ namespace Damka
                     btn.Click += new EventHandler(boardClick);
                     btn.MouseLeave += new EventHandler(mouseLeaveEvent);
                     btn.MouseEnter += new EventHandler(mouseEnterEvent);
+                    btn.BackgroundImageLayout = ImageLayout.Center;
                     gamePanel.Controls.Add(btn);
                     game.addButtonToBoard(btn);
                 }
@@ -161,10 +155,18 @@ namespace Damka
                 game.setBoard(null);
                 createBoardToLoad();// leaves a blank board
                 game.loadFromFile();
-                game.disableAllButtons();
-                game.ShowAvailableMoves();
+                if (game.getCurrentGamePhase() == Constants.GamePhase.SelectedAPiece)
+                    game.ShowAvailableMoves();
+                else
+                    game.ShowAvailablePieces();
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            GameMenu gameScreen = new GameMenu();
+            gameScreen.Show();
+        }
     }
 }
