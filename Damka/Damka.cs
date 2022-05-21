@@ -48,8 +48,8 @@ namespace Damka
             gamePanel.Height = Constants.PANEL_SIZE;
             gamePanel.BackColor = Color.Yellow;
             gamePanel.Anchor = AnchorStyles.None;
-            gamePanel.Left = Constants.PANEL_SIZE-215;
-            gamePanel.Top = Constants.SCREEN_SIZE_HEIGHT / 10 -75;
+            gamePanel.Left = Constants.PANEL_SIZE - 215;
+            gamePanel.Top = Constants.SCREEN_SIZE_HEIGHT / 10 - 75;
             this.Controls.Add(gamePanel);
             for (int row = 0; row < Constants.NUM_OF_ROWS; row++)
             {
@@ -57,7 +57,7 @@ namespace Damka
                 {
                     Button btn = new Button();
                     btn.ForeColor = Color.White;
-/*                    btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();*/
+                    /*                    btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();*/
                     btn.Name = (row * Constants.NUM_OF_COLS + col).ToString();
                     btn.Size = new Size(Constants.BUTTON_SIZE, Constants.BUTTON_SIZE);
                     btn.Location = new Point(col * Constants.BUTTON_SIZE, row * Constants.BUTTON_SIZE);
@@ -66,6 +66,9 @@ namespace Damka
                     btn.BackgroundImageLayout = ImageLayout.Center;
                     btn.BackColor = game.getButtonColor(row, col);
                     btn.Click += new EventHandler(boardClick);
+                    btn.MouseLeave += new EventHandler(mouseLeaveEvent);
+                    btn.MouseEnter += new EventHandler(mouseEnterEvent);
+                    btn.BackgroundImageLayout = ImageLayout.Center;
                     gamePanel.Controls.Add(btn);
                     game.addButtonToBoard(btn);
                     game.initializePlayers(btn, col, row);
@@ -81,7 +84,7 @@ namespace Damka
                 {
                     Button btn = new Button();
                     btn.ForeColor = Color.White;
-/*                    btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();*/
+                    /*                    btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();*/
                     btn.Name = (row * Constants.NUM_OF_COLS + col).ToString();
                     btn.Size = new Size(Constants.BUTTON_SIZE, Constants.BUTTON_SIZE);
                     btn.Location = new Point(col * Constants.BUTTON_SIZE, row * Constants.BUTTON_SIZE);
@@ -93,6 +96,9 @@ namespace Damka
                     else
                         btn.BackColor = Constants.DARK_BROWN;
                     btn.Click += new EventHandler(boardClick);
+                    btn.MouseLeave += new EventHandler(mouseLeaveEvent);
+                    btn.MouseEnter += new EventHandler(mouseEnterEvent);
+                    btn.BackgroundImageLayout = ImageLayout.Center;
                     gamePanel.Controls.Add(btn);
                     game.addButtonToBoard(btn);
                 }
@@ -110,6 +116,16 @@ namespace Damka
         {
             int pressedIndex = int.Parse(((Button)sender).Name);
             game.nextGamePhase(pressedIndex);
+        }
+
+        private void mouseLeaveEvent(object sender, EventArgs e)
+        {
+            ((Button)sender).Cursor = System.Windows.Forms.Cursors.Arrow;
+        }
+
+        private void mouseEnterEvent(object sender, EventArgs e)
+        {
+            ((Button)sender).Cursor = System.Windows.Forms.Cursors.Hand;
         }
 
         //--- SAVE --
