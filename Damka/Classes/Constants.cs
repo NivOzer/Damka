@@ -13,8 +13,8 @@ namespace Damka.Classes
         public const int SCREEN_SIZE_HEIGHT = 1440;
         public const int PANEL_SIZE = 720;
         public const int BUTTON_SIZE = 90;
-        public static Color LIGHT_BROWN = System.Drawing.Color.FromArgb(66, 43, 34); // being set at Damka.cs - it's a duplicate
-        public static Color DARK_BROWN = System.Drawing.Color.FromArgb(113, 82, 60); // the same
+        public static Color LIGHT_BROWN = System.Drawing.Color.FromArgb(66, 43, 34);
+        public static Color DARK_BROWN = System.Drawing.Color.FromArgb(113, 82, 60);
         public static Color selectedColor = System.Drawing.Color.FromArgb(146, 111, 85);
         public static Color AVAILABLE_MOVE_COLOR = System.Drawing.Color.FromArgb(189, 168, 151);
 
