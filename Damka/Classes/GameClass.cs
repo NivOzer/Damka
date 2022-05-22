@@ -116,11 +116,9 @@ namespace Damka.Classes
                 disableAllButtons();
                 if (pressedIndex == _current_player_index || getPlayerMaleByIndex(pressedIndex) != null)
                 {
-                    //restores original color
-                    if (_board[_current_player_index].BackColor == Constants.selectedColor)
-                        _board[_current_player_index].BackColor = getButtonColor(_current_player_index);
                     ShowAvailablePieces();
-                    _gamePhase = Constants.GamePhase.ChoseWhereToGo;
+                    playerSelectedPiece(pressedIndex);
+                    _gamePhase = Constants.GamePhase.SelectedAPiece;
                     return;
                 }
                 playerMoved(pressedIndex);
