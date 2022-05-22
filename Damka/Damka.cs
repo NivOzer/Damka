@@ -12,16 +12,9 @@ using System.Runtime.Serialization;//!!!!!!
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Linq;
 
+
 namespace Damka
 {
-
-    //BUGS TO FIX
-    //2 if loaded a picked game the turn of the person that just played still remains
-    //3 disabled buttons colors
-
-    /*    System.NullReferenceException: 'Object reference not set to an instance of an object.'
-
-    otherPlayer was null. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
     public partial class Damka : Form
     {
         GameClass game = new GameClass();
@@ -165,6 +158,7 @@ namespace Damka
             GameMenu gameScreen = new GameMenu();
             gameScreen.Show();
         }
+
 
     }
 }

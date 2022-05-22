@@ -5,6 +5,7 @@ using System.Text;
 
 using System.Windows.Forms;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace Damka.Classes
 {
@@ -296,7 +297,13 @@ namespace Damka.Classes
 
         public void endGame()
         {
-            MessageBox.Show("Game Ended");
+            MessageBox.Show("Game Ended thank you for playing");
+            var p = new Process();
+            p.StartInfo = new ProcessStartInfo(@"D:\לימודים\endvideo.mp4")
+            {
+                UseShellExecute = true
+            };
+            p.Start();
             disableAllButtons();
         }
     }

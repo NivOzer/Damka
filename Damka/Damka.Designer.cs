@@ -79,9 +79,9 @@ namespace Damka
             this.gameLabel.Location = new System.Drawing.Point(796, 40);
             this.gameLabel.Margin = new System.Windows.Forms.Padding(0);
             this.gameLabel.Name = "gameLabel";
-            this.gameLabel.Size = new System.Drawing.Size(379, 98);
+            this.gameLabel.Size = new System.Drawing.Size(327, 98);
             this.gameLabel.TabIndex = 1;
-            this.gameLabel.Text = "Damka";
+            this.gameLabel.Text = "Nivka";
             this.gameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.gameLabel.UseMnemonic = false;
             // 
@@ -97,7 +97,7 @@ namespace Damka
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(720, 69);
             this.button1.TabIndex = 15;
-            this.button1.Text = "Back To Menu";
+            this.button1.Text = "New Game / Menu";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
