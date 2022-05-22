@@ -119,12 +119,12 @@ namespace Damka
             deadBlacks.Controls.Add(lblBlack);
             createGraveButtons(deadBlacks);
 
-            deadWhites.Width = Constants.BUTTON_SIZE * 2;
-            deadWhites.Height = Constants.BUTTON_SIZE * 6 + 40;
+            deadWhites.Width = deadBlacks.Width;
+            deadWhites.Height = deadBlacks.Height;
             deadWhites.Anchor = AnchorStyles.None;
             // deadWhites.Left = (Constants.SCREEN_SIZE_WIDTH - gamePanel.Location.X + gamePanel.Width - deadWhites.Width) / 2;
             deadWhites.Left = gamePanel.Location.X - (deadBlacks.Location.X + deadBlacks.Width) + gamePanel.Location.X + gamePanel.Width;
-            deadWhites.Top = (gamePanel.Location.Y * 2 + gamePanel.Height - deadWhites.Height) / 2;
+            deadWhites.Top = deadBlacks.Top;
             deadWhites.BackColor = System.Drawing.Color.Transparent;
             deadWhites.Name = "WhiteGrave";
             this.Controls.Add(deadWhites);
