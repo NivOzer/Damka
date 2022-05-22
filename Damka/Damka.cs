@@ -234,9 +234,6 @@ namespace Damka
             {
                 Stream stream = File.Open(openFileDialog1.FileName, FileMode.Open);
                 var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                //!!!!
-                /*                pts = (FigureList)binaryFormatter.Deserialize(stream);
-                                pictureBox1.Invalidate();*/
                 removeButtons();
                 game = (GameClass)binaryFormatter.Deserialize(stream);
                 game.setBoard(null);
