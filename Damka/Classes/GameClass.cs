@@ -17,8 +17,10 @@ namespace Damka.Classes
         private Constants.GamePhase _gamePhase;
         [NonSerialized()] private List<Button> _board;
         private List<Male> _blacks, _whites;
-        private int _current_player_index;
         private List<Male> _deadBlacks, _deadWhites;
+        [NonSerialized()] private List<Button> _blacksGrave;
+        [NonSerialized()] private List<Button> _whitesGrave;
+        private int _current_player_index;
         public GameClass()
         {
             // Generates a button grid for the board
@@ -30,6 +32,8 @@ namespace Damka.Classes
             //Stacks the dead players in there own array
             this._deadBlacks = new List<Male>();
             this._deadWhites = new List<Male>();
+            this._blacksGrave = new List<Button>();
+            this._whitesGrave = new List<Button>();
         }
 
         // --- GETTERS --
@@ -41,6 +45,14 @@ namespace Damka.Classes
             if ((point.getRow() + point.getCol()) % 2 == 0)
                 return Constants.LIGHT_BROWN;
             return Constants.DARK_BROWN;
+        }
+        public List<Male> deadWhites
+        {
+            get { return this._deadWhites; }
+        }
+        public List<Male> deadBlacks
+        {
+            get { return this.deadBlacks; }
         }
         public Color getButtonColor(int row, int col)
         {
@@ -66,6 +78,11 @@ namespace Damka.Classes
             if (btns == null) _board = new List<Button>();
             else _board = btns;
         }
+        public void initGraves()
+        {
+            _whitesGrave = new List<Button>();
+            _blacksGrave = new List<Button>();
+        }
 
         // Game Functionality
         public void initializePlayers(Button btn, int col, int row)
@@ -88,6 +105,8 @@ namespace Damka.Classes
             disableAllButtons();
         }
         public void addButtonToBoard(Button btn) { this._board.Add(btn); }
+        public void addToBlacksGrave(Button btn) { this._blacksGrave.Add(btn); }
+        public void addToWhitesGrave(Button btn) { this._whitesGrave.Add(btn); }
         public void nextGamePhase(int pressedIndex)
         {
             if (_gamePhase == Constants.GamePhase.SelectedAPiece)
@@ -180,22 +199,18 @@ namespace Damka.Classes
                 { // a kill move
                     Male gotKilled = getPlayerMaleByIndex(move.Value);
                     exploded = gotKilled.gotEaten();
-                    if (gotKilled._color == Constants.PlayerColor.White)
-                        _whites.Remove(gotKilled);
-                    else
-                        _blacks.Remove(gotKilled);
-                    _board[move.Value].BackgroundImage = null;
+                    playerKilled(gotKilled, move.Value);
 
                     current.ateAPlayer();
-
-                    if (exploded)
+                    if (exploded) { playerKilled(current, _current_player_index); } // Attacker killed a mine
+/*                    if (exploded)
                     { // Attacker killed a mine 
                         if (Constants.PlayerColor.Black == current.color)
                             _blacks.Remove(current);
                         else
                             _whites.Remove(current);
                         _board[_current_player_index].BackgroundImage = null;
-                    }
+                    }*/
                 }
             }
 
@@ -244,6 +259,23 @@ namespace Damka.Classes
                 }
             }
         }
+
+        private void playerKilled(Male killed, int index)
+        {
+            if (killed._color == Constants.PlayerColor.White)
+            {
+                _whitesGrave[_deadWhites.Count].BackgroundImage = killed.getImage();
+                _deadWhites.Add(killed);
+                _whites.Remove(killed);
+            }
+            else
+            {
+                _blacksGrave[_deadBlacks.Count].BackgroundImage = killed.getImage();
+                _deadBlacks.Add(killed);
+                _blacks.Remove(killed);
+            }
+            _board[index].BackgroundImage = null;
+        }
         public void upgradePiece(Male old, Male upgraded)
         {
             if (Constants.PlayerColor.Black == old.color)
@@ -274,13 +306,19 @@ namespace Damka.Classes
                 _board[move.Key].BackColor = Constants.AVAILABLE_MOVE_COLOR;
             }
         } // Enables all the buttons in the List (by index)
+        public void loadGraves()
+        {
+            int count = 0;
+            foreach (Male w in _deadWhites) _whitesGrave[count++].BackgroundImage = w.getImage();
+            count = 0;
+            foreach (Male bl in _deadBlacks) _blacksGrave[count++].BackgroundImage = bl.getImage();
+        }
         public void loadFromFile()
         {
             foreach (Button btn in _board) btn.BackgroundImage = null;
             foreach (Male w in _whites) _board[w.getIndex()].BackgroundImage = w.getImage();
             foreach (Male b in _blacks) _board[b.getIndex()].BackgroundImage = b.getImage();
         }// Initializes GUI's properties
-
         public void initializeMine()
         {
             Random rnd = new Random();
@@ -297,7 +335,17 @@ namespace Damka.Classes
 
         public void endGame()
         {
-            MessageBox.Show("Game Ended thank you for playing");
+            string winMessage = "Game Ended\n";
+            if (_whites.Count != 0 && _blacks.Count != 0)
+                winMessage += "It's a tie!\nBetter luck next time!";
+            else
+            {
+                if (_turnCounter % 2 == 0)
+                    winMessage += "Black Has Won!!!";
+                else
+                    winMessage += "White Has Won!!!";
+            }
+            MessageBox.Show(winMessage);
             var p = new Process();
             p.StartInfo = new ProcessStartInfo(@"D:\לימודים\endvideo.mp4")
             {

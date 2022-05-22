@@ -19,6 +19,8 @@ namespace Damka
     {
         GameClass game = new GameClass();
         Panel gamePanel = new Panel();
+        Panel deadWhites = new Panel();
+        Panel deadBlacks = new Panel();
         public Damka()
         {
             InitializeComponent();
@@ -31,6 +33,7 @@ namespace Damka
             game.setGamePhase();
             game.ShowAvailablePieces();
             game.initializeMine();
+            createGraveYards();
             //placePlayers();
         }
 
@@ -96,6 +99,12 @@ namespace Damka
         {
             foreach (Control item in gamePanel.Controls.OfType<Button>().ToList())
                 gamePanel.Controls.Remove(item);
+
+            foreach (Control item in deadBlacks.Controls.OfType<Button>().ToList())
+                deadBlacks.Controls.Remove(item);
+
+            foreach (Control item in deadWhites.Controls.OfType<Button>().ToList())
+                deadWhites.Controls.Remove(item);
         }
 
         // Checks the current GamePhase and initiate a proper response
@@ -103,6 +112,69 @@ namespace Damka
         {
             int pressedIndex = int.Parse(((Button)sender).Name);
             game.nextGamePhase(pressedIndex);
+        }
+
+        private void mouseLeaveEvent(object sender, EventArgs e)
+        {
+            ((Button)sender).Cursor = System.Windows.Forms.Cursors.Arrow;
+        }
+
+        private void mouseEnterEvent(object sender, EventArgs e)
+        {
+            ((Button)sender).Cursor = System.Windows.Forms.Cursors.Hand;
+        }
+
+        public void createGraveYards()
+        {
+            // Black's Grave
+            deadBlacks.Width = Constants.BUTTON_SIZE * 2;
+            deadBlacks.Height = Constants.BUTTON_SIZE * 6;
+            deadBlacks.Anchor = AnchorStyles.None;
+            deadBlacks.Left = 430;
+            deadBlacks.Top = 250;
+            deadBlacks.BackColor = System.Drawing.Color.Transparent;
+            deadBlacks.Name = "BlackGrave";
+            this.Controls.Add(deadBlacks);
+            createGraveButtons(deadBlacks);
+
+            deadWhites.Width = deadBlacks.Width;
+            deadWhites.Height = deadBlacks.Height;
+            deadWhites.Anchor = AnchorStyles.None;
+            deadWhites.Left = 1350;
+            deadWhites.Top = deadBlacks.Top;
+            deadWhites.BackColor = System.Drawing.Color.Transparent;
+            deadWhites.Name = "WhiteGrave";
+            this.Controls.Add(deadWhites);
+            createGraveButtons(deadWhites);
+        }
+
+        public void createGraveButtons(Panel panel)
+        {
+            int x = 0, y = 0;
+            for (int i = 0; i < 12; i++)
+            {
+                Button btn = new Button();
+                btn.Location = new Point(x, y);
+                btn.Size = new Size(Constants.BUTTON_SIZE, Constants.BUTTON_SIZE);
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.BackgroundImageLayout = ImageLayout.Center;
+                btn.Name = (i).ToString();
+                panel.Controls.Add(btn);
+                if (i % 2 != 0)
+                {
+                    y += Constants.BUTTON_SIZE;
+                    x = 0;
+                }
+                else
+                    x = Constants.BUTTON_SIZE;
+                btn.BackColor = game.getButtonColor(i, i / 2);
+                btn.Enabled = false;
+
+                if (panel.Name == "BlackGrave")
+                    game.addToBlacksGrave(btn);
+                else
+                    game.addToWhitesGrave(btn);
+            }
         }
 
         //--- SAVE --
@@ -136,14 +208,14 @@ namespace Damka
             {
                 Stream stream = File.Open(openFileDialog1.FileName, FileMode.Open);
                 var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                //!!!!
-                /*                pts = (FigureList)binaryFormatter.Deserialize(stream);
-                                pictureBox1.Invalidate();*/
                 removeButtons();
                 game = (GameClass)binaryFormatter.Deserialize(stream);
                 game.setBoard(null);
                 createBoardToLoad();// leaves a blank board
                 game.loadFromFile();
+                game.initGraves();
+                createGraveYards();
+                game.loadGraves();
                 game.disableAllButtons();
                 if (game.getCurrentGamePhase() == Constants.GamePhase.SelectedAPiece)
                     game.ShowAvailableMoves();

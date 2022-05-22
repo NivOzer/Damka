@@ -33,6 +33,8 @@ namespace Damka
             this.loadButton = new System.Windows.Forms.Button();
             this.gameLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.deadBlacksLBL = new System.Windows.Forms.Label();
+            this.deadWhitesLBL = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // saveButton
@@ -76,7 +78,7 @@ namespace Damka
             this.gameLabel.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.gameLabel.Font = new System.Drawing.Font("Perpetua Titling MT", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.gameLabel.ForeColor = System.Drawing.Color.Snow;
-            this.gameLabel.Location = new System.Drawing.Point(796, 40);
+            this.gameLabel.Location = new System.Drawing.Point(821, 40);
             this.gameLabel.Margin = new System.Windows.Forms.Padding(0);
             this.gameLabel.Name = "gameLabel";
             this.gameLabel.Size = new System.Drawing.Size(327, 98);
@@ -101,6 +103,40 @@ namespace Damka
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // deadBlacksLBL
+            // 
+            this.deadBlacksLBL.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.deadBlacksLBL.BackColor = System.Drawing.Color.Transparent;
+            this.deadBlacksLBL.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.deadBlacksLBL.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.deadBlacksLBL.Font = new System.Drawing.Font("Perpetua Titling MT", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.deadBlacksLBL.ForeColor = System.Drawing.Color.Snow;
+            this.deadBlacksLBL.Location = new System.Drawing.Point(433, 89);
+            this.deadBlacksLBL.Margin = new System.Windows.Forms.Padding(0);
+            this.deadBlacksLBL.Name = "deadBlacksLBL";
+            this.deadBlacksLBL.Size = new System.Drawing.Size(330, 49);
+            this.deadBlacksLBL.TabIndex = 16;
+            this.deadBlacksLBL.Text = "Dead Blacks";
+            this.deadBlacksLBL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.deadBlacksLBL.UseMnemonic = false;
+            // 
+            // deadWhitesLBL
+            // 
+            this.deadWhitesLBL.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.deadWhitesLBL.BackColor = System.Drawing.Color.Transparent;
+            this.deadWhitesLBL.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.deadWhitesLBL.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.deadWhitesLBL.Font = new System.Drawing.Font("Perpetua Titling MT", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.deadWhitesLBL.ForeColor = System.Drawing.Color.Snow;
+            this.deadWhitesLBL.Location = new System.Drawing.Point(1198, 89);
+            this.deadWhitesLBL.Margin = new System.Windows.Forms.Padding(0);
+            this.deadWhitesLBL.Name = "deadWhitesLBL";
+            this.deadWhitesLBL.Size = new System.Drawing.Size(330, 49);
+            this.deadWhitesLBL.TabIndex = 17;
+            this.deadWhitesLBL.Text = "Dead Whites";
+            this.deadWhitesLBL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.deadWhitesLBL.UseMnemonic = false;
+            // 
             // Damka
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -109,6 +145,8 @@ namespace Damka
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImage = global::Damka.Properties.Resources.wood;
             this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.Controls.Add(this.deadWhitesLBL);
+            this.Controls.Add(this.deadBlacksLBL);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.saveButton);
@@ -129,5 +167,7 @@ namespace Damka
         private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.Label gameLabel;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label deadBlacksLBL;
+        private System.Windows.Forms.Label deadWhitesLBL;
     }
 }
