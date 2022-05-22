@@ -247,7 +247,10 @@ namespace Damka
                 game.loadGraves();
                 game.disableAllButtons();
                 if (game.getCurrentGamePhase() == Constants.GamePhase.SelectedAPiece)
+                {
+                    game.ShowAvailablePieces();
                     game.ShowAvailableMoves();
+                }
                 else
                     game.ShowAvailablePieces();
             }
