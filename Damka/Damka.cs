@@ -26,6 +26,8 @@ namespace Damka
     {
         GameClass game = new GameClass();
         Panel gamePanel = new Panel();
+        Panel deadWhites = new Panel();
+        Panel deadBlacks = new Panel();
         public Damka()
         {
             InitializeComponent();
@@ -38,7 +40,7 @@ namespace Damka
             game.setGamePhase();
             game.ShowAvailablePieces();
             game.initializeMine();
-            //placePlayers();
+            createGraveYards();
         }
 
         // Draws all the buttons and adds them to game List<Button> _board
@@ -48,7 +50,7 @@ namespace Damka
             gamePanel.Height = Constants.PANEL_SIZE;
             gamePanel.BackColor = Color.Yellow;
             gamePanel.Anchor = AnchorStyles.None;
-            gamePanel.Left = Constants.PANEL_SIZE - 215;
+            gamePanel.Left = Constants.PANEL_SIZE - 230;
             gamePanel.Top = Constants.SCREEN_SIZE_HEIGHT / 10 - 75;
             this.Controls.Add(gamePanel);
             for (int row = 0; row < Constants.NUM_OF_ROWS; row++)
@@ -57,7 +59,7 @@ namespace Damka
                 {
                     Button btn = new Button();
                     btn.ForeColor = Color.White;
-                    /*                    btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();*/
+                    // btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();
                     btn.Name = (row * Constants.NUM_OF_COLS + col).ToString();
                     btn.Size = new Size(Constants.BUTTON_SIZE, Constants.BUTTON_SIZE);
                     btn.Location = new Point(col * Constants.BUTTON_SIZE, row * Constants.BUTTON_SIZE);
@@ -68,7 +70,6 @@ namespace Damka
                     btn.Click += new EventHandler(boardClick);
                     btn.MouseLeave += new EventHandler(mouseLeaveEvent);
                     btn.MouseEnter += new EventHandler(mouseEnterEvent);
-                    btn.BackgroundImageLayout = ImageLayout.Center;
                     gamePanel.Controls.Add(btn);
                     game.addButtonToBoard(btn);
                     game.initializePlayers(btn, col, row);
@@ -84,24 +85,92 @@ namespace Damka
                 {
                     Button btn = new Button();
                     btn.ForeColor = Color.White;
-                    /*                    btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();*/
+                    // btn.Text = (row * Constants.NUM_OF_COLS + col).ToString();
                     btn.Name = (row * Constants.NUM_OF_COLS + col).ToString();
                     btn.Size = new Size(Constants.BUTTON_SIZE, Constants.BUTTON_SIZE);
                     btn.Location = new Point(col * Constants.BUTTON_SIZE, row * Constants.BUTTON_SIZE);
                     btn.FlatStyle = FlatStyle.Flat;
                     btn.FlatAppearance.BorderSize = 0;
                     btn.BackgroundImageLayout = ImageLayout.Center;
-                    if ((row + col) % 2 == 0)
-                        btn.BackColor = Constants.LIGHT_BROWN;
-                    else
-                        btn.BackColor = Constants.DARK_BROWN;
+                    btn.BackColor = game.getButtonColor(row, col);
                     btn.Click += new EventHandler(boardClick);
                     btn.MouseLeave += new EventHandler(mouseLeaveEvent);
                     btn.MouseEnter += new EventHandler(mouseEnterEvent);
-                    btn.BackgroundImageLayout = ImageLayout.Center;
                     gamePanel.Controls.Add(btn);
                     game.addButtonToBoard(btn);
                 }
+            }
+        }
+
+        public void createGraveYards()
+        {
+            // Black's Grave
+            deadBlacks.Width = Constants.BUTTON_SIZE * 2;
+            deadBlacks.Height = Constants.BUTTON_SIZE * 6 + 40;
+            deadBlacks.Anchor = AnchorStyles.None;
+            deadBlacks.Left = (gamePanel.Location.X - deadBlacks.Width) / 2;
+            deadBlacks.Top = (gamePanel.Location.Y * 2 + gamePanel.Height - deadBlacks.Height) / 2;
+            deadBlacks.BackColor = System.Drawing.Color.Transparent;
+            deadBlacks.Name = "BlackGrave";
+            this.Controls.Add(deadBlacks);
+            Label lblBlack = new Label();
+            lblBlack.Text = "  Dead Blacks  ";
+            labelDesign(lblBlack);
+            deadBlacks.Controls.Add(lblBlack);
+            createGraveButtons(deadBlacks);
+
+            deadWhites.Width = Constants.BUTTON_SIZE * 2;
+            deadWhites.Height = Constants.BUTTON_SIZE * 6 + 40;
+            deadWhites.Anchor = AnchorStyles.None;
+            // deadWhites.Left = (Constants.SCREEN_SIZE_WIDTH - gamePanel.Location.X + gamePanel.Width - deadWhites.Width) / 2;
+            deadWhites.Left = gamePanel.Location.X - (deadBlacks.Location.X + deadBlacks.Width) + gamePanel.Location.X + gamePanel.Width;
+            deadWhites.Top = (gamePanel.Location.Y * 2 + gamePanel.Height - deadWhites.Height) / 2;
+            deadWhites.BackColor = System.Drawing.Color.Transparent;
+            deadWhites.Name = "WhiteGrave";
+            this.Controls.Add(deadWhites);
+            Label lblWhite = new Label();
+            lblWhite.Text = "  Dead Whites  ";
+            labelDesign(lblWhite);
+            deadWhites.Controls.Add(lblWhite);
+            createGraveButtons(deadWhites);
+        }
+
+        private void labelDesign(Label lbl)
+        {
+            lbl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            lbl.AutoSize = true;
+            lbl.ForeColor = System.Drawing.Color.Snow;
+            lbl.BackColor = System.Drawing.Color.Transparent;
+            lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl.Font = new System.Drawing.Font("Perpetua Titling MT", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+        }
+
+        public void createGraveButtons(Panel panel)
+        {
+            int x = 0, y = 40;
+            for (int i = 0; i < 12; i++)
+            {
+                Button btn = new Button();
+                btn.Location = new Point(x, y);
+                btn.Size = new Size(Constants.BUTTON_SIZE, Constants.BUTTON_SIZE);
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.BackgroundImageLayout = ImageLayout.Center;
+                btn.Name = (i).ToString();
+                panel.Controls.Add(btn);
+                if (i % 2 != 0)
+                {
+                    y += Constants.BUTTON_SIZE;
+                    x = 0;
+                }
+                else
+                    x = Constants.BUTTON_SIZE;
+                btn.BackColor = game.getButtonColor(i, i / 2);
+                btn.Enabled = false;
+
+                if (panel.Name == "BlackGrave")
+                    game.addToBlacksGrave(btn);
+                else
+                    game.addToWhitesGrave(btn);
             }
         }
 
@@ -109,6 +178,12 @@ namespace Damka
         {
             foreach (Control item in gamePanel.Controls.OfType<Button>().ToList())
                 gamePanel.Controls.Remove(item);
+
+            foreach (Control item in deadBlacks.Controls.OfType<Button>().ToList())
+                deadBlacks.Controls.Remove(item);
+
+            foreach (Control item in deadWhites.Controls.OfType<Button>().ToList())
+                deadWhites.Controls.Remove(item);
         }
 
         // Checks the current GamePhase and initiate a proper response
@@ -167,6 +242,9 @@ namespace Damka
                 game.setBoard(null);
                 createBoardToLoad();// leaves a blank board
                 game.loadFromFile();
+                game.initGraves();
+                createGraveYards();
+                game.loadGraves();
                 game.disableAllButtons();
                 if (game.getCurrentGamePhase() == Constants.GamePhase.SelectedAPiece)
                     game.ShowAvailableMoves();
