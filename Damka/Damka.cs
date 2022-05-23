@@ -127,11 +127,11 @@ namespace Damka
         public void createGraveYards()
         {
             // Black's Grave
-            deadBlacks.Width = Constants.BUTTON_SIZE * 2;
-            deadBlacks.Height = Constants.BUTTON_SIZE * 6;
+            deadBlacks.Width = Constants.BUTTON_SIZE * 2+200;
+            deadBlacks.Height = Constants.BUTTON_SIZE * 6+200;
             deadBlacks.Anchor = AnchorStyles.None;
             deadBlacks.Left = 430;
-            deadBlacks.Top = 250;
+            deadBlacks.Top = 143;
             deadBlacks.BackColor = System.Drawing.Color.Transparent;
             deadBlacks.Name = "BlackGrave";
             this.Controls.Add(deadBlacks);
