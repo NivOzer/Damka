@@ -86,7 +86,7 @@ namespace Damka.Classes
                     }
                     else
                     {
-                        if (isValidMove(startIndex - 7, startIndex - 14) && board[startIndex - 14].Image == null)
+                        if (isValidMove(startIndex - 7, startIndex - 14) && board[startIndex - 14].BackgroundImage == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex - 7);
                             if (otherPlayer._color != this._color)
@@ -104,7 +104,7 @@ namespace Damka.Classes
                     }
                     else
                     {
-                        if (isValidMove(startIndex - 9, startIndex - 18) && board[startIndex - 18].Image == null)
+                        if (isValidMove(startIndex - 9, startIndex - 18) && board[startIndex - 18].BackgroundImage == null)
                         {
                             otherPlayer = game.getPlayerMaleByIndex(startIndex - 9);
                             if (otherPlayer._color != this._color)
