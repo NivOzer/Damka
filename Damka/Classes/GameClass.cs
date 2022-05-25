@@ -22,9 +22,6 @@ namespace Damka.Classes
         [NonSerialized()] private List<Button> _blacksGrave;
         [NonSerialized()] private List<Button> _whitesGrave;
         private int _current_player_index;
-        private SoundPlayer _moveSound;
-        private SoundPlayer _eatSound;
-        private SoundPlayer _mineWasEaten;
         public GameClass()
         {
             // Generates a button grid for the board
@@ -38,9 +35,6 @@ namespace Damka.Classes
             this._deadWhites = new List<Male>();
             this._blacksGrave = new List<Button>();
             this._whitesGrave = new List<Button>();
-            this._moveSound = new SoundPlayer(@"H:\לימודים\OneDrive\OneDrive - Holon Institute of Technology\C# Projects\Damka Project\moveSound.wav");
-            this._eatSound = new SoundPlayer(@"H:\לימודים\OneDrive\OneDrive - Holon Institute of Technology\C# Projects\Damka Project\eatSound.wav");
-            this._mineWasEaten = new SoundPlayer(@"H:\לימודים\OneDrive\OneDrive - Holon Institute of Technology\C# Projects\Damka Project\mineEatenSound.wav");
         }
 
         // --- GETTERS --
@@ -208,14 +202,9 @@ namespace Damka.Classes
                     exploded = gotKilled.gotEaten();
                     playerKilled(gotKilled, move.Value);
                     current.ateAPlayer();
-                    if (exploded) { 
-                        playerKilled(current, _current_player_index);
-                        _mineWasEaten.Play();
-                    } // Attacker killed a mine
-                    else _eatSound.Play();
+                    if (exploded) { playerKilled(current, _current_player_index);} // Attacker killed a mine
                     break;
                 }
-                else this._moveSound.Play();
             }
             _board[_current_player_index].BackColor = getButtonColor(_current_player_index);
             if (exploded == false)
