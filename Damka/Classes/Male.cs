@@ -7,7 +7,6 @@ using System.Windows.Forms;
 
 namespace Damka.Classes
 {
-    //added an image attribute
     [Serializable]
     class Male
     {
@@ -72,7 +71,6 @@ namespace Damka.Classes
         public virtual List<KeyValuePair<int, int>> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
         {
             List<KeyValuePair<int, int>> result = new List<KeyValuePair<int, int>>();
-            // List<int> result = new List<int>();
             Male otherPlayer;
 
             if (_color == Constants.PlayerColor.Black)
@@ -82,7 +80,6 @@ namespace Damka.Classes
                     if (board[startIndex - 7].BackgroundImage == null)
                     { // black can go right
                         result.Add(new KeyValuePair<int, int>(startIndex - 7, -1));
-                        // result.Add(startIndex - 7);
                     }
                     else
                     {
@@ -91,7 +88,6 @@ namespace Damka.Classes
                             otherPlayer = game.getPlayerMaleByIndex(startIndex - 7);
                             if (otherPlayer._color != this._color)
                                 result.Add(new KeyValuePair<int, int>(startIndex - 14, startIndex - 7));
-                            // result.Add(startIndex - 14); // black can eat left
                         }
                     }
                 }
@@ -100,7 +96,6 @@ namespace Damka.Classes
                     if (board[startIndex - 9].BackgroundImage == null)
                     { // black can go left
                         result.Add(new KeyValuePair<int, int>(startIndex - 9, -1));
-                        // result.Add(startIndex - 9);
                     }
                     else
                     {
@@ -109,7 +104,6 @@ namespace Damka.Classes
                             otherPlayer = game.getPlayerMaleByIndex(startIndex - 9);
                             if (otherPlayer._color != this._color)
                                 result.Add(new KeyValuePair<int, int>(startIndex - 18, startIndex - 9));
-                            // if (otherPlayer._color != this._color) result.Add(startIndex - 18); // White can eat right
                         }
                     }
                 }
@@ -121,7 +115,6 @@ namespace Damka.Classes
                     if (board[startIndex + 7].BackgroundImage == null)
                     { // White can go left
                         result.Add(new KeyValuePair<int, int>(startIndex + 7, -1));
-                        // result.Add(startIndex + 7);
                     }
                     else
                     {
@@ -130,7 +123,6 @@ namespace Damka.Classes
                             otherPlayer = game.getPlayerMaleByIndex(startIndex + 7);
                             if (otherPlayer._color != this._color)
                                 result.Add(new KeyValuePair<int, int>(startIndex + 14, startIndex + 7));
-                            // if (otherPlayer._color != this._color) result.Add(startIndex + 14); // White can eat left
                         }
                     }
                 }
@@ -139,7 +131,6 @@ namespace Damka.Classes
                     if (board[startIndex + 9].BackgroundImage == null)
                     { // White can go right
                         result.Add(new KeyValuePair<int, int>(startIndex + 9, -1));
-                        // result.Add(startIndex + 9);
                     }
                     else
                     {
@@ -148,7 +139,6 @@ namespace Damka.Classes
                             otherPlayer = game.getPlayerMaleByIndex(startIndex + 9);
                             if (otherPlayer._color != this._color)
                                 result.Add(new KeyValuePair<int, int>(startIndex + 18, startIndex + 9));
-                            // if (otherPlayer._color != this._color) result.Add(startIndex + 18); // White can eat right
                         }
                     }
                 }

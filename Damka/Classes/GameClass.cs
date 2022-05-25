@@ -112,7 +112,6 @@ namespace Damka.Classes
         {
             if (_gamePhase == Constants.GamePhase.SelectedAPiece)
             { // Player was in character selection
-                // Logic here
                 disableAllButtons();
                 if (pressedIndex == _current_player_index || getPlayerMaleByIndex(pressedIndex) != null)
                 {
@@ -177,7 +176,6 @@ namespace Damka.Classes
         }//A Specific player has been pressed event
         public void ShowAvailableMoves()
         {
-            // List<int> moves;
             List<KeyValuePair<int, int>> moves = new List<KeyValuePair<int, int>>();
             Male current = getPlayerMaleByIndex(_current_player_index);
             moves = current.getAvailableMoves(_board, _current_player_index, this);
