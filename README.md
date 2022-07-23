@@ -5,7 +5,7 @@ Developed as a first year Object Oriented Progrmaing course's final project.
 ## Features
 - [x] Spcial units like `Vertical King` and `Mine` with added functionality implemented by Inheritance
 - [x] Managing objects (pieces) through `System.Collections.Generic` and Polymorphism 
-- [x] "Windows Form Application" - Event Driven Game
+- [x] Windows Form Application - event driven game design 
 - [x] Fully operational game save/load achieved by Serialization
 
 
