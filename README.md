@@ -1,6 +1,7 @@
 # Damka
 The Famous game of checkers but with an odd twist ;)
 Developed as a first year final project in an OOP course.
+Written in C#
 
 ## Features
 - [x] Spcial units like `Vertical/Horizontal King` and `Mine` with added functionality implemented by Inheritance
