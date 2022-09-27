@@ -1,6 +1,6 @@
 # Damka
-The Famous game of checkers but with an odd twist ;) <br\>
-Developed as a first year final project in an OOP course.<br\>
+The Famous game of checkers but with an odd twist ;) <br/>
+Developed as a first year final project in an OOP course.<br/>
 Written in C#
 
 ## Features
