@@ -1,12 +1,12 @@
 # Damka
-A twist for beloved and renowned game Damka written in C#.  
-Developed as a first year Object Oriented Progrmaing course's final project.
+The Famous game of checkers but with an odd twist ;)
+Developed as a first year final project in an OOP course.
 
 ## Features
-- [x] Spcial units like `Vertical King` and `Mine` with added functionality implemented by Inheritance
+- [x] Spcial units like `Vertical/Horizontal King` and `Mine` with added functionality implemented by Inheritance
 - [x] Managing objects (pieces) through `System.Collections.Generic` and Polymorphism 
-- [x] Windows Form Application - event driven game design 
-- [x] Fully operational game save/load achieved by Serialization
+- [x] Windows Form Application - event driven game design
+- [x] Fully operational game save/load/restart achieved with Serialization
 
 
 
