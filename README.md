@@ -8,7 +8,7 @@ Written in C#
 - [x] Managing objects (pieces) through `System.Collections.Generic` and Polymorphism 
 - [x] Windows Form Application - event driven game design
 - [x] Fully operational game save/load/restart achieved with Serialization
-
+- [x] Graphics
 
 
 ![game menu](https://user-images.githubusercontent.com/61422607/180623166-7c06b93d-2cef-45de-bfe6-79195947cbf1.png)
