@@ -10,6 +10,6 @@ Written in C#
 - [x] Fully operational game save/load/restart achieved with Serialization
 - [x] Graphics
 
-
+The game was made for a 1080x720 resolution , so for a pure gameplay i recommend adjusting your screen resolution to fit the needs
 ![game menu](https://user-images.githubusercontent.com/61422607/180623166-7c06b93d-2cef-45de-bfe6-79195947cbf1.png)
 ![gameplay](https://user-images.githubusercontent.com/61422607/180623169-94b70f0a-ce40-4679-b1e9-a4d356eb147c.png)
