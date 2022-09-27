@@ -9,21 +9,28 @@ namespace Damka.Classes
     [Serializable]
     class King : Male
     {
-        private int _eatCounter;
-        // public King(Position pos, Constants.PlayerColor color) : base(pos, color)
-        // {
-        //     //
-        // }
-
+        internal int _eatCounter;
         public King(Male old) : base(old.pos, old.color)
+        { // Upgrade from Male
+            _range = 8;
+            _eatCounter = 0;
+        }
+
+        public King(Position pos, Constants.PlayerColor color) : base(pos, color)
         {
             _range = 8;
             _eatCounter = 0;
         }
 
-        public override List<int> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
+        public King(King old) : base(old._pos, old._color)
+        { // getting Upgrade to special King
+            this._range = old._range;
+            this._eatCounter = old._eatCounter;
+        }
+
+        public override List<KeyValuePair<int, int>> getAvailableMoves(List<Button> board, int startIndex, GameClass game)
         {
-            List<int> result = new List<int>();
+            List<KeyValuePair<int, int>> result = new List<KeyValuePair<int, int>>();
             Male temp;
             int fromIndex = startIndex, toIndex, counter = 1;
             bool isEmpty = true;
@@ -32,10 +39,14 @@ namespace Damka.Classes
             toIndex = startIndex - (7 * counter);
             while (isValidMove(fromIndex, toIndex))
             {
-                if (board[toIndex].Image == null)
+                if (board[toIndex].BackgroundImage == null)
                 { // can go right up
-                    result.Add(toIndex);
-                    if (isEmpty == false) break;
+                    result.Add(new KeyValuePair<int, int>(toIndex, -1));
+                    if (isEmpty == false)
+                    {
+                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex + 7));
+                        break;
+                    }
                 }
                 else
                 {
@@ -56,10 +67,14 @@ namespace Damka.Classes
             toIndex = startIndex - (9 * counter);
             while (isValidMove(fromIndex, toIndex))
             {
-                if (board[toIndex].Image == null)
+                if (board[toIndex].BackgroundImage == null)
                 { // can go left up
-                    result.Add(toIndex);
-                    if (isEmpty == false) break;
+                    result.Add(new KeyValuePair<int, int>(toIndex, -1));
+                    if (isEmpty == false)
+                    {
+                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex + 9));
+                        break;
+                    }
                 }
                 else
                 {
@@ -80,10 +95,14 @@ namespace Damka.Classes
             toIndex = startIndex + (7 * counter);
             while (isValidMove(fromIndex, toIndex))
             {
-                if (board[toIndex].Image == null)
+                if (board[toIndex].BackgroundImage == null)
                 { // can go left up
-                    result.Add(toIndex);
-                    if (isEmpty == false) break;
+                    result.Add(new KeyValuePair<int, int>(toIndex, -1));
+                    if (isEmpty == false)
+                    {
+                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex - 7));
+                        break;
+                    }
                 }
                 else
                 {
@@ -104,10 +123,14 @@ namespace Damka.Classes
             toIndex = startIndex + (9 * counter);
             while (isValidMove(fromIndex, toIndex))
             {
-                if (board[toIndex].Image == null)
+                if (board[toIndex].BackgroundImage == null)
                 { // can go left up
-                    result.Add(toIndex);
-                    if (isEmpty == false) break;
+                    result.Add(new KeyValuePair<int, int>(toIndex, -1));
+                    if (isEmpty == false)
+                    {
+                        result.Add(new KeyValuePair<int, int>(toIndex, toIndex - 9));
+                        break;
+                    }
                 }
                 else
                 {

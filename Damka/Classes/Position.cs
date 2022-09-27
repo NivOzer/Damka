@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Damka.Classes
 {
+    [Serializable]
     class Position
     {
         static int NUM_OF_COLS = 8;
